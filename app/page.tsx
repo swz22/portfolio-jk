@@ -1,13 +1,9 @@
+import { Hero } from '@/components/sections/hero';
+
 export default function HomePage() {
   return (
     <>
-      <section id="hero" className="relative h-screen">
-        <div className="container mx-auto flex h-full items-center px-4">
-          <h1 className="text-4xl font-bold md:text-6xl">
-            Portfolio Coming Soon
-          </h1>
-        </div>
-      </section>
+      <Hero />
 
       <section id="projects" className="py-20">
         <div className="container mx-auto px-4">

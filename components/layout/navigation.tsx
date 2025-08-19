@@ -99,7 +99,7 @@ export function Navigation() {
                 </svg>
               </Button>
 
-              <Button variant="default" size="sm">
+              <Button variant="default" size="sm" asChild>
                 <Link href="#contact">Get in Touch</Link>
               </Button>
             </div>
