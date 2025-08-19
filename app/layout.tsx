@@ -10,8 +10,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'John Doe | Full Stack Developer',
-    template: '%s | John Doe',
+    default: 'John Kim | Full Stack Developer',
+    template: '%s | John Kim',
   },
   description:
     'Full Stack Developer specializing in modern web technologies, 3D graphics, and creating exceptional digital experiences.',
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
     'Web Developer',
     'Portfolio',
   ],
-  authors: [{ name: 'John Doe' }],
-  creator: 'John Doe',
+  authors: [{ name: 'John Kim' }],
+  creator: 'John Kim',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://johndoe.dev',
-    siteName: 'John Doe Portfolio',
-    title: 'John Doe | Full Stack Developer',
+    url: 'https://johnkim.dev',
+    siteName: 'John Kim Portfolio',
+    title: 'John Kim | Full Stack Developer',
     description:
       'Full Stack Developer specializing in modern web technologies, 3D graphics, and creating exceptional digital experiences.',
     images: [
@@ -39,16 +39,16 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'John Doe - Full Stack Developer',
+        alt: 'John Kim - Full Stack Developer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'John Doe | Full Stack Developer',
+    title: 'John Kim | Full Stack Developer',
     description:
       'Full Stack Developer specializing in modern web technologies, 3D graphics, and creating exceptional digital experiences.',
-    creator: '@johndoe',
+    creator: '@johnkim',
     images: ['/og-image.jpg'],
   },
   robots: {

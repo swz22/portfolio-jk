@@ -39,7 +39,7 @@ export function LoadingScreen() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <span className="text-4xl font-bold">JD</span>
+              <span className="text-4xl font-bold">JK</span>
             </motion.div>
           </div>
           <motion.div

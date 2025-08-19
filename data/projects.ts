@@ -29,7 +29,7 @@ export const projects: Project[] = [
     },
     links: {
       live: 'https://portfolio-3d.vercel.app',
-      github: 'https://github.com/johndoe/portfolio-3d',
+      github: 'https://github.com/johnkim/portfolio-3d',
     },
     featured: true,
     category: '3d-graphics',
@@ -97,7 +97,7 @@ export const projects: Project[] = [
     },
     links: {
       live: 'https://dashboard.example.com',
-      github: 'https://github.com/johndoe/data-viz',
+      github: 'https://github.com/johnkim/data-viz',
     },
     featured: false,
     category: 'web-app',
@@ -158,7 +158,7 @@ export const projects: Project[] = [
       rating: 4.9,
     },
     links: {
-      github: 'https://github.com/johndoe/devtools-cli',
+      github: 'https://github.com/johnkim/devtools-cli',
     },
     featured: false,
     category: 'open-source',

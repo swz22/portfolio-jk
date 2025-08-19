@@ -61,7 +61,7 @@ export function Navigation() {
               href="/"
               className="hover:text-primary text-2xl font-bold tracking-tight transition-colors"
             >
-              JD
+              JK
             </Link>
 
             <ul className="hidden items-center gap-8 md:flex">

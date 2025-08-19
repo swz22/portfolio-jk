@@ -13,7 +13,7 @@ export function Terminal() {
   const [history, setHistory] = useState<Command[]>([
     {
       input: '',
-      output: `Welcome to JD's Portfolio Terminal v1.0.0
+      output: `Welcome to JK's Portfolio Terminal v1.0.0
 Type 'help' for available commands.`,
     },
   ]);
@@ -39,7 +39,7 @@ Type 'help' for available commands.`,
           .join('\n');
         break;
       case 'about':
-        output = `John Doe
+        output = `John Kim
 Full Stack Developer
 
 Passionate about creating exceptional digital experiences with modern web technologies and 3D graphics.
@@ -63,10 +63,10 @@ Type 'projects [number]' for more details.`;
         break;
       case 'contact':
         output = `Get in Touch:
-• Email: hello@johndoe.dev
-• GitHub: github.com/johndoe
-• LinkedIn: linkedin.com/in/johndoe
-• Twitter: @johndoe`;
+• Email: hello@johnkim.dev
+• GitHub: github.com/johnkim
+• LinkedIn: linkedin.com/in/johnkim
+• Twitter: @johnkim`;
         break;
       case 'clear':
         setHistory([]);
@@ -82,10 +82,10 @@ Type 'projects [number]' for more details.`;
         break;
       case 'socials':
         output = `Social Links:
-• GitHub: github.com/johndoe
-• LinkedIn: linkedin.com/in/johndoe
-• Twitter: @johndoe
-• Email: hello@johndoe.dev`;
+• GitHub: github.com/johnkim
+• LinkedIn: linkedin.com/in/johnkim
+• Twitter: @johnkim
+• Email: hello@johnkim.dev`;
         break;
       case 'easter':
         output = '🥚 Try: matrix, hack, or game';

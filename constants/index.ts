@@ -1,13 +1,13 @@
 import type { NavItem, SocialLink } from '@/types';
 
 export const SITE_CONFIG = {
-  name: 'John Doe',
+  name: 'John Kim',
   title: 'Full Stack Developer',
   description:
     'Full Stack Developer specializing in modern web technologies, 3D graphics, and creating exceptional digital experiences.',
-  url: 'https://johndoe.dev',
-  email: 'hello@johndoe.dev',
-  location: 'San Francisco, CA',
+  url: 'https://johnkim.dev',
+  email: 'jkdev220@gmail.com',
+  location: 'Dallas, Texas',
   availability: 'Available for freelance',
 } as const;
 
@@ -22,25 +22,25 @@ export const NAV_ITEMS: NavItem[] = [
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     platform: 'GitHub',
-    url: 'https://github.com/johndoe',
+    url: 'https://github.com/swz22',
     icon: 'github',
     color: '#181717',
   },
   {
     platform: 'LinkedIn',
-    url: 'https://linkedin.com/in/johndoe',
+    url: 'https://linkedin.com/in/johnkim',
     icon: 'linkedin',
     color: '#0A66C2',
   },
   {
     platform: 'Twitter',
-    url: 'https://twitter.com/johndoe',
+    url: 'https://twitter.com/johnkim',
     icon: 'twitter',
     color: '#1DA1F2',
   },
   {
     platform: 'Email',
-    url: 'mailto:hello@johndoe.dev',
+    url: 'mailto:hello@johnkim.dev',
     icon: 'email',
     color: '#EA4335',
   },
