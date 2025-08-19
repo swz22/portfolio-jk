@@ -13,7 +13,10 @@ import Link from 'next/link';
 
 export function Hero() {
   return (
-    <section id="hero" className="relative flex min-h-screen items-center">
+    <section
+      id="hero"
+      className="relative flex min-h-screen items-center justify-center"
+    >
       <div className="absolute inset-0 z-0">
         <SpaceTheme />
       </div>
@@ -27,7 +30,7 @@ export function Hero() {
       </div> */}
 
       <div className="container relative z-10 mx-auto px-4">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

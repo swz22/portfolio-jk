@@ -110,14 +110,14 @@ Type 'projects [number]' for more details.`;
   };
 
   return (
-    <div className="glass flex h-[400px] flex-col rounded-lg p-4 font-mono text-sm">
+    <div className="glass-hover flex h-[350px] flex-col rounded-lg bg-black/30 p-4 font-mono text-sm backdrop-blur-md">
       <div className="mb-4 flex items-center gap-2">
         <div className="flex gap-1.5">
           <div className="h-3 w-3 rounded-full bg-red-500" />
           <div className="h-3 w-3 rounded-full bg-yellow-500" />
           <div className="h-3 w-3 rounded-full bg-green-500" />
         </div>
-        <span className="text-muted-foreground text-xs">terminal</span>
+        <span className="text-xs text-muted-foreground">terminal</span>
       </div>
 
       <div ref={terminalRef} className="mb-2 flex-1 space-y-2 overflow-y-auto">
@@ -130,7 +130,7 @@ Type 'projects [number]' for more details.`;
               </div>
             )}
             {item.output && (
-              <div className="text-muted-foreground whitespace-pre-wrap pl-4">
+              <div className="whitespace-pre-wrap pl-4 text-muted-foreground">
                 {item.output}
               </div>
             )}
@@ -138,7 +138,7 @@ Type 'projects [number]' for more details.`;
         ))}
       </div>
 
-      <div className="border-border flex items-center gap-2 border-t pt-2">
+      <div className="flex items-center gap-2 border-t border-border pt-2">
         <span className="text-primary">❯</span>
         <input
           ref={inputRef}
@@ -146,7 +146,7 @@ Type 'projects [number]' for more details.`;
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="flex-1 bg-transparent outline-none"
+          className="flex-1 bg-transparent placeholder-muted-foreground/50 outline-none"
           placeholder="Type a command..."
           autoFocus
         />
