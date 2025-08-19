@@ -73,7 +73,6 @@ export function EarthTheme() {
 
       ctx.save();
       ctx.translate(centerX, centerY);
-      ctx.rotate(earth.rotation);
 
       const earthGradient = ctx.createRadialGradient(
         -earth.radius * 0.3,
@@ -83,80 +82,310 @@ export function EarthTheme() {
         0,
         earth.radius
       );
-      earthGradient.addColorStop(0, '#4da6ff'); // Light blue
-      earthGradient.addColorStop(0.7, '#0066cc'); // Ocean blue
-      earthGradient.addColorStop(1, '#003d7a'); // Deep ocean
+      earthGradient.addColorStop(0, '#5eb3ff'); // Light blue
+      earthGradient.addColorStop(0.6, '#2288dd'); // Ocean blue
+      earthGradient.addColorStop(1, '#0044aa'); // Deep ocean
 
-      // Earth base
+      // Earth base circle
       ctx.beginPath();
       ctx.arc(0, 0, earth.radius, 0, Math.PI * 2);
       ctx.fillStyle = earthGradient;
       ctx.fill();
-
-      ctx.fillStyle = '#2d5016';
-
-      // Africa/Europe
+      ctx.save();
       ctx.beginPath();
-      ctx.ellipse(20, -10, 40, 60, 0.2, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.arc(0, 0, earth.radius - 2, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.save();
 
-      // Americas
-      ctx.beginPath();
-      ctx.ellipse(-60, 0, 30, 70, -0.3, 0, Math.PI * 2);
-      ctx.fill();
+      const mapWidth = earth.radius * 4 * Math.PI;
+      const offset = (earth.rotation / (Math.PI * 2)) * mapWidth;
+      const scale = earth.radius / 150;
 
-      // Asia
-      ctx.beginPath();
-      ctx.ellipse(70, -20, 50, 40, 0.1, 0, Math.PI * 2);
-      ctx.fill();
+      for (let i = 0; i < 2; i++) {
+        const xOffset = i * mapWidth - offset;
 
-      // Australia
-      ctx.beginPath();
-      ctx.ellipse(60, 60, 25, 20, 0, 0, Math.PI * 2);
-      ctx.fill();
+        ctx.fillStyle = '#3a7e3a';
 
-      // Ice caps
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-
-      // North pole
-      ctx.beginPath();
-      ctx.arc(0, -earth.radius + 10, 30, 0, Math.PI * 2);
-      ctx.fill();
-
-      // South pole
-      ctx.beginPath();
-      ctx.arc(0, earth.radius - 10, 35, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Cloud layer
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-      for (let i = 0; i < 8; i++) {
-        const cloudX = Math.cos(i * 0.8 + time * 0.0002) * earth.radius * 0.7;
-        const cloudY = Math.sin(i * 0.8) * earth.radius * 0.6;
+        // Africa
+        ctx.save();
+        ctx.translate(xOffset + mapWidth * 0.05, 0);
+        ctx.scale(scale, scale);
         ctx.beginPath();
-        ctx.ellipse(cloudX, cloudY, 30, 15, i, 0, Math.PI * 2);
+        ctx.moveTo(0, -50);
+        ctx.quadraticCurveTo(15, -45, 20, -35);
+        ctx.quadraticCurveTo(25, -20, 30, -5);
+        ctx.quadraticCurveTo(35, 10, 25, 25);
+        ctx.quadraticCurveTo(20, 35, 15, 45);
+        ctx.lineTo(10, 55);
+        ctx.quadraticCurveTo(5, 50, 0, 45);
+        ctx.quadraticCurveTo(-10, 35, -15, 20);
+        ctx.quadraticCurveTo(-20, 5, -25, -10);
+        ctx.quadraticCurveTo(-20, -30, -10, -40);
+        ctx.quadraticCurveTo(-5, -48, 0, -50);
+        ctx.closePath();
         ctx.fill();
+
+        // Madagascar
+        ctx.beginPath();
+        ctx.ellipse(35, 25, 5, 12, 0.2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Europe
+        ctx.save();
+        ctx.translate(xOffset + mapWidth * 0.03, -50);
+        ctx.scale(scale, scale);
+        ctx.beginPath();
+        ctx.moveTo(-10, 0);
+        ctx.quadraticCurveTo(-5, -5, 0, -8);
+        ctx.quadraticCurveTo(10, -10, 20, -8);
+        ctx.quadraticCurveTo(25, -5, 30, 0);
+        ctx.quadraticCurveTo(25, 5, 20, 8);
+        ctx.quadraticCurveTo(15, 10, 10, 12);
+        ctx.quadraticCurveTo(0, 15, -5, 10);
+        ctx.quadraticCurveTo(-10, 5, -10, 0);
+        ctx.closePath();
+        ctx.fill();
+
+        // UK
+        ctx.beginPath();
+        ctx.ellipse(-12, -5, 3, 6, -0.2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Asia
+        ctx.save();
+        ctx.translate(xOffset + mapWidth * 0.25, -20);
+        ctx.scale(scale, scale);
+        ctx.beginPath();
+        ctx.moveTo(-40, -20);
+        ctx.quadraticCurveTo(-20, -30, 0, -35);
+        ctx.quadraticCurveTo(30, -30, 50, -25);
+        ctx.quadraticCurveTo(60, -20, 65, -10);
+        ctx.quadraticCurveTo(70, 0, 65, 10);
+        ctx.quadraticCurveTo(60, 20, 50, 25);
+        ctx.quadraticCurveTo(40, 30, 30, 35);
+        // India
+        ctx.quadraticCurveTo(20, 40, 15, 50);
+        ctx.lineTo(10, 55);
+        ctx.quadraticCurveTo(5, 50, 0, 45);
+        // Southeast Asia
+        ctx.quadraticCurveTo(-10, 40, -20, 35);
+        ctx.quadraticCurveTo(-30, 25, -35, 15);
+        ctx.quadraticCurveTo(-40, 0, -40, -20);
+        ctx.closePath();
+        ctx.fill();
+
+        // Japan
+        ctx.beginPath();
+        ctx.ellipse(75, -5, 4, 15, 0.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Australia (longitude 135°E)
+        ctx.save();
+        ctx.translate(xOffset + mapWidth * 0.37, 30);
+        ctx.scale(scale, scale);
+        ctx.beginPath();
+        ctx.moveTo(-20, 0);
+        ctx.quadraticCurveTo(-15, -10, -5, -12);
+        ctx.quadraticCurveTo(5, -10, 15, -8);
+        ctx.quadraticCurveTo(25, -5, 30, 0);
+        ctx.quadraticCurveTo(25, 10, 20, 15);
+        ctx.quadraticCurveTo(10, 20, 0, 18);
+        ctx.quadraticCurveTo(-10, 15, -20, 10);
+        ctx.quadraticCurveTo(-25, 5, -20, 0);
+        ctx.closePath();
+        ctx.fill();
+
+        // New Zealand
+        ctx.beginPath();
+        ctx.ellipse(40, 10, 3, 8, 0.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // South America
+        ctx.save();
+        ctx.translate(xOffset + mapWidth * 0.8, 10);
+        ctx.scale(scale, scale);
+        ctx.beginPath();
+        ctx.moveTo(0, -30);
+        ctx.quadraticCurveTo(8, -25, 10, -15);
+        ctx.quadraticCurveTo(12, -5, 10, 5);
+        ctx.quadraticCurveTo(8, 15, 5, 25);
+        ctx.quadraticCurveTo(3, 35, 0, 45);
+        ctx.lineTo(-2, 55);
+        ctx.lineTo(-5, 50);
+        ctx.quadraticCurveTo(-8, 40, -10, 30);
+        ctx.quadraticCurveTo(-12, 20, -15, 10);
+        ctx.quadraticCurveTo(-18, 0, -20, -10);
+        ctx.quadraticCurveTo(-18, -20, -15, -25);
+        ctx.quadraticCurveTo(-10, -30, 0, -30);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+
+        // North America
+        ctx.save();
+        ctx.translate(xOffset + mapWidth * 0.72, -35);
+        ctx.scale(scale, scale);
+        ctx.beginPath();
+        ctx.moveTo(-30, 20);
+        ctx.quadraticCurveTo(-25, 10, -20, 5);
+        ctx.quadraticCurveTo(-10, 0, 0, -5);
+        ctx.quadraticCurveTo(10, -8, 20, -10);
+        ctx.quadraticCurveTo(30, -8, 35, -5);
+        // Alaska
+        ctx.quadraticCurveTo(40, -15, 35, -20);
+        ctx.quadraticCurveTo(30, -25, 25, -20);
+        // Canada
+        ctx.quadraticCurveTo(20, -25, 10, -30);
+        ctx.quadraticCurveTo(0, -35, -10, -30);
+        ctx.quadraticCurveTo(-20, -25, -25, -20);
+        ctx.quadraticCurveTo(-30, -10, -35, 0);
+        ctx.quadraticCurveTo(-35, 10, -30, 20);
+        ctx.closePath();
+        ctx.fill();
+
+        // Central America
+        ctx.beginPath();
+        ctx.moveTo(-20, 20);
+        ctx.quadraticCurveTo(-15, 25, -10, 30);
+        ctx.quadraticCurveTo(-5, 35, 0, 30);
+        ctx.lineTo(-5, 20);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+
+        // Greenland
+        ctx.save();
+        ctx.translate(xOffset + mapWidth * 0.9, -65);
+        ctx.scale(scale, scale);
+        ctx.fillStyle = '#e8e8e8';
+        ctx.beginPath();
+        ctx.moveTo(0, -10);
+        ctx.quadraticCurveTo(8, -8, 10, 0);
+        ctx.quadraticCurveTo(8, 10, 5, 15);
+        ctx.quadraticCurveTo(0, 20, -5, 15);
+        ctx.quadraticCurveTo(-8, 10, -10, 0);
+        ctx.quadraticCurveTo(-8, -8, 0, -10);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
       }
 
-      // Atmosphere glow
-      const atmosGradient = ctx.createRadialGradient(
+      // Antarctica
+      ctx.fillStyle = '#f0f0f0';
+      ctx.beginPath();
+      const antarcticY = earth.radius - 20;
+      ctx.moveTo(-earth.radius * 0.8, antarcticY);
+      ctx.quadraticCurveTo(
+        -earth.radius * 0.4,
+        antarcticY - 5,
         0,
+        antarcticY - 8
+      );
+      ctx.quadraticCurveTo(
+        earth.radius * 0.4,
+        antarcticY - 5,
+        earth.radius * 0.8,
+        antarcticY
+      );
+      ctx.quadraticCurveTo(
+        earth.radius * 0.6,
+        antarcticY + 10,
+        earth.radius * 0.3,
+        antarcticY + 15
+      );
+      ctx.quadraticCurveTo(
         0,
-        earth.radius,
+        antarcticY + 20,
+        -earth.radius * 0.3,
+        antarcticY + 15
+      );
+      ctx.quadraticCurveTo(
+        -earth.radius * 0.6,
+        antarcticY + 10,
+        -earth.radius * 0.8,
+        antarcticY
+      );
+      ctx.closePath();
+      ctx.fill();
+
+      // Arctic ice
+      ctx.beginPath();
+      const arcticY = -earth.radius + 15;
+      ctx.moveTo(0, arcticY);
+      ctx.quadraticCurveTo(
+        earth.radius * 0.3,
+        arcticY + 5,
+        earth.radius * 0.5,
+        arcticY + 10
+      );
+      ctx.quadraticCurveTo(earth.radius * 0.3, arcticY + 15, 0, arcticY + 12);
+      ctx.quadraticCurveTo(
+        -earth.radius * 0.3,
+        arcticY + 15,
+        -earth.radius * 0.5,
+        arcticY + 10
+      );
+      ctx.quadraticCurveTo(-earth.radius * 0.3, arcticY + 5, 0, arcticY);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.restore();
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
+      ctx.lineWidth = 0.5;
+
+      for (let i = 0; i < 4; i++) {
+        const cloudTime = time * 0.0001 + i;
+        const cloudY = Math.sin(i * 1.5) * earth.radius * 0.6;
+        const cloudX = Math.cos(cloudTime) * earth.radius * 0.8;
+
+        ctx.beginPath();
+        ctx.moveTo(cloudX - 50, cloudY);
+        ctx.quadraticCurveTo(cloudX, cloudY - 5, cloudX + 50, cloudY);
+        ctx.stroke();
+      }
+
+      ctx.restore();
+
+      const shadingGradient = ctx.createRadialGradient(
+        earth.radius * 0.3,
+        -earth.radius * 0.3,
+        0,
         0,
         0,
         earth.radius * 1.2
       );
-      atmosGradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
-      atmosGradient.addColorStop(0.8, 'rgba(0, 0, 0, 0)');
-      atmosGradient.addColorStop(1, 'rgba(100, 200, 255, 0.3)');
+      shadingGradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
+      shadingGradient.addColorStop(0.7, 'rgba(0, 0, 0, 0)');
+      shadingGradient.addColorStop(1, 'rgba(0, 0, 0, 0.3)');
 
       ctx.beginPath();
-      ctx.arc(0, 0, earth.radius * 1.2, 0, Math.PI * 2);
-      ctx.fillStyle = atmosGradient;
+      ctx.arc(0, 0, earth.radius, 0, Math.PI * 2);
+      ctx.fillStyle = shadingGradient;
       ctx.fill();
 
       ctx.restore();
+
+      const atmosGradient = ctx.createRadialGradient(
+        centerX,
+        centerY,
+        earth.radius,
+        centerX,
+        centerY,
+        earth.radius * 1.15
+      );
+      atmosGradient.addColorStop(0, 'rgba(135, 206, 235, 0.2)');
+      atmosGradient.addColorStop(1, 'rgba(135, 206, 235, 0)');
+
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, earth.radius * 1.15, 0, Math.PI * 2);
+      ctx.fillStyle = atmosGradient;
+      ctx.fill();
     };
 
     const drawSatellite = () => {
@@ -209,7 +438,6 @@ export function EarthTheme() {
         const objX = centerX + Math.cos(obj.angle) * obj.distance;
         const objY = centerY + Math.sin(obj.angle) * obj.distance;
 
-        // Object glow
         const glowGradient = ctx.createRadialGradient(
           objX,
           objY,
@@ -224,8 +452,6 @@ export function EarthTheme() {
         ctx.beginPath();
         ctx.arc(objX, objY, obj.size * 2, 0, Math.PI * 2);
         ctx.fill();
-
-        // Object core
         ctx.beginPath();
         ctx.arc(objX, objY, obj.size, 0, Math.PI * 2);
         ctx.fillStyle = obj.color;
@@ -238,8 +464,9 @@ export function EarthTheme() {
     const animate = () => {
       time++;
 
-      earth.rotation += 0.002;
-      satellite.angle += 0.005;
+      earth.rotation += 0.003; // Rotation speed
+      satellite.angle += 0.003;
+
       stars.forEach((star) => {
         star.brightness = 0.5 + Math.sin(time * 0.01 + star.x * 10) * 0.5;
       });
