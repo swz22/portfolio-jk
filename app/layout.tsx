@@ -80,6 +80,8 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+import { LayoutWrapper } from '@/components/layout/layout-wrapper';
+
 export default function RootLayout({
   children,
 }: {
@@ -87,7 +89,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <LayoutWrapper>{children}</LayoutWrapper>
+      </body>
     </html>
   );
 }
