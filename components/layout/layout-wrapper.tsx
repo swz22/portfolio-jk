@@ -4,17 +4,11 @@ import { ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import { Navigation } from './navigation';
 import { Footer } from './footer';
+import { CustomCursor } from '@/components/ui/custom-cursor';
 
 const LoadingScreen = dynamic(
   () =>
     import('@/components/ui/loading-screen').then((mod) => mod.LoadingScreen),
-  {
-    ssr: false,
-  }
-);
-
-const CustomCursor = dynamic(
-  () => import('@/components/ui/custom-cursor').then((mod) => mod.CustomCursor),
   {
     ssr: false,
   }
@@ -39,7 +33,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
       <CustomCursor />
       <ScrollProgress />
       <Navigation />
-      <main className="min-h-screen pt-20">{children}</main>
+      <main className="min-h-screen">{children}</main>
       <Footer />
     </>
   );

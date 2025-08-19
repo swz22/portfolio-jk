@@ -2,22 +2,22 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useMounted } from '@/hooks/use-mounted';
 
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [isPointer, setIsPointer] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
+    if (!mounted) return;
+
     const isTouchDevice =
       'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-    if (!isTouchDevice) {
-      setIsVisible(true);
-    }
+    if (isTouchDevice) return;
 
     const cursor = cursorRef.current;
-    if (!cursor || isTouchDevice) return;
+    if (!cursor) return;
 
     const moveCursor = (e: MouseEvent) => {
       if (cursor) {
@@ -44,9 +44,13 @@ export function CustomCursor() {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handlePointerOver);
     };
-  }, []);
+  }, [mounted]);
 
-  if (!isVisible) return null;
+  if (!mounted) return null;
+
+  const isTouchDevice =
+    'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  if (isTouchDevice) return null;
 
   return (
     <>
@@ -58,12 +62,11 @@ export function CustomCursor() {
       <div
         ref={cursorRef}
         className={cn(
-          'pointer-events-none fixed left-0 top-0 z-[9999] h-8 w-8 opacity-0 will-change-transform',
+          'pointer-events-none fixed left-0 top-0 z-[9999] h-8 w-8 will-change-transform',
           isPointer ? 'scale-150' : 'scale-100'
         )}
         style={{
           transition: 'scale 0.2s ease',
-          opacity: isVisible ? 1 : 0,
         }}
       >
         <div className="relative h-full w-full">
