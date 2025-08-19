@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { Scene } from '@/components/three/scene';
-import { ParticleGalaxy } from '@/components/three/particle-galaxy';
+// import { BeachTheme } from '@/components/three/beach-theme';
+import { EarthTheme } from '@/components/three/earth-theme';
 import { Terminal } from '@/components/ui/terminal';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -13,12 +14,12 @@ export function Hero() {
   return (
     <section id="hero" className="relative flex min-h-screen items-center">
       <div className="absolute inset-0 z-0">
-        <Scene className="h-full w-full">
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} />
-          <ParticleGalaxy />
-        </Scene>
+        <EarthTheme />
       </div>
+
+      {/* <div className="absolute inset-0 z-0">
+        <BeachTheme />
+      </div> */}
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="grid items-center gap-12 lg:grid-cols-2">
@@ -33,16 +34,16 @@ export function Hero() {
 
             <h1 className="mb-6 text-5xl font-bold md:text-7xl">
               Hi, I'm{' '}
-              <span className="from-primary bg-gradient-to-r to-blue-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
                 {SITE_CONFIG.name}
               </span>
             </h1>
 
-            <p className="text-muted-foreground mb-8 text-xl md:text-2xl">
+            <p className="mb-8 text-xl text-muted-foreground md:text-2xl">
               {SITE_CONFIG.title}
             </p>
 
-            <p className="text-muted-foreground mb-8 max-w-lg text-lg">
+            <p className="mb-8 max-w-lg text-lg text-muted-foreground">
               {SITE_CONFIG.description}
             </p>
 
@@ -58,21 +59,21 @@ export function Hero() {
             <div className="mt-12 flex items-center gap-6">
               <div>
                 <p className="text-3xl font-bold">5+</p>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-sm text-muted-foreground">
                   Years Experience
                 </p>
               </div>
-              <div className="bg-border h-12 w-px" />
+              <div className="h-12 w-px bg-border" />
               <div>
                 <p className="text-3xl font-bold">50+</p>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-sm text-muted-foreground">
                   Projects Completed
                 </p>
               </div>
-              <div className="bg-border h-12 w-px" />
+              <div className="h-12 w-px bg-border" />
               <div>
                 <p className="text-3xl font-bold">100%</p>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-sm text-muted-foreground">
                   Client Satisfaction
                 </p>
               </div>
@@ -97,7 +98,7 @@ export function Hero() {
       >
         <Link
           href="#projects"
-          className="text-muted-foreground hover:text-foreground flex flex-col items-center gap-2 transition-colors"
+          className="flex flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
         >
           <span className="text-sm">Scroll to explore</span>
           <motion.svg
