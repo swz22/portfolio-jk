@@ -22,172 +22,291 @@ export function SpaceTheme() {
     let animationId: number;
     let time = 0;
 
-    const stars = Array.from({ length: 300 }, () => ({
+    const stars = Array.from({ length: 150 }, () => ({
       x: Math.random(),
       y: Math.random(),
-      size: Math.random() * 2 + 0.5,
-      brightness: Math.random(),
-      twinkleSpeed: Math.random() * 0.02 + 0.005,
-      color:
-        Math.random() > 0.8
-          ? '#ffd700'
-          : Math.random() > 0.5
-            ? '#ffffff'
-            : '#fffaf0',
+      size: Math.random() * 3 + 1,
+      sparklePhase: Math.random() * Math.PI * 2,
+      sparkleSpeed: Math.random() * 0.015 + 0.005,
+      type: Math.random() > 0.7 ? 'sparkle' : 'normal',
+      color: ['#ffffff', '#ffd4e5', '#d4e5ff', '#fffbeb'][
+        Math.floor(Math.random() * 4)
+      ],
     }));
 
-    const nebulaClouds = Array.from({ length: 3 }, (_, i) => ({
+    const petals = Array.from({ length: 30 }, () => ({
       x: Math.random(),
       y: Math.random(),
-      radius: 200 + Math.random() * 300,
-      color: ['#4a0080', '#000080', '#8b008b'][i],
-      drift: Math.random() * 0.0002 - 0.0001,
-      opacity: 0.02 + Math.random() * 0.03,
+      size: Math.random() * 15 + 10,
+      rotation: Math.random() * Math.PI * 2,
+      rotationSpeed: (Math.random() - 0.5) * 0.01,
+      fallSpeed: Math.random() * 0.00025 + 0.0001,
+      swayAmount: Math.random() * 50 + 20,
+      swaySpeed: Math.random() * 0.001 + 0.0005,
+      opacity: Math.random() * 0.3 + 0.1,
+      color: Math.random() > 0.5 ? '#ff6b6b' : '#ff8cc8',
     }));
 
-    const shootingStars: Array<{
+    interface Planet {
+      x: number;
+      y: number;
+      radius: number;
+      baseColor: string;
+      accentColor: string;
+      glowColor: string;
+      hasRing: boolean;
+    }
+
+    const planets: Planet[] = [
+      {
+        x: 0.8,
+        y: 0.2,
+        radius: 80,
+        baseColor: '#8b5cf6',
+        accentColor: '#ec4899',
+        glowColor: '#f472b6',
+        hasRing: true,
+      },
+      {
+        x: 0.2,
+        y: 0.7,
+        radius: 50,
+        baseColor: '#3b82f6',
+        accentColor: '#06b6d4',
+        glowColor: '#67e8f9',
+        hasRing: false,
+      },
+    ];
+
+    interface ShootingStar {
       x: number;
       y: number;
       length: number;
       speed: number;
       angle: number;
       opacity: number;
+      trail: Array<{ x: number; y: number }>;
       active: boolean;
-    }> = [];
+    }
 
-    const planets = [
-      {
-        x: 0.8,
-        y: 0.3,
-        radius: 40,
-        color: '#8b4513',
-        glowColor: '#ff6347',
-        orbitRadius: 0,
-        orbitSpeed: 0,
-      },
-      {
-        x: 0.2,
-        y: 0.7,
-        radius: 25,
-        color: '#4682b4',
-        glowColor: '#00ffff',
-        orbitRadius: 0,
-        orbitSpeed: 0,
-      },
-    ];
+    const shootingStars: ShootingStar[] = [];
 
-    const createShootingStar = () => {
-      if (shootingStars.length < 5 && Math.random() < 0.005) {
-        shootingStars.push({
-          x: Math.random(),
-          y: Math.random() * 0.5,
-          length: 80 + Math.random() * 120,
-          speed: 0.015 + Math.random() * 0.01,
-          angle: Math.PI * 0.15 + Math.random() * Math.PI * 0.2,
-          opacity: 1,
-          active: true,
-        });
-      }
-    };
+    const energyParticles = Array.from({ length: 40 }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      vx: (Math.random() - 0.5) * 0.0005,
+      vy: (Math.random() - 0.5) * 0.0005,
+      size: Math.random() * 4 + 2,
+      energy: Math.random(),
+      pulseSpeed: Math.random() * 0.01 + 0.005,
+    }));
 
     const drawBackground = () => {
-      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-      gradient.addColorStop(0, '#000000');
-      gradient.addColorStop(0.4, '#0a0a2e');
-      gradient.addColorStop(0.8, '#1a1a3e');
-      gradient.addColorStop(1, '#16213e');
+      const gradient = ctx.createLinearGradient(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+      gradient.addColorStop(0, '#0f0c29');
+      gradient.addColorStop(0.3, '#24243e');
+      gradient.addColorStop(0.5, '#302b63');
+      gradient.addColorStop(0.7, '#24243e');
+      gradient.addColorStop(1, '#0f0c29');
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+      ctx.lineWidth = 1;
+      const gridSize = 50;
+
+      for (let x = 0; x < canvas.width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+
+      for (let y = 0; y < canvas.height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
     };
 
-    const drawNebula = () => {
-      nebulaClouds.forEach((cloud) => {
-        cloud.x += cloud.drift;
-        if (cloud.x > 1.2) cloud.x = -0.2;
-        if (cloud.x < -0.2) cloud.x = 1.2;
+    const drawAnimeNebula = () => {
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
 
-        const x = cloud.x * canvas.width;
-        const y = cloud.y * canvas.height;
+      const nebulaColors = [
+        {
+          x: 0.3,
+          y: 0.4,
+          color1: 'rgba(139, 92, 246, 0.2)',
+          color2: 'rgba(236, 72, 153, 0.1)',
+        },
+        {
+          x: 0.7,
+          y: 0.6,
+          color1: 'rgba(59, 130, 246, 0.2)',
+          color2: 'rgba(34, 211, 238, 0.1)',
+        },
+        {
+          x: 0.5,
+          y: 0.2,
+          color1: 'rgba(251, 146, 60, 0.15)',
+          color2: 'rgba(254, 215, 170, 0.08)',
+        },
+      ];
 
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, cloud.radius);
-        gradient.addColorStop(
-          0,
-          cloud.color +
-            Math.floor(cloud.opacity * 255)
-              .toString(16)
-              .padStart(2, '0')
-        );
-        gradient.addColorStop(
-          0.4,
-          cloud.color +
-            Math.floor(cloud.opacity * 0.5 * 255)
-              .toString(16)
-              .padStart(2, '0')
-        );
+      nebulaColors.forEach((nebula, i) => {
+        const x = canvas.width * nebula.x + Math.sin(time * 0.00005 + i) * 30;
+        const y = canvas.height * nebula.y + Math.cos(time * 0.00005 + i) * 30;
+
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, 200);
+        gradient.addColorStop(0, nebula.color1);
+        gradient.addColorStop(0.5, nebula.color2);
         gradient.addColorStop(1, 'transparent');
 
         ctx.fillStyle = gradient;
-        ctx.fillRect(
-          x - cloud.radius,
-          y - cloud.radius,
-          cloud.radius * 2,
-          cloud.radius * 2
-        );
+        ctx.beginPath();
+        ctx.arc(x, y, 300, 0, Math.PI * 2);
+        ctx.fill();
       });
+
+      ctx.restore();
     };
 
     const drawStars = () => {
       stars.forEach((star) => {
-        const twinkle = Math.sin(time * star.twinkleSpeed) * 0.5 + 0.5;
-        const opacity = star.brightness * twinkle;
+        const x = star.x * canvas.width;
+        const y = star.y * canvas.height;
 
-        ctx.beginPath();
-        ctx.arc(
-          star.x * canvas.width,
-          star.y * canvas.height,
-          star.size,
-          0,
-          Math.PI * 2
-        );
+        if (star.type === 'sparkle') {
+          const sparkle =
+            Math.sin(time * star.sparkleSpeed + star.sparklePhase) * 0.5 + 0.5;
+          const size = star.size * (1 + sparkle * 0.5);
 
-        ctx.fillStyle =
-          star.color +
-          Math.floor(opacity * 255)
-            .toString(16)
-            .padStart(2, '0');
-        ctx.fill();
-
-        if (star.size > 1.5 && opacity > 0.7) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(time * 0.001);
           ctx.beginPath();
-          ctx.arc(
-            star.x * canvas.width,
-            star.y * canvas.height,
-            star.size * 3,
+          ctx.moveTo(0, -size * 3);
+          ctx.lineTo(-size * 0.3, -size * 0.3);
+          ctx.lineTo(-size * 3, 0);
+          ctx.lineTo(-size * 0.3, size * 0.3);
+          ctx.lineTo(0, size * 3);
+          ctx.lineTo(size * 0.3, size * 0.3);
+          ctx.lineTo(size * 3, 0);
+          ctx.lineTo(size * 0.3, -size * 0.3);
+          ctx.closePath();
+
+          const starGradient = ctx.createRadialGradient(
             0,
-            Math.PI * 2
+            0,
+            0,
+            0,
+            0,
+            size * 3
           );
+          starGradient.addColorStop(0, star.color);
+          starGradient.addColorStop(0.5, star.color + '80');
+          starGradient.addColorStop(1, 'transparent');
+          ctx.fillStyle = starGradient;
+          ctx.fill();
+
+          ctx.restore();
+        } else {
+          ctx.beginPath();
+          ctx.arc(x, y, star.size, 0, Math.PI * 2);
+          ctx.fillStyle = star.color;
+          ctx.fill();
+
           const glowGradient = ctx.createRadialGradient(
-            star.x * canvas.width,
-            star.y * canvas.height,
+            x,
+            y,
             0,
-            star.x * canvas.width,
-            star.y * canvas.height,
-            star.size * 3
+            x,
+            y,
+            star.size * 4
           );
-          glowGradient.addColorStop(0, star.color + '40');
+          glowGradient.addColorStop(0, star.color + '60');
+          glowGradient.addColorStop(0.5, star.color + '20');
           glowGradient.addColorStop(1, 'transparent');
           ctx.fillStyle = glowGradient;
+          ctx.beginPath();
+          ctx.arc(x, y, star.size * 4, 0, Math.PI * 2);
           ctx.fill();
         }
       });
+    };
+
+    const drawPetals = () => {
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+
+      petals.forEach((petal) => {
+        petal.y += petal.fallSpeed;
+        petal.x +=
+          Math.sin(time * petal.swaySpeed) * petal.swayAmount * 0.00001;
+        petal.rotation += petal.rotationSpeed;
+
+        if (petal.y > 1) petal.y = -0.1;
+        if (petal.x > 1.1) petal.x = -0.1;
+        if (petal.x < -0.1) petal.x = 1.1;
+
+        const x = petal.x * canvas.width;
+        const y = petal.y * canvas.height;
+
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(petal.rotation);
+        ctx.globalAlpha = petal.opacity;
+
+        ctx.beginPath();
+        ctx.moveTo(0, -petal.size);
+        ctx.bezierCurveTo(
+          -petal.size * 0.5,
+          -petal.size * 0.5,
+          -petal.size * 0.5,
+          petal.size * 0.5,
+          0,
+          petal.size
+        );
+        ctx.bezierCurveTo(
+          petal.size * 0.5,
+          petal.size * 0.5,
+          petal.size * 0.5,
+          -petal.size * 0.5,
+          0,
+          -petal.size
+        );
+
+        const petalGradient = ctx.createRadialGradient(
+          0,
+          0,
+          0,
+          0,
+          0,
+          petal.size
+        );
+        petalGradient.addColorStop(0, petal.color);
+        petalGradient.addColorStop(0.7, petal.color + '80');
+        petalGradient.addColorStop(1, petal.color + '00');
+        ctx.fillStyle = petalGradient;
+        ctx.fill();
+
+        ctx.restore();
+      });
+
+      ctx.restore();
     };
 
     const drawPlanets = () => {
       planets.forEach((planet) => {
         const x = planet.x * canvas.width;
         const y = planet.y * canvas.height;
-
         const glowGradient = ctx.createRadialGradient(
           x,
           y,
@@ -196,35 +315,145 @@ export function SpaceTheme() {
           y,
           planet.radius * 2
         );
-        glowGradient.addColorStop(0, planet.glowColor + '20');
-        glowGradient.addColorStop(0.5, planet.glowColor + '10');
+        glowGradient.addColorStop(0, planet.glowColor + '40');
+        glowGradient.addColorStop(0.5, planet.glowColor + '20');
         glowGradient.addColorStop(1, 'transparent');
         ctx.fillStyle = glowGradient;
         ctx.beginPath();
         ctx.arc(x, y, planet.radius * 2, 0, Math.PI * 2);
         ctx.fill();
+        ctx.beginPath();
+        ctx.arc(x, y, planet.radius, 0, Math.PI * 2);
+        ctx.fillStyle = planet.baseColor;
+        ctx.fill();
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(x, y, planet.radius, 0, Math.PI * 2);
+        ctx.clip();
 
-        const planetGradient = ctx.createRadialGradient(
+        const lightGradient = ctx.createRadialGradient(
           x - planet.radius * 0.3,
           y - planet.radius * 0.3,
           0,
-          x,
-          y,
-          planet.radius
+          x - planet.radius * 0.3,
+          y - planet.radius * 0.3,
+          planet.radius * 1.5
         );
-        planetGradient.addColorStop(0, planet.color);
-        planetGradient.addColorStop(0.8, '#000000');
-        planetGradient.addColorStop(1, '#000000');
+        lightGradient.addColorStop(0, 'rgba(255, 255, 255, 0.3)');
+        lightGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.1)');
+        lightGradient.addColorStop(1, 'transparent');
+        ctx.fillStyle = lightGradient;
+        ctx.fillRect(
+          x - planet.radius,
+          y - planet.radius,
+          planet.radius * 2,
+          planet.radius * 2
+        );
 
         ctx.beginPath();
-        ctx.arc(x, y, planet.radius, 0, Math.PI * 2);
-        ctx.fillStyle = planetGradient;
+        ctx.arc(x, y, planet.radius * 0.9, Math.PI * 0.3, Math.PI * 1.3);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
         ctx.fill();
 
-        ctx.strokeStyle = planet.glowColor + '40';
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = planet.accentColor;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(x, y, planet.radius * 0.7, 0, Math.PI * 2);
         ctx.stroke();
+
+        ctx.restore();
+
+        if (planet.hasRing) {
+          ctx.save();
+          ctx.strokeStyle = planet.accentColor + '60';
+          ctx.lineWidth = 4;
+          ctx.setLineDash([10, 5]);
+          ctx.beginPath();
+          ctx.ellipse(
+            x,
+            y,
+            planet.radius * 1.5,
+            planet.radius * 0.4,
+            Math.PI * 0.1,
+            0,
+            Math.PI * 2
+          );
+          ctx.stroke();
+          ctx.restore();
+        }
       });
+    };
+
+    const drawEnergyParticles = () => {
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+
+      energyParticles.forEach((particle) => {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+
+        particle.vx += (0.5 - particle.x) * 0.000005;
+        particle.vy += (0.5 - particle.y) * 0.000005;
+
+        if (particle.x > 1) particle.x = 0;
+        if (particle.x < 0) particle.x = 1;
+        if (particle.y > 1) particle.y = 0;
+        if (particle.y < 0) particle.y = 1;
+
+        const x = particle.x * canvas.width;
+        const y = particle.y * canvas.height;
+        const pulse = Math.sin(time * particle.pulseSpeed) * 0.5 + 0.5;
+        const size = particle.size * (1 + pulse * 0.5);
+
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        const energyGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+        energyGradient.addColorStop(0, '#ffffff');
+        energyGradient.addColorStop(0.3, '#ffd23f');
+        energyGradient.addColorStop(0.7, '#ee6c4d');
+        energyGradient.addColorStop(1, '#c9184a');
+        ctx.fillStyle = energyGradient;
+        ctx.fill();
+
+        const auraGradient = ctx.createRadialGradient(
+          x,
+          y,
+          size,
+          x,
+          y,
+          size * 4
+        );
+        auraGradient.addColorStop(0, 'rgba(255, 210, 63, 0.4)');
+        auraGradient.addColorStop(0.5, 'rgba(238, 108, 77, 0.2)');
+        auraGradient.addColorStop(1, 'transparent');
+        ctx.fillStyle = auraGradient;
+        ctx.beginPath();
+        ctx.arc(x, y, size * 4, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      ctx.restore();
+    };
+
+    const createShootingStar = () => {
+      if (shootingStars.length < 3 && Math.random() < 0.002) {
+        const star: ShootingStar = {
+          x: Math.random(),
+          y: Math.random() * 0.5,
+          length: 150,
+          speed: 0.003,
+          angle: Math.PI * 0.25,
+          opacity: 1,
+          trail: [],
+          active: true,
+        };
+
+        for (let i = 0; i < 20; i++) {
+          star.trail.push({ x: star.x, y: star.y });
+        }
+
+        shootingStars.push(star);
+      }
     };
 
     const drawShootingStars = () => {
@@ -233,61 +462,66 @@ export function SpaceTheme() {
 
         star.x += Math.cos(star.angle) * star.speed;
         star.y += Math.sin(star.angle) * star.speed;
-        star.opacity -= 0.02;
+        star.trail.pop();
+        star.trail.unshift({ x: star.x, y: star.y });
+        star.opacity -= 0.002;
 
         if (star.opacity <= 0 || star.x > 1.2 || star.y > 1.2) {
           shootingStars.splice(index, 1);
           return;
         }
 
-        const x = star.x * canvas.width;
-        const y = star.y * canvas.height;
+        star.trail.forEach((point, i) => {
+          const x = point.x * canvas.width;
+          const y = point.y * canvas.height;
+          const size = ((star.trail.length - i) / star.trail.length) * 3;
+          const opacity =
+            ((star.trail.length - i) / star.trail.length) * star.opacity;
 
-        const gradient = ctx.createLinearGradient(
-          x,
-          y,
-          x - Math.cos(star.angle) * star.length,
-          y - Math.sin(star.angle) * star.length
-        );
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${star.opacity})`);
-        gradient.addColorStop(
-          0.5,
-          `rgba(255, 255, 255, ${star.opacity * 0.5})`
-        );
-        gradient.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          const hue = (i / star.trail.length) * 60 + 180;
+          ctx.fillStyle = `hsla(${hue}, 70%, 60%, ${opacity})`;
+          ctx.fill();
+        });
 
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(
-          x - Math.cos(star.angle) * star.length,
-          y - Math.sin(star.angle) * star.length
-        );
-        ctx.stroke();
-      });
-    };
-
-    const drawCosmicDust = () => {
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.02)';
-      for (let i = 0; i < 50; i++) {
-        const x = (Math.sin(time * 0.0001 + i) + 1) * 0.5 * canvas.width;
-        const y = (Math.cos(time * 0.0002 + i * 2) + 1) * 0.5 * canvas.height;
-        const size = Math.sin(time * 0.001 + i) * 2 + 3;
+        const headX = star.x * canvas.width;
+        const headY = star.y * canvas.height;
 
         ctx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.arc(headX, headY, 5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
         ctx.fill();
-      }
+
+        const headGlow = ctx.createRadialGradient(
+          headX,
+          headY,
+          0,
+          headX,
+          headY,
+          15
+        );
+        headGlow.addColorStop(0, `rgba(255, 255, 255, ${star.opacity * 0.8})`);
+        headGlow.addColorStop(
+          0.5,
+          `rgba(255, 210, 210, ${star.opacity * 0.4})`
+        );
+        headGlow.addColorStop(1, 'transparent');
+        ctx.fillStyle = headGlow;
+        ctx.beginPath();
+        ctx.arc(headX, headY, 15, 0, Math.PI * 2);
+        ctx.fill();
+      });
     };
 
     const animate = () => {
       time++;
 
       drawBackground();
-      drawNebula();
+      drawAnimeNebula();
       drawStars();
-      drawCosmicDust();
+      drawPetals();
+      drawEnergyParticles();
       drawPlanets();
       createShootingStar();
       drawShootingStars();
