@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { cn } from '@/lib/utils';
 
 interface ContributionDay {
   date: string;
@@ -9,10 +11,12 @@ interface ContributionDay {
 }
 
 export function GitHubGraph() {
-  const weeks = 53;
-  const daysPerWeek = 7;
+  const [contributions, setContributions] = useState<ContributionDay[]>([]);
+  const [totalContributions, setTotalContributions] = useState(0);
 
-  const generateMockData = (): ContributionDay[] => {
+  useEffect(() => {
+    const weeks = 53;
+    const daysPerWeek = 7;
     const days: ContributionDay[] = [];
     const today = new Date();
 
@@ -36,14 +40,9 @@ export function GitHubGraph() {
       }
     }
 
-    return days;
-  };
-
-  const contributions = generateMockData();
-  const totalContributions = contributions.reduce(
-    (sum, day) => sum + day.count,
-    0
-  );
+    setContributions(days);
+    setTotalContributions(days.reduce((sum, day) => sum + day.count, 0));
+  }, []);
 
   const getColor = (level: number) => {
     switch (level) {
@@ -62,11 +61,23 @@ export function GitHubGraph() {
     }
   };
 
+  if (contributions.length === 0) {
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="text-lg font-semibold">GitHub Contributions</h3>
+          <span className="text-sm text-muted-foreground">Loading...</span>
+        </div>
+        <div className="h-[120px] animate-pulse rounded bg-secondary/20" />
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">GitHub Contributions</h3>
-        <span className="text-muted-foreground text-sm">
+        <span className="text-sm text-muted-foreground">
           {totalContributions.toLocaleString()} contributions this year
         </span>
       </div>
@@ -89,7 +100,7 @@ export function GitHubGraph() {
         </div>
       </div>
 
-      <div className="text-muted-foreground flex items-center gap-2 text-xs">
+      <div className="flex items-center gap-2 text-xs text-muted-foreground">
         <span>Less</span>
         <div className="flex gap-1">
           {[0, 1, 2, 3, 4].map((level) => (
@@ -103,8 +114,4 @@ export function GitHubGraph() {
       </div>
     </div>
   );
-
-  function cn(...classes: string[]) {
-    return classes.filter(Boolean).join(' ');
-  }
 }

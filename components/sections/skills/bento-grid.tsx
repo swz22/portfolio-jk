@@ -2,13 +2,46 @@
 
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Scene } from '@/components/three/scene';
-import { FloatingSpheres } from '@/components/three/skills/floating-spheres';
-import { GitHubGraph } from './github-graph';
-import { CodeSnippet } from './code-snippet';
+import dynamic from 'next/dynamic';
 import { codeSnippets, skillCategories } from '@/data/skills';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+
+const Scene = dynamic(
+  () => import('@/components/three/scene').then((mod) => mod.Scene),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="relative flex h-[300px] items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary"></div>
+      </div>
+    ),
+  }
+);
+
+const FloatingSpheres = dynamic(
+  () =>
+    import('@/components/three/skills/floating-spheres').then(
+      (mod) => mod.FloatingSpheres
+    ),
+  {
+    ssr: false,
+  }
+);
+
+const GitHubGraph = dynamic(
+  () => import('./github-graph').then((mod) => mod.GitHubGraph),
+  {
+    ssr: false,
+  }
+);
+
+const CodeSnippet = dynamic(
+  () => import('./code-snippet').then((mod) => mod.CodeSnippet),
+  {
+    ssr: false,
+  }
+);
 
 export function BentoGrid() {
   const [activeSnippet, setActiveSnippet] = useState(0);
@@ -22,16 +55,14 @@ export function BentoGrid() {
         transition={{ duration: 0.5 }}
         className="md:col-span-2 lg:col-span-2"
       >
-        <Card className="border-border/50 bg-card/50 h-full backdrop-blur">
+        <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
           <CardHeader>
             <CardTitle>3D Skill Visualization</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="relative h-[300px]">
-              <Scene className="h-full w-full">
-                <FloatingSpheres skills={topSkills} />
-              </Scene>
-            </div>
+            <Scene className="h-[300px] w-full">
+              <FloatingSpheres skills={topSkills} />
+            </Scene>
           </CardContent>
         </Card>
       </motion.div>
@@ -42,7 +73,7 @@ export function BentoGrid() {
         transition={{ duration: 0.5, delay: 0.1 }}
         className="md:col-span-2"
       >
-        <Card className="border-border/50 bg-card/50 h-full backdrop-blur">
+        <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
           <CardContent className="p-6">
             <GitHubGraph />
           </CardContent>
@@ -55,7 +86,7 @@ export function BentoGrid() {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="md:col-span-2 lg:col-span-2"
       >
-        <Card className="border-border/50 bg-card/50 h-full backdrop-blur">
+        <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
           <CardHeader>
             <CardTitle>Code Snippets</CardTitle>
             <div className="mt-2 flex gap-2">
@@ -87,26 +118,26 @@ export function BentoGrid() {
         transition={{ duration: 0.5, delay: 0.3 }}
         className="md:col-span-1"
       >
-        <Card className="border-border/50 bg-card/50 h-full backdrop-blur">
+        <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
           <CardHeader>
             <CardTitle>Stats</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="text-center">
               <p className="text-4xl font-bold">50+</p>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-sm text-muted-foreground">
                 Projects Completed
               </p>
             </div>
             <div className="text-center">
               <p className="text-4xl font-bold">95%</p>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-sm text-muted-foreground">
                 Client Satisfaction
               </p>
             </div>
             <div className="text-center">
               <p className="text-4xl font-bold">5+</p>
-              <p className="text-muted-foreground text-sm">Years Experience</p>
+              <p className="text-sm text-muted-foreground">Years Experience</p>
             </div>
           </CardContent>
         </Card>
@@ -118,38 +149,38 @@ export function BentoGrid() {
         transition={{ duration: 0.5, delay: 0.4 }}
         className="md:col-span-1"
       >
-        <Card className="border-border/50 bg-card/50 h-full backdrop-blur">
+        <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
           <CardHeader>
             <CardTitle>Certifications</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex items-center gap-3">
-              <div className="bg-primary/20 flex h-10 w-10 items-center justify-center rounded">
+              <div className="flex h-10 w-10 items-center justify-center rounded bg-primary/20">
                 🏆
               </div>
               <div>
                 <p className="text-sm font-medium">AWS Certified</p>
-                <p className="text-muted-foreground text-xs">
+                <p className="text-xs text-muted-foreground">
                   Solutions Architect
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="bg-primary/20 flex h-10 w-10 items-center justify-center rounded">
+              <div className="flex h-10 w-10 items-center justify-center rounded bg-primary/20">
                 🎓
               </div>
               <div>
                 <p className="text-sm font-medium">Meta Certificate</p>
-                <p className="text-muted-foreground text-xs">React Advanced</p>
+                <p className="text-xs text-muted-foreground">React Advanced</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="bg-primary/20 flex h-10 w-10 items-center justify-center rounded">
+              <div className="flex h-10 w-10 items-center justify-center rounded bg-primary/20">
                 📜
               </div>
               <div>
                 <p className="text-sm font-medium">Google Cloud</p>
-                <p className="text-muted-foreground text-xs">Professional</p>
+                <p className="text-xs text-muted-foreground">Professional</p>
               </div>
             </div>
           </CardContent>
