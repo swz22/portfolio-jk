@@ -3,28 +3,39 @@
 import { Canvas } from '@react-three/fiber';
 import { Preload } from '@react-three/drei';
 import { ReactNode, Suspense } from 'react';
-import { SCENE_CONFIG } from '@/constants';
 
 interface SceneProps {
   children: ReactNode;
   className?: string;
 }
 
+const cameraConfig = {
+  fov: 45,
+  near: 0.1,
+  far: 1000,
+  position: [0, 0, 5] as [number, number, number],
+};
+
+const rendererConfig = {
+  antialias: true,
+  alpha: true,
+  powerPreference: 'high-performance' as WebGLPowerPreference,
+};
+
 export function Scene({ children, className }: SceneProps) {
   return (
     <div className={className}>
       <Canvas
         camera={{
-          fov: SCENE_CONFIG.camera.fov,
-          near: SCENE_CONFIG.camera.near,
-          far: SCENE_CONFIG.camera.far,
-          position: SCENE_CONFIG.camera.position as [number, number, number],
+          fov: cameraConfig.fov,
+          near: cameraConfig.near,
+          far: cameraConfig.far,
+          position: cameraConfig.position,
         }}
         gl={{
-          antialias: SCENE_CONFIG.renderer.antialias,
-          alpha: SCENE_CONFIG.renderer.alpha,
-          powerPreference: SCENE_CONFIG.renderer
-            .powerPreference as WebGLPowerPreference,
+          antialias: rendererConfig.antialias,
+          alpha: rendererConfig.alpha,
+          powerPreference: rendererConfig.powerPreference,
         }}
         dpr={[1, 2]}
       >

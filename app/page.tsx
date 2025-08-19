@@ -1,4 +1,4 @@
-import { Hero } from '@/components/sections/hero';
+import { Hero } from '@/components/sections/hero/wrapper';
 import Projects from '@/components/sections/projects';
 
 export default function HomePage() {

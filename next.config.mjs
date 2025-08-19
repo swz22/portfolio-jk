@@ -23,26 +23,35 @@ const withBundle = withBundleAnalyzer({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: [
+    'three',
+    '@react-three/fiber',
+    '@react-three/drei',
+    '@react-three/postprocessing',
+    '@react-three/rapier',
+    '@react-three/a11y',
+  ],
   pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
   images: {
     domains: ['localhost'],
     formats: ['image/avif', 'image/webp'],
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+        path: false,
+        crypto: false,
+      };
+    }
+
     config.module.rules.push({
       test: /\.(glsl|vs|fs|vert|frag)$/,
       use: ['raw-loader', 'glslify-loader'],
     });
 
-    // For better Three.js performance
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      three: '@react-three/fiber/node_modules/three',
-    };
-
     return config;
   },
-  // For better performance
   swcMinify: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',

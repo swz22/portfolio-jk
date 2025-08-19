@@ -2,8 +2,8 @@
 
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
 import { useMousePosition } from '@/hooks/use-mouse-position';
+import { Points, Color, AdditiveBlending } from 'three';
 
 interface ParticleGalaxyProps {
   count?: number;
@@ -28,15 +28,15 @@ export function ParticleGalaxy({
   insideColor = '#ff6030',
   outsideColor = '#1b3984',
 }: ParticleGalaxyProps) {
-  const particlesRef = useRef<THREE.Points>(null);
+  const particlesRef = useRef<Points>(null);
   const mousePosition = useMousePosition();
 
   const { positions, colors } = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
 
-    const colorInside = new THREE.Color(insideColor);
-    const colorOutside = new THREE.Color(outsideColor);
+    const colorInside = new Color(insideColor);
+    const colorOutside = new Color(outsideColor);
 
     for (let i = 0; i < count; i++) {
       const i3 = i * 3;
@@ -120,7 +120,7 @@ export function ParticleGalaxy({
         size={size}
         sizeAttenuation
         vertexColors
-        blending={THREE.AdditiveBlending}
+        blending={AdditiveBlending}
         depthWrite={false}
       />
     </points>
