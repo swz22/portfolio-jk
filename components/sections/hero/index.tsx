@@ -1,9 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Scene } from '@/components/three/scene';
+import { SpaceTheme } from '@/components/three/space-theme';
 // import { BeachTheme } from '@/components/three/beach-theme';
-import { EarthTheme } from '@/components/three/earth-theme';
+// import { EarthTheme } from '@/components/three/earth-theme';
 import { Terminal } from '@/components/ui/terminal';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -14,11 +14,15 @@ export function Hero() {
   return (
     <section id="hero" className="relative flex min-h-screen items-center">
       <div className="absolute inset-0 z-0">
-        <EarthTheme />
+        <SpaceTheme />
       </div>
 
       {/* <div className="absolute inset-0 z-0">
         <BeachTheme />
+      </div> */}
+
+      {/* <div className="absolute inset-0 z-0">
+        <EarthTheme />
       </div> */}
 
       <div className="container relative z-10 mx-auto px-4">
