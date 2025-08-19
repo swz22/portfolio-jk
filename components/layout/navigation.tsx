@@ -5,14 +5,19 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { NAV_ITEMS } from '@/constants';
 import { Button } from '@/components/ui/button';
-import { useMounted } from '@/hooks/use-mounted';
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-  const mounted = useMounted();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
 
@@ -38,9 +43,7 @@ export function Navigation() {
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  if (!mounted) return null;
+  }, [mounted]);
 
   return (
     <header
@@ -59,7 +62,7 @@ export function Navigation() {
           <div className="flex items-center justify-between">
             <Link
               href="/"
-              className="hover:text-primary text-2xl font-bold tracking-tight transition-colors"
+              className="text-2xl font-bold tracking-tight transition-colors hover:text-primary"
             >
               JK
             </Link>
@@ -70,8 +73,8 @@ export function Navigation() {
                   <Link
                     href={item.href}
                     className={cn(
-                      'hover:text-primary text-sm font-medium transition-colors',
-                      activeSection === item.href.substring(1)
+                      'text-sm font-medium transition-colors hover:text-primary',
+                      mounted && activeSection === item.href.substring(1)
                         ? 'text-primary'
                         : 'text-muted-foreground'
                     )}
