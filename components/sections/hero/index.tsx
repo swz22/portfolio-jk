@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Scene } from '@/components/three/scene';
-// import { BeachTheme } from '@/components/three/beach-theme';
+import dynamic from 'next/dynamic';
+import { BeachTheme } from '@/components/three/beach-theme';
 import { EarthTheme } from '@/components/three/earth-theme';
 import { SpaceTheme } from '@/components/three/space-theme';
 import { Terminal } from '@/components/ui/terminal';
