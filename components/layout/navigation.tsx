@@ -46,13 +46,8 @@ export function Navigation() {
   }, [mounted]);
 
   return (
-    <header
-      className={cn(
-        'fixed left-0 right-0 top-0 z-50 transition-all duration-300',
-        isScrolled ? 'py-4' : 'py-6'
-      )}
-    >
-      <nav className="container mx-auto px-4">
+    <header className="fixed left-0 right-0 top-0 z-50">
+      <nav className="container mx-auto px-4 py-4">
         <div
           className={cn(
             'glass glass-hover rounded-full px-8 py-4 transition-all duration-300',
