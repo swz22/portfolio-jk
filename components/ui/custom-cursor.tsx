@@ -1,38 +1,39 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useMounted } from '@/hooks/use-mounted';
 
 export function CustomCursor() {
+  const cursorRef = useRef<HTMLDivElement>(null);
   const [isPointer, setIsPointer] = useState(false);
   const mounted = useMounted();
-  
-  const cursorX = useMotionValue(0);
-  const cursorY = useMotionValue(0);
-  
-  const springConfig = { damping: 25, stiffness: 700 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
     if (!mounted) return;
 
+    const isTouchDevice =
+      'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) return;
+
+    const cursor = cursorRef.current;
+    if (!cursor) return;
+
     const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 16);
-      cursorY.set(e.clientY - 16);
+      if (cursor) {
+        cursor.style.transform = `translate3d(${e.clientX - 16}px, ${e.clientY - 16}px, 0)`;
+      }
     };
 
     const handlePointerOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const isClickable = 
+      const isClickable =
         target.tagName === 'A' ||
         target.tagName === 'BUTTON' ||
         target.onclick !== null ||
         target.classList.contains('cursor-pointer') ||
         window.getComputedStyle(target).cursor === 'pointer';
-      
+
       setIsPointer(isClickable);
     };
 
@@ -43,11 +44,12 @@ export function CustomCursor() {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handlePointerOver);
     };
-  }, [cursorX, cursorY, mounted]);
+  }, [mounted]);
 
   if (!mounted) return null;
 
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const isTouchDevice =
+    'ontouchstart' in window || navigator.maxTouchPoints > 0;
   if (isTouchDevice) return null;
 
   return (
@@ -57,28 +59,26 @@ export function CustomCursor() {
           cursor: none !important;
         }
       `}</style>
-      <motion.div
+      <div
+        ref={cursorRef}
         className={cn(
-          'fixed top-0 left-0 w-8 h-8 pointer-events-none z-[9999] transition-transform duration-100',
+          'pointer-events-none fixed left-0 top-0 z-[9999] h-8 w-8 will-change-transform',
           isPointer ? 'scale-150' : 'scale-100'
         )}
         style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
+          transition: 'scale 0.2s ease',
         }}
       >
-        <div className="relative w-full h-full">
+        <div className="relative h-full w-full">
           <div
             className={cn(
-              'absolute inset-0 rounded-full transition-all duration-300',
-              isPointer 
-                ? 'bg-primary/20 scale-150' 
-                : 'bg-primary/10'
+              'absolute inset-0 rounded-full',
+              isPointer ? 'bg-primary/20 scale-150' : 'bg-primary/10'
             )}
           />
-          <div className="absolute inset-2 rounded-full bg-primary" />
+          <div className="bg-primary absolute inset-2 rounded-full" />
         </div>
-      </motion.div>
+      </div>
     </>
   );
 }
