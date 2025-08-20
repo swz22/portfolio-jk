@@ -1,10 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import dynamic from 'next/dynamic';
-import { BeachTheme } from '@/components/three/beach-theme';
-import { EarthTheme } from '@/components/three/earth-theme';
-import { SpaceTheme } from '@/components/three/space-theme';
+import { ThemeScene } from '@/components/three/theme-scene';
 import { Terminal } from '@/components/ui/terminal';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -17,17 +14,7 @@ export function Hero() {
       id="hero"
       className="relative flex min-h-screen items-center justify-center"
     >
-      <div className="absolute inset-0 z-0">
-        <SpaceTheme />
-      </div>
-
-      {/* <div className="absolute inset-0 z-0">
-        <EarthTheme />
-      </div> */}
-
-      {/* <div className="absolute inset-0 z-0">
-        <BeachTheme />
-      </div> */}
+      <ThemeScene />
 
       <div className="container relative z-10 mx-auto px-4 py-20">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
