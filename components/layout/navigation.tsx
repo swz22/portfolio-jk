@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils';
 import { NAV_ITEMS } from '@/constants';
 import { Button } from '@/components/ui/button';
 import { MobileMenu } from './mobile-menu';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { ThemeSelector } from '@/components/ui/theme-selector';
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -84,6 +86,9 @@ export function Navigation() {
               </ul>
 
               <div className="flex items-center gap-3">
+                <ThemeToggle />
+                <ThemeSelector />
+
                 <Button
                   variant="ghost"
                   size="icon"
