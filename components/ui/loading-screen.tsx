@@ -18,14 +18,14 @@ export function LoadingScreen() {
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          className="bg-background fixed inset-0 z-[100] flex items-center justify-center"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-background"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
           <div className="relative">
             <motion.div
-              className="border-primary h-32 w-32 rounded-full border-t-2"
+              className="h-32 w-32 rounded-full border-t-2 border-primary"
               animate={{ rotate: 360 }}
               transition={{
                 duration: 1,
@@ -43,13 +43,13 @@ export function LoadingScreen() {
             </motion.div>
           </div>
           <motion.div
-            className="absolute bottom-10 left-1/2 -translate-x-1/2"
+            className="fixed bottom-10 left-0 right-0 flex justify-center"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
             <div className="flex items-center gap-1">
-              <span className="text-muted-foreground text-sm">Loading</span>
+              <span className="text-sm text-muted-foreground">Loading</span>
               <motion.div
                 className="flex gap-1"
                 initial={{ opacity: 0 }}
@@ -57,7 +57,7 @@ export function LoadingScreen() {
                 transition={{ delay: 0.7 }}
               >
                 <motion.span
-                  className="bg-primary inline-block h-1 w-1 rounded-full"
+                  className="inline-block h-1 w-1 rounded-full bg-primary"
                   animate={{ scale: [1, 1.5, 1] }}
                   transition={{
                     duration: 0.6,
@@ -66,7 +66,7 @@ export function LoadingScreen() {
                   }}
                 />
                 <motion.span
-                  className="bg-primary inline-block h-1 w-1 rounded-full"
+                  className="inline-block h-1 w-1 rounded-full bg-primary"
                   animate={{ scale: [1, 1.5, 1] }}
                   transition={{
                     duration: 0.6,
@@ -75,7 +75,7 @@ export function LoadingScreen() {
                   }}
                 />
                 <motion.span
-                  className="bg-primary inline-block h-1 w-1 rounded-full"
+                  className="inline-block h-1 w-1 rounded-full bg-primary"
                   animate={{ scale: [1, 1.5, 1] }}
                   transition={{
                     duration: 0.6,
