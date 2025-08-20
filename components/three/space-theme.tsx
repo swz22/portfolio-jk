@@ -55,26 +55,36 @@ export function SpaceTheme() {
       accentColor: string;
       glowColor: string;
       hasRing: boolean;
+      orbitRadius: number;
+      orbitSpeed: number;
+      orbitOffset: number;
+    }
+
+    interface Planet {
+      x: number;
+      y: number;
+      radius: number;
+      baseColor: string;
+      accentColor: string;
+      glowColor: string;
+      hasRing: boolean;
+      orbitRadius: number;
+      orbitSpeed: number;
+      orbitOffset: number;
     }
 
     const planets: Planet[] = [
       {
-        x: 0.8,
-        y: 0.2,
-        radius: 80,
-        baseColor: '#8b5cf6',
-        accentColor: '#ec4899',
-        glowColor: '#f472b6',
-        hasRing: true,
-      },
-      {
-        x: 0.2,
-        y: 0.7,
+        x: 0.5, // Center of screen
+        y: 0.5,
         radius: 50,
         baseColor: '#3b82f6',
         accentColor: '#06b6d4',
         glowColor: '#67e8f9',
-        hasRing: false,
+        hasRing: true,
+        orbitRadius: 0.7,
+        orbitSpeed: 0.002,
+        orbitOffset: 0,
       },
     ];
 
@@ -91,11 +101,11 @@ export function SpaceTheme() {
 
     const shootingStars: ShootingStar[] = [];
 
-    const energyParticles = Array.from({ length: 40 }, () => ({
+    const energyParticles = Array.from({ length: 32 }, () => ({
       x: Math.random(),
       y: Math.random(),
-      vx: (Math.random() - 0.5) * 0.0005,
-      vy: (Math.random() - 0.5) * 0.0005,
+      vx: (Math.random() - 0.5) * 0.0002,
+      vy: (Math.random() - 0.5) * 0.0002,
       size: Math.random() * 4 + 2,
       energy: Math.random(),
       pulseSpeed: Math.random() * 0.01 + 0.005,
@@ -180,8 +190,26 @@ export function SpaceTheme() {
 
     const drawStars = () => {
       stars.forEach((star) => {
-        const x = star.x * canvas.width;
-        const y = star.y * canvas.height;
+        const centerX = 0.5;
+        const centerY = 0.5;
+        const rotationSpeed = 0.00008;
+        const angle = time * rotationSpeed;
+        const dx = star.x - centerX;
+        const dy = star.y - centerY;
+        const rotatedX =
+          centerX + (dx * Math.cos(angle) - dy * Math.sin(angle));
+        const rotatedY =
+          centerY + (dx * Math.sin(angle) + dy * Math.cos(angle));
+
+        let x = rotatedX;
+        let y = rotatedY;
+        if (x < -0.1) x += 1.2;
+        if (x > 1.1) x -= 1.2;
+        if (y < -0.1) y += 1.2;
+        if (y > 1.1) y -= 1.2;
+
+        const screenX = x * canvas.width;
+        const screenY = y * canvas.height;
 
         if (star.type === 'sparkle') {
           const sparkle =
@@ -189,7 +217,7 @@ export function SpaceTheme() {
           const size = star.size * (1 + sparkle * 0.5);
 
           ctx.save();
-          ctx.translate(x, y);
+          ctx.translate(screenX, screenY);
           ctx.rotate(time * 0.001);
           ctx.beginPath();
           ctx.moveTo(0, -size * 3);
@@ -219,16 +247,16 @@ export function SpaceTheme() {
           ctx.restore();
         } else {
           ctx.beginPath();
-          ctx.arc(x, y, star.size, 0, Math.PI * 2);
+          ctx.arc(screenX, screenY, star.size, 0, Math.PI * 2);
           ctx.fillStyle = star.color;
           ctx.fill();
 
           const glowGradient = ctx.createRadialGradient(
-            x,
-            y,
+            screenX,
+            screenY,
             0,
-            x,
-            y,
+            screenX,
+            screenY,
             star.size * 4
           );
           glowGradient.addColorStop(0, star.color + '60');
@@ -236,7 +264,7 @@ export function SpaceTheme() {
           glowGradient.addColorStop(1, 'transparent');
           ctx.fillStyle = glowGradient;
           ctx.beginPath();
-          ctx.arc(x, y, star.size * 4, 0, Math.PI * 2);
+          ctx.arc(screenX, screenY, star.size * 4, 0, Math.PI * 2);
           ctx.fill();
         }
       });
@@ -256,8 +284,19 @@ export function SpaceTheme() {
         if (petal.x > 1.1) petal.x = -0.1;
         if (petal.x < -0.1) petal.x = 1.1;
 
-        const x = petal.x * canvas.width;
-        const y = petal.y * canvas.height;
+        const centerX = 0.5;
+        const centerY = 0.5;
+        const rotationSpeed = 0.00012;
+        const angle = time * rotationSpeed;
+        const dx = petal.x - centerX;
+        const dy = petal.y - centerY;
+        const rotatedX =
+          centerX + (dx * Math.cos(angle) - dy * Math.sin(angle));
+        const rotatedY =
+          centerY + (dx * Math.sin(angle) + dy * Math.cos(angle));
+
+        const x = rotatedX * canvas.width;
+        const y = rotatedY * canvas.height;
 
         ctx.save();
         ctx.translate(x, y);
@@ -304,9 +343,16 @@ export function SpaceTheme() {
     };
 
     const drawPlanets = () => {
-      planets.forEach((planet) => {
-        const x = planet.x * canvas.width;
-        const y = planet.y * canvas.height;
+      planets.forEach((planet, index) => {
+        const orbitAngle = time * planet.orbitSpeed + planet.orbitOffset;
+        const centerX = planet.x * canvas.width;
+        const centerY = planet.y * canvas.height;
+        const x =
+          centerX + Math.cos(orbitAngle) * planet.orbitRadius * canvas.width;
+        const y =
+          centerY +
+          Math.sin(orbitAngle) * planet.orbitRadius * canvas.height * 0.6;
+        const rotationAngle = time * 0.005 * (index + 1);
         const glowGradient = ctx.createRadialGradient(
           x,
           y,
@@ -330,6 +376,33 @@ export function SpaceTheme() {
         ctx.beginPath();
         ctx.arc(x, y, planet.radius, 0, Math.PI * 2);
         ctx.clip();
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotationAngle);
+        ctx.fillStyle = planet.accentColor + '30';
+        ctx.beginPath();
+        ctx.ellipse(
+          -planet.radius * 0.3,
+          -planet.radius * 0.2,
+          planet.radius * 0.4,
+          planet.radius * 0.6,
+          Math.PI * 0.3,
+          0,
+          Math.PI * 2
+        );
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(
+          planet.radius * 0.2,
+          planet.radius * 0.3,
+          planet.radius * 0.3,
+          planet.radius * 0.5,
+          -Math.PI * 0.2,
+          0,
+          Math.PI * 2
+        );
+        ctx.fill();
+        ctx.restore();
 
         const lightGradient = ctx.createRadialGradient(
           x - planet.radius * 0.3,
@@ -354,13 +427,15 @@ export function SpaceTheme() {
         ctx.arc(x, y, planet.radius * 0.9, Math.PI * 0.3, Math.PI * 1.3);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
         ctx.fill();
-
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotationAngle * 0.5);
         ctx.strokeStyle = planet.accentColor;
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.arc(x, y, planet.radius * 0.7, 0, Math.PI * 2);
+        ctx.arc(0, 0, planet.radius * 0.7, 0, Math.PI * 2);
         ctx.stroke();
-
+        ctx.restore();
         ctx.restore();
 
         if (planet.hasRing) {
@@ -392,8 +467,8 @@ export function SpaceTheme() {
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        particle.vx += (0.5 - particle.x) * 0.000005;
-        particle.vy += (0.5 - particle.y) * 0.000005;
+        particle.vx += (0.5 - particle.x) * 0.000002; // Slower acceleration
+        particle.vy += (0.5 - particle.y) * 0.000002; // Slower acceleration
 
         if (particle.x > 1) particle.x = 0;
         if (particle.x < 0) particle.x = 1;
