@@ -101,11 +101,20 @@ body {
 
 @layer utilities {
   .glass {
-    @apply bg-background/30 border-border/50 border backdrop-blur-md;
+    @apply border border-border/50 bg-background/30 backdrop-blur-md;
   }
 
   .glass-hover {
-    @apply hover:bg-background/40 hover:border-border/70 transition-all hover:backdrop-blur-lg;
+    @apply transition-all hover:border-border/70 hover:bg-background/40 hover:backdrop-blur-lg;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
 
