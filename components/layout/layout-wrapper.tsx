@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import { Navigation } from './navigation';
 import { Footer } from './footer';
+import { ThemeProvider } from '@/contexts/theme-context';
 
 const LoadingScreen = dynamic(
   () =>
@@ -34,13 +35,13 @@ interface LayoutWrapperProps {
 
 export function LayoutWrapper({ children }: LayoutWrapperProps) {
   return (
-    <>
+    <ThemeProvider>
       <LoadingScreen />
       <CustomCursor />
       <ScrollProgress />
       <Navigation />
       <main className="min-h-screen">{children}</main>
       <Footer />
-    </>
+    </ThemeProvider>
   );
 }
