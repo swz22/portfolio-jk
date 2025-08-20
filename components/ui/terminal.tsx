@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { TERMINAL_COMMANDS } from '@/constants';
+import { useTheme } from '@/contexts/theme-context';
 
 interface Command {
   input: string;
@@ -19,6 +20,8 @@ Type 'help' for available commands.`,
   ]);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
+  const { currentTheme, setTheme, themes, isEffectsEnabled, toggleEffects } =
+    useTheme();
 
   useEffect(() => {
     if (terminalRef.current) {
@@ -72,7 +75,40 @@ Type 'projects [number]' for more details.`;
         setHistory([]);
         return;
       case 'theme':
-        output = 'Theme toggling is not available in terminal mode.';
+        output = `Theme commands:
+• theme list     - Show available themes
+• theme set <n> - Change theme
+• theme current  - Show current theme
+• effects on/off - Toggle effects`;
+        break;
+      case 'theme list':
+        output = `Available themes:\n${themes
+          .filter((t) => t.available)
+          .map(
+            (t) =>
+              `• ${t.name.padEnd(10)} - ${t.description} [${t.performance}]`
+          )
+          .join('\n')}`;
+        break;
+      case 'theme current':
+        output = `Current theme: ${currentTheme}
+Effects: ${isEffectsEnabled ? 'enabled' : 'disabled'}`;
+        break;
+      case 'effects on':
+        toggleEffects();
+        output = 'Effects enabled. Enjoy the visual experience!';
+        break;
+      case 'effects off':
+        toggleEffects();
+        output = 'Effects disabled. Minimal mode activated.';
+        break;
+      case 'enable effects':
+        if (!isEffectsEnabled) {
+          toggleEffects();
+          output = 'Effects enabled. Enjoy the visual experience!';
+        } else {
+          output = 'Effects are already enabled.';
+        }
         break;
       case 'resume':
         output = 'Downloading resume...';
@@ -91,12 +127,34 @@ Type 'projects [number]' for more details.`;
         output = '🥚 Try: matrix, hack, or game';
         break;
       case 'matrix':
-        output = 'Entering the Matrix... (Feature coming soon)';
+        if (themes.find((t) => t.id === 'matrix')?.available) {
+          setTheme('matrix');
+          output = 'Entering the Matrix...';
+        } else {
+          output = 'Matrix theme coming soon...';
+        }
         break;
       case '':
         return;
       default:
-        output = `Command not found: ${cmd}. Type 'help' for available commands.`;
+        if (trimmedCmd.startsWith('theme set ')) {
+          const themeName = trimmedCmd.replace('theme set ', '');
+          const theme = themes.find(
+            (t) => t.name.toLowerCase() === themeName.toLowerCase()
+          );
+          if (theme && theme.available) {
+            if (!isEffectsEnabled && theme.id !== 'none') {
+              output = 'Enable effects first with "effects on"';
+            } else {
+              setTheme(theme.id);
+              output = `Theme changed to ${theme.name}`;
+            }
+          } else {
+            output = `Theme "${themeName}" not found or unavailable`;
+          }
+        } else {
+          output = `Command not found: ${cmd}. Type 'help' for available commands.`;
+        }
     }
 
     setHistory([...history, { input: cmd, output }]);
