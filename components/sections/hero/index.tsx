@@ -29,8 +29,8 @@ export function Hero() {
         <BeachTheme />
       </div> */}
 
-      <div className="container relative z-10 mx-auto px-4">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-8">
+      <div className="container relative z-10 mx-auto px-4 py-20">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -92,8 +92,11 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex items-start justify-center lg:justify-end lg:pt-16"
           >
-            <Terminal />
+            <div className="w-full max-w-2xl">
+              <Terminal />
+            </div>
           </motion.div>
         </div>
       </div>

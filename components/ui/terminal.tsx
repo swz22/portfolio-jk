@@ -110,7 +110,7 @@ Type 'projects [number]' for more details.`;
   };
 
   return (
-    <div className="glass-hover flex h-[350px] flex-col rounded-lg bg-black/30 p-4 font-mono text-sm backdrop-blur-md">
+    <div className="glass-hover flex h-[450px] w-full flex-col rounded-xl bg-black/40 p-6 font-mono text-sm shadow-2xl backdrop-blur-lg">
       <div className="mb-4 flex items-center gap-2">
         <div className="flex gap-1.5">
           <div className="h-3 w-3 rounded-full bg-red-500" />
