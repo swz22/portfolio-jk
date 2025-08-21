@@ -7,22 +7,14 @@ import { useTheme } from '@/contexts/theme-context';
 const StarfallTheme = lazy(() =>
   import('./space-theme').then((mod) => ({ default: mod.SpaceTheme }))
 );
-const BeachTheme = lazy(() =>
-  import('./beach-theme').then((mod) => ({ default: mod.BeachTheme }))
-);
-const MinimalTheme = lazy(() =>
-  import('./minimal-theme').then((mod) => ({ default: mod.MinimalTheme }))
-);
 const NeuralTheme = lazy(() =>
   import('./neural-theme').then((mod) => ({ default: mod.NeuralTheme }))
 );
 
 const themeComponents = {
   starfall: StarfallTheme,
-  beach: BeachTheme,
   matrix: null,
   cyberpunk: null,
-  minimal: MinimalTheme,
   neural: NeuralTheme,
   underwater: null,
 };
