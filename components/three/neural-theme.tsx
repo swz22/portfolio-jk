@@ -101,7 +101,6 @@ function NeuralNetwork() {
       end: [number, number, number];
     }[] = [];
 
-    // Create a simple 3D network structure
     const layers = [
       { count: 3, x: -3 },
       { count: 5, x: -1 },
@@ -124,13 +123,11 @@ function NeuralNetwork() {
       layerNeurons.push(layerPositions);
     });
 
-    // Create connections between layers
     for (let i = 0; i < layerNeurons.length - 1; i++) {
       const currentLayer = layerNeurons[i];
       const nextLayer = layerNeurons[i + 1];
 
       currentLayer.forEach((neuron) => {
-        // Connect to 2-3 random neurons in the next layer
         const connectionCount = Math.floor(Math.random() * 2) + 2;
         const shuffled = [...nextLayer].sort(() => Math.random() - 0.5);
 
@@ -263,7 +260,7 @@ export function NeuralTheme() {
 
           <OrbitControls
             enablePan={false}
-            enableZoom={true}
+            enableZoom={false}
             minDistance={8}
             maxDistance={20}
             rotateSpeed={0.5}
