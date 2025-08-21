@@ -5,7 +5,9 @@ import { useTheme } from '@/contexts/theme-context';
 import { cn } from '@/lib/utils';
 
 export function ThemeToggle() {
-  const { isEffectsEnabled, toggleEffects, currentTheme } = useTheme();
+  const { isEffectsEnabled, toggleEffects, currentTheme, themes } = useTheme();
+
+  const currentThemeName = themes.find((t) => t.id === currentTheme)?.name;
 
   return (
     <motion.button
@@ -65,14 +67,14 @@ export function ThemeToggle() {
       </span>
 
       <AnimatePresence>
-        {isEffectsEnabled && currentTheme !== 'none' && (
+        {isEffectsEnabled && currentThemeName && (
           <motion.span
             initial={{ opacity: 0, width: 0 }}
             animate={{ opacity: 1, width: 'auto' }}
             exit={{ opacity: 0, width: 0 }}
             className="ml-1 hidden overflow-hidden text-xs text-muted-foreground sm:inline"
           >
-            • {currentTheme}
+            • {currentThemeName}
           </motion.span>
         )}
       </AnimatePresence>

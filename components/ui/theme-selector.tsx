@@ -11,7 +11,7 @@ export function ThemeSelector() {
 
   if (!isEffectsEnabled) return null;
 
-  const availableThemes = themes.filter((t) => t.available && t.id !== 'none');
+  const availableThemes = themes.filter((t) => t.available);
 
   return (
     <div className="relative">
