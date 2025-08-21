@@ -164,8 +164,8 @@ Effects: ${isEffectsEnabled ? 'enabled' : 'disabled'}`;
   };
 
   return (
-    <div className="glass-hover flex h-[450px] w-full flex-col rounded-xl bg-black/40 p-6 font-mono text-sm shadow-2xl backdrop-blur-lg">
-      <div className="mb-4 flex items-center gap-2">
+    <div className="terminal-container glass-hover flex h-[450px] w-full flex-col rounded-xl bg-black/40 p-6 font-mono text-sm shadow-2xl backdrop-blur-lg">
+      <div className="terminal-header mb-4 flex select-none items-center gap-2">
         <div className="flex gap-1.5">
           <div className="h-3 w-3 rounded-full bg-red-500" />
           <div className="h-3 w-3 rounded-full bg-yellow-500" />
@@ -179,12 +179,12 @@ Effects: ${isEffectsEnabled ? 'enabled' : 'disabled'}`;
           <div key={index}>
             {item.input && (
               <div className="flex items-center gap-2">
-                <span className="text-primary">❯</span>
-                <span>{item.input}</span>
+                <span className="select-none text-primary">❯</span>
+                <span className="select-none">{item.input}</span>
               </div>
             )}
             {item.output && (
-              <div className="whitespace-pre-wrap pl-4 text-muted-foreground">
+              <div className="terminal-output whitespace-pre-wrap pl-4 text-muted-foreground">
                 {item.output}
               </div>
             )}
@@ -193,14 +193,14 @@ Effects: ${isEffectsEnabled ? 'enabled' : 'disabled'}`;
       </div>
 
       <div className="flex items-center gap-2 border-t border-border pt-2">
-        <span className="text-primary">❯</span>
+        <span className="select-none text-primary">❯</span>
         <input
           ref={inputRef}
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="flex-1 bg-transparent placeholder-muted-foreground/50 outline-none"
+          className="flex-1 bg-transparent placeholder-muted-foreground outline-none"
           placeholder="Type a command..."
           autoFocus
         />
