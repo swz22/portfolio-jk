@@ -100,7 +100,7 @@ Effects: ${isEffectsEnabled ? 'enabled' : 'disabled'}`;
         break;
       case 'effects off':
         toggleEffects();
-        output = 'Effects disabled. Minimal mode activated.';
+        output = 'Effects disabled.';
         break;
       case 'enable effects':
         if (!isEffectsEnabled) {
