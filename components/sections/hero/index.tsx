@@ -22,6 +22,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="select-none"
           >
             <Badge variant="secondary" className="mb-4">
               {SITE_CONFIG.availability}
@@ -89,7 +90,7 @@ export function Hero() {
       </div>
 
       <motion.div
-        className="absolute bottom-8 left-0 right-0 z-10 flex justify-center"
+        className="absolute bottom-8 left-0 right-0 z-10 flex select-none justify-center"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.5 }}
