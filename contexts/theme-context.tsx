@@ -10,10 +10,8 @@ import React, {
 
 export type ThemeId =
   | 'starfall'
-  | 'beach'
   | 'matrix'
   | 'cyberpunk'
-  | 'minimal'
   | 'neural'
   | 'underwater';
 
@@ -37,27 +35,11 @@ interface ThemeContextType {
 
 const themes: ThemeConfig[] = [
   {
-    id: 'minimal',
-    name: 'Arctic Sky',
-    description: '',
-    technology: '2D Canvas',
-    performance: 'light',
-    available: true,
-  },
-  {
     id: 'starfall',
     name: 'Starfall',
     description: '',
     technology: '2D Canvas',
     performance: 'light',
-    available: true,
-  },
-  {
-    id: 'beach',
-    name: 'Beach',
-    description: '',
-    technology: '2D Canvas',
-    performance: 'medium',
     available: true,
   },
   {
@@ -134,12 +116,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const newState = !isEffectsEnabled;
     setIsEffectsEnabled(newState);
     localStorage.setItem('portfolio-effects', String(newState));
-
-    if (!newState) {
-      setTheme('minimal');
-    } else if (currentTheme === 'minimal') {
-      setTheme('starfall');
-    }
   };
 
   return (
