@@ -9,17 +9,19 @@ import React, {
 } from 'react';
 
 export type ThemeId =
-  | 'space'
-  | 'earth'
+  | 'starfall'
   | 'beach'
   | 'matrix'
   | 'cyberpunk'
-  | 'minimal';
+  | 'minimal'
+  | 'neural'
+  | 'underwater';
 
 interface ThemeConfig {
   id: ThemeId;
   name: string;
   description: string;
+  technology: '2D Canvas' | '3D WebGL';
   performance: 'light' | 'medium' | 'heavy';
   available: boolean;
 }
@@ -37,42 +39,56 @@ const themes: ThemeConfig[] = [
   {
     id: 'minimal',
     name: 'Arctic Sky',
-    description: 'Serene aurora with soft blues',
+    description: '',
+    technology: '2D Canvas',
     performance: 'light',
     available: true,
   },
   {
-    id: 'space',
-    name: 'Space',
-    description: 'Anime-inspired space with shooting stars',
+    id: 'starfall',
+    name: 'Starfall',
+    description: '',
+    technology: '2D Canvas',
     performance: 'light',
-    available: true,
-  },
-  {
-    id: 'earth',
-    name: 'Earth',
-    description: '3D globe with satellites',
-    performance: 'heavy',
     available: true,
   },
   {
     id: 'beach',
     name: 'Beach',
-    description: 'Relaxing beach scene',
+    description: '',
+    technology: '2D Canvas',
     performance: 'medium',
     available: true,
   },
   {
+    id: 'neural',
+    name: 'Neural Network',
+    description: '',
+    technology: '3D WebGL',
+    performance: 'medium',
+    available: true,
+  },
+  {
+    id: 'underwater',
+    name: 'Underwater Abyss',
+    description: '',
+    technology: '3D WebGL',
+    performance: 'heavy',
+    available: false,
+  },
+  {
     id: 'matrix',
     name: 'Matrix',
-    description: 'Digital rain effect',
+    description: '',
+    technology: '2D Canvas',
     performance: 'medium',
     available: false,
   },
   {
     id: 'cyberpunk',
     name: 'Cyberpunk',
-    description: 'Neon city vibes',
+    description: '',
+    technology: '3D WebGL',
     performance: 'heavy',
     available: false,
   },
@@ -81,20 +97,25 @@ const themes: ThemeConfig[] = [
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [currentTheme, setCurrentTheme] = useState<ThemeId>('space');
+  const [currentTheme, setCurrentTheme] = useState<ThemeId>('starfall');
   const [isEffectsEnabled, setIsEffectsEnabled] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme') as ThemeId;
+    const savedTheme = localStorage.getItem('portfolio-theme');
     const savedEffects = localStorage.getItem('portfolio-effects');
 
     if (savedEffects !== null) {
       setIsEffectsEnabled(savedEffects === 'true');
     }
 
-    if (savedTheme && themes.find((t) => t.id === savedTheme)?.available) {
-      setCurrentTheme(savedTheme);
+    if (savedTheme) {
+      const isValidTheme = themes.some(
+        (t) => t.id === savedTheme && t.available
+      );
+      if (isValidTheme) {
+        setCurrentTheme(savedTheme as ThemeId);
+      }
     }
   }, []);
 
@@ -117,7 +138,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     if (!newState) {
       setTheme('minimal');
     } else if (currentTheme === 'minimal') {
-      setTheme('space');
+      setTheme('starfall');
     }
   };
 
