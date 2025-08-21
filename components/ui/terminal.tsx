@@ -86,7 +86,7 @@ Type 'projects [number]' for more details.`;
           .filter((t) => t.available)
           .map(
             (t) =>
-              `• ${t.name.padEnd(10)} - ${t.description} [${t.performance}]`
+              `• ${t.name.padEnd(12)} - ${t.description} [${t.performance}]`
           )
           .join('\n')}`;
         break;
@@ -143,12 +143,8 @@ Effects: ${isEffectsEnabled ? 'enabled' : 'disabled'}`;
             (t) => t.name.toLowerCase() === themeName.toLowerCase()
           );
           if (theme && theme.available) {
-            if (!isEffectsEnabled && theme.id !== 'none') {
-              output = 'Enable effects first with "effects on"';
-            } else {
-              setTheme(theme.id);
-              output = `Theme changed to ${theme.name}`;
-            }
+            setTheme(theme.id);
+            output = `Theme changed to ${theme.name}`;
           } else {
             output = `Theme "${themeName}" not found or unavailable`;
           }
