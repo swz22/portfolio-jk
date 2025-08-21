@@ -13,6 +13,9 @@ const EarthTheme = lazy(() =>
 const BeachTheme = lazy(() =>
   import('./beach-theme').then((mod) => ({ default: mod.BeachTheme }))
 );
+const MinimalTheme = lazy(() =>
+  import('./minimal-theme').then((mod) => ({ default: mod.MinimalTheme }))
+);
 
 const themeComponents = {
   space: SpaceTheme,
@@ -20,13 +23,13 @@ const themeComponents = {
   beach: BeachTheme,
   matrix: null,
   cyberpunk: null,
-  none: null,
+  minimal: MinimalTheme,
 };
 
 export function ThemeScene() {
   const { currentTheme, isEffectsEnabled, isTransitioning } = useTheme();
 
-  if (!isEffectsEnabled || currentTheme === 'none') {
+  if (!isEffectsEnabled || !currentTheme) {
     return null;
   }
 

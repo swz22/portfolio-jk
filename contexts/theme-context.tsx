@@ -14,7 +14,7 @@ export type ThemeId =
   | 'beach'
   | 'matrix'
   | 'cyberpunk'
-  | 'none';
+  | 'minimal';
 
 interface ThemeConfig {
   id: ThemeId;
@@ -35,9 +35,9 @@ interface ThemeContextType {
 
 const themes: ThemeConfig[] = [
   {
-    id: 'none',
-    name: 'Minimal',
-    description: 'Clean, no effects',
+    id: 'minimal',
+    name: 'Arctic Sky',
+    description: 'Serene aurora with soft blues',
     performance: 'light',
     available: true,
   },
@@ -82,17 +82,20 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [currentTheme, setCurrentTheme] = useState<ThemeId>('space');
-  const [isEffectsEnabled, setIsEffectsEnabled] = useState(false);
+  const [isEffectsEnabled, setIsEffectsEnabled] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('portfolio-theme') as ThemeId;
-    const savedEffects = localStorage.getItem('portfolio-effects') === 'true';
+    const savedEffects = localStorage.getItem('portfolio-effects');
+
+    if (savedEffects !== null) {
+      setIsEffectsEnabled(savedEffects === 'true');
+    }
 
     if (savedTheme && themes.find((t) => t.id === savedTheme)?.available) {
       setCurrentTheme(savedTheme);
     }
-    setIsEffectsEnabled(savedEffects);
   }, []);
 
   const setTheme = (theme: ThemeId) => {
@@ -112,8 +115,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('portfolio-effects', String(newState));
 
     if (!newState) {
-      setTheme('none');
-    } else if (currentTheme === 'none') {
+      setTheme('minimal');
+    } else if (currentTheme === 'minimal') {
       setTheme('space');
     }
   };
