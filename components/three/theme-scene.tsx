@@ -4,11 +4,8 @@ import { Suspense, lazy } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from '@/contexts/theme-context';
 
-const SpaceTheme = lazy(() =>
+const StarfallTheme = lazy(() =>
   import('./space-theme').then((mod) => ({ default: mod.SpaceTheme }))
-);
-const EarthTheme = lazy(() =>
-  import('./earth-theme').then((mod) => ({ default: mod.EarthTheme }))
 );
 const BeachTheme = lazy(() =>
   import('./beach-theme').then((mod) => ({ default: mod.BeachTheme }))
@@ -16,14 +13,18 @@ const BeachTheme = lazy(() =>
 const MinimalTheme = lazy(() =>
   import('./minimal-theme').then((mod) => ({ default: mod.MinimalTheme }))
 );
+const NeuralTheme = lazy(() =>
+  import('./neural-theme').then((mod) => ({ default: mod.NeuralTheme }))
+);
 
 const themeComponents = {
-  space: SpaceTheme,
-  earth: EarthTheme,
+  starfall: StarfallTheme,
   beach: BeachTheme,
   matrix: null,
   cyberpunk: null,
   minimal: MinimalTheme,
+  neural: NeuralTheme,
+  underwater: null,
 };
 
 export function ThemeScene() {
