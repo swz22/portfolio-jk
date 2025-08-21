@@ -79,28 +79,28 @@ export function ThemeSelector() {
                       setIsOpen(false);
                     }}
                     className={cn(
-                      'flex w-full flex-col items-start gap-1 rounded-md px-3 py-2 text-left transition-all',
+                      'flex w-full items-center justify-between rounded-md px-3 py-2 transition-all',
                       'hover:bg-secondary/50',
                       currentTheme === theme.id && 'bg-secondary'
                     )}
                   >
-                    <div className="flex w-full items-center justify-between">
+                    <div className="flex items-center gap-2">
                       <span className="font-medium">{theme.name}</span>
-                      <span
-                        className={cn(
-                          'text-xs',
-                          theme.performance === 'light' && 'text-green-500',
-                          theme.performance === 'medium' && 'text-yellow-500',
-                          theme.performance === 'heavy' && 'text-red-500'
-                        )}
-                      >
-                        {theme.performance === 'light' && '●'}
-                        {theme.performance === 'medium' && '●●'}
-                        {theme.performance === 'heavy' && '●●●'}
+                      <span className="rounded-full bg-secondary px-1.5 py-0.5 text-[10px] text-secondary-foreground">
+                        {theme.technology === '3D WebGL' ? '3D' : '2D'}
                       </span>
                     </div>
-                    <span className="text-xs text-muted-foreground">
-                      {theme.description}
+                    <span
+                      className={cn(
+                        'text-xs',
+                        theme.performance === 'light' && 'text-green-500',
+                        theme.performance === 'medium' && 'text-yellow-500',
+                        theme.performance === 'heavy' && 'text-red-500'
+                      )}
+                    >
+                      {theme.performance === 'light' && '●'}
+                      {theme.performance === 'medium' && '●●'}
+                      {theme.performance === 'heavy' && '●●●'}
                     </span>
                   </button>
                 ))}
