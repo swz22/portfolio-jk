@@ -1,5 +1,5 @@
 import { Hero } from '@/components/sections/hero/wrapper';
-import Projects from '@/components/sections/projects';
+import { Projects } from '@/components/sections/projects/wrapper';
 import Skills from '@/components/sections/skills';
 import Experience from '@/components/sections/experience';
 import Contact from '@/components/sections/contact';
