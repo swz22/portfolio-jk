@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Experience } from '@/types';
 import { cn } from '@/lib/utils';
@@ -11,7 +12,11 @@ interface TimelineProps {
   onSelect: (id: string) => void;
 }
 
-export function Timeline({ experiences, selectedId, onSelect }: TimelineProps) {
+export const Timeline = memo(function Timeline({
+  experiences,
+  selectedId,
+  onSelect,
+}: TimelineProps) {
   return (
     <div className="relative">
       <div className="absolute left-8 top-0 h-full w-0.5 bg-border" />
@@ -160,4 +165,4 @@ export function Timeline({ experiences, selectedId, onSelect }: TimelineProps) {
       </div>
     </div>
   );
-}
+});
