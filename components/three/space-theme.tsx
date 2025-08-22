@@ -4,12 +4,14 @@ import { useEffect, useRef } from 'react';
 
 export function SpaceTheme() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number>();
+  const lastFrameTime = useRef<number>(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) return;
 
     const resizeCanvas = () => {
@@ -19,7 +21,6 @@ export function SpaceTheme() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    let animationId: number;
     let time = 0;
 
     const stars = Array.from({ length: 150 }, () => ({
@@ -47,47 +48,6 @@ export function SpaceTheme() {
       color: Math.random() > 0.5 ? '#ff6b6b' : '#ff8cc8',
     }));
 
-    // interface Planet {
-    //   x: number;
-    //   y: number;
-    //   radius: number;
-    //   baseColor: string;
-    //   accentColor: string;
-    //   glowColor: string;
-    //   hasRing: boolean;
-    //   orbitRadius: number;
-    //   orbitSpeed: number;
-    //   orbitOffset: number;
-    // }
-
-    interface Planet {
-      x: number;
-      y: number;
-      radius: number;
-      baseColor: string;
-      accentColor: string;
-      glowColor: string;
-      hasRing: boolean;
-      orbitRadius: number;
-      orbitSpeed: number;
-      orbitOffset: number;
-    }
-
-    // const planets: Planet[] = [
-    //   {
-    //     x: 0.5,  // Center of screen
-    //     y: 0.5,
-    //     radius: 50,
-    //     baseColor: '#3b82f6',
-    //     accentColor: '#06b6d4',
-    //     glowColor: '#67e8f9',
-    //     hasRing: true,
-    //     orbitRadius: 0.7,   // Large orbit
-    //     orbitSpeed: 0.002,  // Orbit speed
-    //     orbitOffset: 0,     // Start at 0 degrees
-    //   },
-    // ];
-
     interface ShootingStar {
       x: number;
       y: number;
@@ -104,8 +64,8 @@ export function SpaceTheme() {
     const energyParticles = Array.from({ length: 32 }, () => ({
       x: Math.random(),
       y: Math.random(),
-      vx: (Math.random() - 0.5) * 0.0002, // Slower movement
-      vy: (Math.random() - 0.5) * 0.0002, // Slower movement
+      vx: (Math.random() - 0.5) * 0.0002,
+      vy: (Math.random() - 0.5) * 0.0002,
       size: Math.random() * 4 + 2,
       energy: Math.random(),
       pulseSpeed: Math.random() * 0.01 + 0.005,
@@ -190,13 +150,11 @@ export function SpaceTheme() {
 
     const drawStars = () => {
       stars.forEach((star) => {
-        // Calculate rotation around center
         const centerX = 0.5;
         const centerY = 0.5;
-        const rotationSpeed = 0.00008; // Increased rotation speed
+        const rotationSpeed = 0.00008;
         const angle = time * rotationSpeed;
 
-        // Rotate star position around center
         const dx = star.x - centerX;
         const dy = star.y - centerY;
         const rotatedX =
@@ -204,7 +162,6 @@ export function SpaceTheme() {
         const rotatedY =
           centerY + (dx * Math.sin(angle) + dy * Math.cos(angle));
 
-        // Wrap around screen edges
         let x = rotatedX;
         let y = rotatedY;
         if (x < -0.1) x += 1.2;
@@ -288,13 +245,11 @@ export function SpaceTheme() {
         if (petal.x > 1.1) petal.x = -0.1;
         if (petal.x < -0.1) petal.x = 1.1;
 
-        // Calculate rotation around center
         const centerX = 0.5;
         const centerY = 0.5;
-        const rotationSpeed = 0.00012; // Slightly faster than stars
+        const rotationSpeed = 0.00012;
         const angle = time * rotationSpeed;
 
-        // Rotate petal position around center
         const dx = petal.x - centerX;
         const dy = petal.y - centerY;
         const rotatedX =
@@ -349,120 +304,6 @@ export function SpaceTheme() {
       ctx.restore();
     };
 
-    // const drawPlanets = () => {
-    //   planets.forEach((planet, index) => {
-    //     // Calculate circular orbital position around center
-    //     const orbitAngle = time * planet.orbitSpeed + planet.orbitOffset;
-    //     const centerX = planet.x * canvas.width;
-    //     const centerY = planet.y * canvas.height;
-    //
-    //     // Full circular orbit
-    //     const x = centerX + Math.cos(orbitAngle) * planet.orbitRadius * canvas.width;
-    //     const y = centerY + Math.sin(orbitAngle) * planet.orbitRadius * canvas.height * 0.6; // Slightly elliptical
-    //
-    //     // Planet rotation angle
-    //     const rotationAngle = time * 0.005 * (index + 1);
-    //
-    //     const glowGradient = ctx.createRadialGradient(
-    //       x,
-    //       y,
-    //       planet.radius * 0.8,
-    //       x,
-    //       y,
-    //       planet.radius * 2
-    //     );
-    //     glowGradient.addColorStop(0, planet.glowColor + '40');
-    //     glowGradient.addColorStop(0.5, planet.glowColor + '20');
-    //     glowGradient.addColorStop(1, 'transparent');
-    //     ctx.fillStyle = glowGradient;
-    //     ctx.beginPath();
-    //     ctx.arc(x, y, planet.radius * 2, 0, Math.PI * 2);
-    //     ctx.fill();
-    //     ctx.beginPath();
-    //     ctx.arc(x, y, planet.radius, 0, Math.PI * 2);
-    //     ctx.fillStyle = planet.baseColor;
-    //     ctx.fill();
-    //     ctx.save();
-    //     ctx.beginPath();
-    //     ctx.arc(x, y, planet.radius, 0, Math.PI * 2);
-    //     ctx.clip();
-
-    //     // Add rotating surface details
-    //     ctx.save();
-    //     ctx.translate(x, y);
-    //     ctx.rotate(rotationAngle);
-    //
-    //     // Surface pattern 1
-    //     ctx.fillStyle = planet.accentColor + '30';
-    //     ctx.beginPath();
-    //     ctx.ellipse(-planet.radius * 0.3, -planet.radius * 0.2, planet.radius * 0.4, planet.radius * 0.6, Math.PI * 0.3, 0, Math.PI * 2);
-    //     ctx.fill();
-    //
-    //     // Surface pattern 2
-    //     ctx.beginPath();
-    //     ctx.ellipse(planet.radius * 0.2, planet.radius * 0.3, planet.radius * 0.3, planet.radius * 0.5, -Math.PI * 0.2, 0, Math.PI * 2);
-    //     ctx.fill();
-    //
-    //     ctx.restore();
-
-    //     const lightGradient = ctx.createRadialGradient(
-    //       x - planet.radius * 0.3,
-    //       y - planet.radius * 0.3,
-    //       0,
-    //       x - planet.radius * 0.3,
-    //       y - planet.radius * 0.3,
-    //       planet.radius * 1.5
-    //     );
-    //     lightGradient.addColorStop(0, 'rgba(255, 255, 255, 0.3)');
-    //     lightGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.1)');
-    //     lightGradient.addColorStop(1, 'transparent');
-    //     ctx.fillStyle = lightGradient;
-    //     ctx.fillRect(
-    //       x - planet.radius,
-    //       y - planet.radius,
-    //       planet.radius * 2,
-    //       planet.radius * 2
-    //     );
-
-    //     ctx.beginPath();
-    //     ctx.arc(x, y, planet.radius * 0.9, Math.PI * 0.3, Math.PI * 1.3);
-    //     ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
-    //     ctx.fill();
-
-    //     // Inner ring detail (rotates with planet)
-    //     ctx.save();
-    //     ctx.translate(x, y);
-    //     ctx.rotate(rotationAngle * 0.5);
-    //     ctx.strokeStyle = planet.accentColor;
-    //     ctx.lineWidth = 3;
-    //     ctx.beginPath();
-    //     ctx.arc(0, 0, planet.radius * 0.7, 0, Math.PI * 2);
-    //     ctx.stroke();
-    //     ctx.restore();
-
-    //     ctx.restore();
-
-    //     if (planet.hasRing) {
-    //       ctx.save();
-    //       ctx.strokeStyle = planet.accentColor + '60';
-    //       ctx.lineWidth = 4;
-    //       ctx.setLineDash([10, 5]);
-    //       ctx.beginPath();
-    //       ctx.ellipse(
-    //         x,
-    //         y,
-    //         planet.radius * 1.5,
-    //         planet.radius * 0.4,
-    //         Math.PI * 0.1,
-    //         0,
-    //         Math.PI * 2
-    //       );
-    //       ctx.stroke();
-    //       ctx.restore();
-    //     }
-    //   });
-    // };
-
     const drawEnergyParticles = () => {
       ctx.save();
       ctx.globalCompositeOperation = 'screen';
@@ -471,8 +312,8 @@ export function SpaceTheme() {
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        particle.vx += (0.5 - particle.x) * 0.000002; // Slower acceleration
-        particle.vy += (0.5 - particle.y) * 0.000002; // Slower acceleration
+        particle.vx += (0.5 - particle.x) * 0.000002;
+        particle.vy += (0.5 - particle.y) * 0.000002;
 
         if (particle.x > 1) particle.x = 0;
         if (particle.x < 0) particle.x = 1;
@@ -593,25 +434,31 @@ export function SpaceTheme() {
       });
     };
 
-    const animate = () => {
-      time++;
+    const animate = (currentTime: number) => {
+      const deltaTime = currentTime - lastFrameTime.current;
 
-      drawBackground();
-      drawAnimeNebula();
-      drawStars();
-      drawPetals();
-      drawEnergyParticles();
-      // drawPlanets();
-      createShootingStar();
-      drawShootingStars();
+      if (deltaTime >= 16) {
+        lastFrameTime.current = currentTime;
+        time++;
 
-      animationId = requestAnimationFrame(animate);
+        drawBackground();
+        drawAnimeNebula();
+        drawStars();
+        drawPetals();
+        drawEnergyParticles();
+        createShootingStar();
+        drawShootingStars();
+      }
+
+      animationRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    animationRef.current = requestAnimationFrame(animate);
 
     return () => {
-      cancelAnimationFrame(animationId);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
       window.removeEventListener('resize', resizeCanvas);
     };
   }, []);
