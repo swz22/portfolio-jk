@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Experience } from '@/types';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -10,7 +11,9 @@ interface ExperienceCardProps {
   experience: Experience;
 }
 
-export function ExperienceCard({ experience }: ExperienceCardProps) {
+export const ExperienceCard = memo(function ExperienceCard({
+  experience,
+}: ExperienceCardProps) {
   return (
     <TiltCard max={5}>
       <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
@@ -118,4 +121,4 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
       </Card>
     </TiltCard>
   );
-}
+});
