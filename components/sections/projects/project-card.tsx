@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { Project } from '@/types';
 import {
   Card,
@@ -19,7 +20,11 @@ interface ProjectCardProps {
   onOpenModal: (project: Project) => void;
 }
 
-export function ProjectCard({ project, index, onOpenModal }: ProjectCardProps) {
+export const ProjectCard = memo(function ProjectCard({
+  project,
+  index,
+  onOpenModal,
+}: ProjectCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -27,9 +32,9 @@ export function ProjectCard({ project, index, onOpenModal }: ProjectCardProps) {
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <TiltCard>
-        <Card className="border-border/50 bg-card/50 h-full overflow-hidden backdrop-blur">
+        <Card className="h-full overflow-hidden border-border/50 bg-card/50 backdrop-blur">
           <CardHeader className="p-0">
-            <div className="from-primary/20 to-primary/5 relative h-48 bg-gradient-to-br">
+            <div className="relative h-48 bg-gradient-to-br from-primary/20 to-primary/5">
               {project.featured && (
                 <Badge
                   className="absolute right-4 top-4 z-10"
@@ -48,7 +53,7 @@ export function ProjectCard({ project, index, onOpenModal }: ProjectCardProps) {
 
           <CardContent className="p-6">
             <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
-            <p className="text-muted-foreground mb-4 text-sm">
+            <p className="mb-4 text-sm text-muted-foreground">
               {project.description}
             </p>
 
@@ -72,7 +77,7 @@ export function ProjectCard({ project, index, onOpenModal }: ProjectCardProps) {
                     <p className="font-semibold">
                       {project.metrics.performance}%
                     </p>
-                    <p className="text-muted-foreground text-xs">Performance</p>
+                    <p className="text-xs text-muted-foreground">Performance</p>
                   </div>
                 )}
                 {project.metrics.users && (
@@ -82,13 +87,13 @@ export function ProjectCard({ project, index, onOpenModal }: ProjectCardProps) {
                         ? `${Math.floor(project.metrics.users / 1000)}k`
                         : project.metrics.users}
                     </p>
-                    <p className="text-muted-foreground text-xs">Users</p>
+                    <p className="text-xs text-muted-foreground">Users</p>
                   </div>
                 )}
                 {project.metrics.rating && (
                   <div className="text-sm">
                     <p className="font-semibold">★ {project.metrics.rating}</p>
-                    <p className="text-muted-foreground text-xs">Rating</p>
+                    <p className="text-xs text-muted-foreground">Rating</p>
                   </div>
                 )}
               </div>
@@ -141,4 +146,4 @@ export function ProjectCard({ project, index, onOpenModal }: ProjectCardProps) {
       </TiltCard>
     </motion.div>
   );
-}
+});
