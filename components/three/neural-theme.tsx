@@ -13,7 +13,7 @@ function Neuron({ position }: { position: [number, number, number] }) {
   useFrame((state) => {
     if (meshRef.current && lightRef.current) {
       const pulse = Math.sin(state.clock.elapsedTime * pulseSpeed) * 0.5 + 0.5;
-      meshRef.current.scale.setScalar(0.8 + pulse * 0.2);
+      meshRef.current.scale.setScalar(0.4 + pulse * 0.2);
       lightRef.current.intensity = 0.5 + pulse * 0.5;
     }
   });
@@ -74,7 +74,7 @@ function Connection({
   useFrame((state) => {
     if (meshRef.current) {
       const material = meshRef.current.material as THREE.MeshBasicMaterial;
-      material.opacity = 0.3 + Math.sin(state.clock.elapsedTime * 3) * 0.2;
+      material.opacity = 0.3 + Math.sin(state.clock.elapsedTime * 1.5) * 0.2;
     }
   });
 
@@ -170,6 +170,7 @@ function BackgroundParticles() {
   const particles = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
+    const sizes = new Float32Array(count);
 
     for (let i = 0; i < count; i++) {
       positions[i * 3] = (Math.random() - 0.5) * 30;
@@ -181,9 +182,12 @@ function BackgroundParticles() {
       colors[i * 3] = color.r;
       colors[i * 3 + 1] = color.g;
       colors[i * 3 + 2] = color.b;
+
+      // Add size variation but cap the maximum
+      sizes[i] = Math.min(Math.random() * 0.08 + 0.04, 0.1);
     }
 
-    return { positions, colors };
+    return { positions, colors, sizes };
   }, [count]);
 
   useFrame((state) => {
@@ -207,9 +211,15 @@ function BackgroundParticles() {
           array={particles.colors}
           itemSize={3}
         />
+        <bufferAttribute
+          attach="attributes-size"
+          count={particles.sizes.length}
+          array={particles.sizes}
+          itemSize={1}
+        />
       </bufferGeometry>
       <pointsMaterial
-        size={0.05}
+        size={0.08}
         vertexColors
         transparent
         opacity={0.6}
