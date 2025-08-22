@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TiltCard } from '@/components/three/tilt-card';
@@ -11,7 +12,10 @@ interface SkillCardProps {
   index: number;
 }
 
-export function SkillCard({ category, index }: SkillCardProps) {
+export const SkillCard = memo(function SkillCard({
+  category,
+  index,
+}: SkillCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -19,7 +23,7 @@ export function SkillCard({ category, index }: SkillCardProps) {
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <TiltCard max={10}>
-        <Card className="border-border/50 bg-card/50 h-full backdrop-blur">
+        <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
           <CardHeader>
             <CardTitle className="text-xl">{category.name}</CardTitle>
           </CardHeader>
@@ -36,4 +40,4 @@ export function SkillCard({ category, index }: SkillCardProps) {
       </TiltCard>
     </motion.div>
   );
-}
+});
