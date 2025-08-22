@@ -13,7 +13,7 @@ function Neuron({ position }: { position: [number, number, number] }) {
   useFrame((state) => {
     if (meshRef.current && lightRef.current) {
       const pulse = Math.sin(state.clock.elapsedTime * pulseSpeed) * 0.5 + 0.5;
-      meshRef.current.scale.setScalar(0.8 + pulse * 0.4);
+      meshRef.current.scale.setScalar(0.8 + pulse * 0.2);
       lightRef.current.intensity = 0.5 + pulse * 0.5;
     }
   });
@@ -209,7 +209,7 @@ function BackgroundParticles() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.1}
+        size={0.05}
         vertexColors
         transparent
         opacity={0.6}
