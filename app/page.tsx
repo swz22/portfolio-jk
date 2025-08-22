@@ -1,7 +1,7 @@
 import { Hero } from '@/components/sections/hero/wrapper';
 import { Projects } from '@/components/sections/projects/wrapper';
 import { Skills } from '@/components/sections/skills/wrapper';
-import Experience from '@/components/sections/experience';
+import { Experience } from '@/components/sections/experience/wrapper';
 import Contact from '@/components/sections/contact';
 
 export default function HomePage() {
