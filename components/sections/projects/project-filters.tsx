@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { PROJECT_CATEGORIES } from '@/constants';
@@ -9,7 +10,7 @@ interface ProjectFiltersProps {
   onFilterChange: (filter: string) => void;
 }
 
-export function ProjectFilters({
+export const ProjectFilters = memo(function ProjectFilters({
   activeFilter,
   onFilterChange,
 }: ProjectFiltersProps) {
@@ -21,7 +22,7 @@ export function ProjectFilters({
           onClick={() => onFilterChange(category.value)}
           className={cn(
             'rounded-full px-4 py-2 text-sm font-medium transition-all',
-            'focus:ring-ring hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2',
+            'hover:scale-105 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
             activeFilter === category.value
               ? 'bg-primary text-primary-foreground'
               : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
@@ -34,4 +35,4 @@ export function ProjectFilters({
       ))}
     </div>
   );
-}
+});
