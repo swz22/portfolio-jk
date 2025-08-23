@@ -30,7 +30,7 @@ export function Hero() {
             <h1 className="mb-6 text-5xl font-bold md:text-7xl">
               Hi, I'm{' '}
               <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-                {SITE_CONFIG.name}
+                John
               </span>
             </h1>
 
