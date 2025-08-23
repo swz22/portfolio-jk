@@ -7,28 +7,6 @@ import { codeSnippets, skillCategories } from '@/data/skills';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
-const Scene = dynamic(
-  () => import('@/components/three/scene').then((mod) => mod.Scene),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="relative flex h-[300px] items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary"></div>
-      </div>
-    ),
-  }
-);
-
-const FloatingSpheres = dynamic(
-  () =>
-    import('@/components/three/skills/floating-spheres').then(
-      (mod) => mod.FloatingSpheres
-    ),
-  {
-    ssr: false,
-  }
-);
-
 const GitHubGraph = dynamic(
   () => import('./github-graph').then((mod) => mod.GitHubGraph),
   {
@@ -45,7 +23,6 @@ const CodeSnippet = dynamic(
 
 export function BentoGrid() {
   const [activeSnippet, setActiveSnippet] = useState(0);
-  const topSkills = skillCategories[0].skills.slice(0, 6);
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -53,24 +30,6 @@ export function BentoGrid() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="md:col-span-2 lg:col-span-2"
-      >
-        <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
-          <CardHeader>
-            <CardTitle>3D Skill Visualization</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Scene className="h-[300px] w-full">
-              <FloatingSpheres skills={topSkills} />
-            </Scene>
-          </CardContent>
-        </Card>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
         className="md:col-span-2"
       >
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
@@ -83,7 +42,7 @@ export function BentoGrid() {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
         className="md:col-span-2 lg:col-span-2"
       >
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
@@ -115,7 +74,7 @@ export function BentoGrid() {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
         className="md:col-span-1"
       >
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
@@ -146,41 +105,72 @@ export function BentoGrid() {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
         className="md:col-span-1"
       >
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
           <CardHeader>
-            <CardTitle>Certifications</CardTitle>
+            <CardTitle>Expertise</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded bg-primary/20">
-                🏆
+                🚀
               </div>
               <div>
-                <p className="text-sm font-medium">AWS Certified</p>
+                <p className="text-sm font-medium">Full Stack</p>
                 <p className="text-xs text-muted-foreground">
-                  Solutions Architect
+                  End-to-end development
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded bg-primary/20">
-                🎓
+                📊
               </div>
               <div>
-                <p className="text-sm font-medium">Meta Certificate</p>
-                <p className="text-xs text-muted-foreground">React Advanced</p>
+                <p className="text-sm font-medium">Project Management</p>
+                <p className="text-xs text-muted-foreground">
+                  Cross-functional leadership
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded bg-primary/20">
-                📜
+                ⚡
               </div>
               <div>
-                <p className="text-sm font-medium">Google Cloud</p>
-                <p className="text-xs text-muted-foreground">Professional</p>
+                <p className="text-sm font-medium">Performance</p>
+                <p className="text-xs text-muted-foreground">
+                  Optimization expert
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="md:col-span-2"
+      >
+        <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
+          <CardHeader>
+            <CardTitle>Languages</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-lg bg-secondary/50 p-4 text-center">
+                <p className="mb-1 text-2xl">🇺🇸</p>
+                <p className="text-sm font-medium">English</p>
+                <p className="text-xs text-muted-foreground">Native</p>
+              </div>
+              <div className="rounded-lg bg-secondary/50 p-4 text-center">
+                <p className="mb-1 text-2xl">🇰🇷</p>
+                <p className="text-sm font-medium">Korean</p>
+                <p className="text-xs text-muted-foreground">Fluent</p>
               </div>
             </div>
           </CardContent>
