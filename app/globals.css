@@ -187,13 +187,6 @@ html {
 }
 
 @layer components {
-  .select-none {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-
   .terminal-container {
     .terminal-output ::selection {
       background: rgba(0, 255, 255, 0.3);

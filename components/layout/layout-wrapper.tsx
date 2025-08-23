@@ -14,13 +14,6 @@ const LoadingScreen = dynamic(
   }
 );
 
-const CustomCursor = dynamic(
-  () => import('@/components/ui/custom-cursor').then((mod) => mod.CustomCursor),
-  {
-    ssr: false,
-  }
-);
-
 const ScrollProgress = dynamic(
   () =>
     import('@/components/ui/scroll-progress').then((mod) => mod.ScrollProgress),
@@ -37,7 +30,6 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
   return (
     <ThemeProvider>
       <LoadingScreen />
-      <CustomCursor />
       <ScrollProgress />
       <Navigation />
       <main className="min-h-screen">{children}</main>
