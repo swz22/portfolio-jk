@@ -5,17 +5,17 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-border border-t">
+    <footer className="border-t border-border">
       <div className="container mx-auto px-4 py-12">
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <div className="flex flex-col items-center gap-2 md:items-start">
             <Link
               href="/"
-              className="hover:text-primary text-2xl font-bold tracking-tight transition-colors"
+              className="text-2xl font-bold tracking-tight transition-colors hover:text-primary"
             >
-              JD
+              JK
             </Link>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-sm text-muted-foreground">
               {SITE_CONFIG.title} • {SITE_CONFIG.location}
             </p>
           </div>
@@ -27,7 +27,7 @@ export function Footer() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-secondary hover:bg-primary hover:text-primary-foreground flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:scale-110"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-primary-foreground"
                 aria-label={link.platform}
               >
                 <span className="sr-only">{link.platform}</span>
@@ -78,8 +78,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-border mt-8 border-t pt-8 text-center">
-          <p className="text-muted-foreground text-sm">
+        <div className="mt-8 border-t border-border pt-8 text-center">
+          <p className="text-sm text-muted-foreground">
             © {currentYear} {SITE_CONFIG.name}. All rights reserved.
           </p>
         </div>
