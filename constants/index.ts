@@ -28,7 +28,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     platform: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/john-kim',
+    url: 'https://linkedin.com/in/johnkim',
     icon: 'linkedin',
     color: '#0A66C2',
   },
@@ -123,6 +123,5 @@ export const SKILL_CATEGORIES = [
   'Backend',
   'Database',
   'DevOps',
-  '3D Graphics',
   'Tools',
 ] as const;
