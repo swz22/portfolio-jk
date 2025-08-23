@@ -22,13 +22,13 @@ export const NAV_ITEMS: NavItem[] = [
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     platform: 'GitHub',
-    url: 'https://github.com/swz22',
+    url: 'https://github.com/jkdev220',
     icon: 'github',
     color: '#181717',
   },
   {
     platform: 'LinkedIn',
-    url: 'https://linkedin.com/in/johnkim',
+    url: 'https://www.linkedin.com/in/john-kim',
     icon: 'linkedin',
     color: '#0A66C2',
   },
@@ -40,7 +40,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     platform: 'Email',
-    url: 'mailto:hello@johnkim.dev',
+    url: 'mailto:jkdev220@gmail.com',
     icon: 'email',
     color: '#EA4335',
   },
