@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import dynamic from 'next/dynamic';
-import { codeSnippets, skillCategories } from '@/data/skills';
+import { codeSnippets } from '@/data/skills';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
