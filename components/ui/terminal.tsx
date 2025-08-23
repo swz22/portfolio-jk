@@ -43,17 +43,20 @@ Type 'help' for available commands.`,
         break;
       case 'about':
         output = `John Kim
-Full Stack Developer
+Full Stack Developer & Project Manager
 
-Passionate about creating exceptional digital experiences with modern web technologies and 3D graphics.
-Specializing in React, Next.js, Three.js, and TypeScript.`;
+Forward-focused Software Developer proficient in various modern web technologies.
+Proven track record of improving application performance, delivering enterprise-grade 
+solutions, and optimizing user experience. Currently leading cross-functional 
+initiatives at Samsung Electronics America.`;
         break;
       case 'skills':
         output = `Technical Skills:
-• Frontend: React, Next.js, TypeScript, Three.js
-• Backend: Node.js, Python, PostgreSQL
-• Tools: Git, Docker, AWS, Figma
-• Specialties: 3D Graphics, Performance Optimization`;
+• Frontend: React, Angular, TypeScript, Redux
+• Backend: Node.js, Express.js, Python
+• Database: PostgreSQL, MongoDB, MySQL
+• Tools: Git, Docker, GraphQL, SAP
+• Cloud: Firebase, Heroku, AWS`;
         break;
       case 'projects':
         output = `Recent Projects:
@@ -66,10 +69,10 @@ Type 'projects [number]' for more details.`;
         break;
       case 'contact':
         output = `Get in Touch:
-• Email: hello@johnkim.dev
-• GitHub: github.com/johnkim
-• LinkedIn: linkedin.com/in/johnkim
-• Twitter: @johnkim`;
+• Email: jkdev220@gmail.com
+• GitHub: github.com/jkdev220
+• LinkedIn: linkedin.com/in/john-kim
+• Location: Dallas, Texas`;
         break;
       case 'clear':
         setHistory([]);
@@ -118,10 +121,10 @@ Effects: ${isEffectsEnabled ? 'enabled' : 'disabled'}`;
         break;
       case 'socials':
         output = `Social Links:
-• GitHub: github.com/johnkim
-• LinkedIn: linkedin.com/in/johnkim
+• GitHub: github.com/jkdev220
+• LinkedIn: linkedin.com/in/john-kim
 • Twitter: @johnkim
-• Email: hello@johnkim.dev`;
+• Email: jkdev220@gmail.com`;
         break;
       case 'easter':
         output = '🥚 Try: matrix, hack, or game';
