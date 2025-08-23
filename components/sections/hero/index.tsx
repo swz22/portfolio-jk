@@ -35,11 +35,13 @@ export function Hero() {
             </h1>
 
             <p className="mb-8 text-xl text-muted-foreground md:text-2xl">
-              {SITE_CONFIG.title}
+              {SITE_CONFIG.title} & Project Manager
             </p>
 
             <p className="mb-8 max-w-lg text-lg text-muted-foreground">
-              {SITE_CONFIG.description}
+              Forward-focused Software Developer with proven track record in
+              enterprise solutions. Currently leading cross-functional
+              initiatives at Samsung Electronics America.
             </p>
 
             <div className="flex flex-wrap gap-4">
