@@ -57,47 +57,13 @@ export const ProjectCard = memo(function ProjectCard({
               {project.description}
             </p>
 
-            <div className="mb-4 flex flex-wrap gap-2">
-              {project.techStack.slice(0, 3).map((tech) => (
+            <div className="flex flex-wrap gap-1.5">
+              {project.techStack.map((tech) => (
                 <Badge key={tech.name} variant="secondary" className="text-xs">
                   {tech.icon} {tech.name}
                 </Badge>
               ))}
-              {project.techStack.length > 3 && (
-                <Badge variant="secondary" className="text-xs">
-                  +{project.techStack.length - 3}
-                </Badge>
-              )}
             </div>
-
-            {project.metrics && (
-              <div className="grid grid-cols-3 gap-2 text-center">
-                {project.metrics.performance && (
-                  <div className="text-sm">
-                    <p className="font-semibold">
-                      {project.metrics.performance}%
-                    </p>
-                    <p className="text-xs text-muted-foreground">Performance</p>
-                  </div>
-                )}
-                {project.metrics.users && (
-                  <div className="text-sm">
-                    <p className="font-semibold">
-                      {project.metrics.users >= 1000
-                        ? `${Math.floor(project.metrics.users / 1000)}k`
-                        : project.metrics.users}
-                    </p>
-                    <p className="text-xs text-muted-foreground">Users</p>
-                  </div>
-                )}
-                {project.metrics.rating && (
-                  <div className="text-sm">
-                    <p className="font-semibold">★ {project.metrics.rating}</p>
-                    <p className="text-xs text-muted-foreground">Rating</p>
-                  </div>
-                )}
-              </div>
-            )}
           </CardContent>
 
           <CardFooter className="flex gap-2 p-6 pt-0">
