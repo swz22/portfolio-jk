@@ -1,9 +1,13 @@
 'use client';
 
+import { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { skillCategories } from '@/data/skills';
 import { SkillCard } from './skill-card';
-import { BentoGrid } from './bento-grid';
+
+const BentoGrid = lazy(() =>
+  import('./bento-grid').then((mod) => ({ default: mod.BentoGrid }))
+);
 
 export default function Skills() {
   return (
@@ -19,14 +23,22 @@ export default function Skills() {
           <h2 className="mb-4 text-3xl font-bold md:text-5xl">
             Skills & Expertise
           </h2>
-          <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             A comprehensive overview of my technical skills, tools, and
             technologies I work with
           </p>
         </motion.div>
 
         <div className="mb-16">
-          <BentoGrid />
+          <Suspense
+            fallback={
+              <div className="flex h-[400px] items-center justify-center">
+                <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary"></div>
+              </div>
+            }
+          >
+            <BentoGrid />
+          </Suspense>
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
