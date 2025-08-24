@@ -110,8 +110,12 @@ export const ProjectCard = memo(function ProjectCard({
               View Details
             </Button>
             {project.links.live && (
-              <Button variant="outline" size="sm" asChild>
-                <Link href={project.links.live} target="_blank">
+              <Button variant="outline" size="sm">
+                <Link
+                  href={project.links.live}
+                  target="_blank"
+                  className="flex items-center"
+                >
                   <svg
                     className="h-4 w-4"
                     fill="none"
@@ -129,8 +133,12 @@ export const ProjectCard = memo(function ProjectCard({
               </Button>
             )}
             {project.links.github && (
-              <Button variant="outline" size="sm" asChild>
-                <Link href={project.links.github} target="_blank">
+              <Button variant="outline" size="sm">
+                <Link
+                  href={project.links.github}
+                  target="_blank"
+                  className="flex items-center"
+                >
                   <svg
                     className="h-4 w-4"
                     fill="currentColor"

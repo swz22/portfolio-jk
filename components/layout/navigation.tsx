@@ -114,10 +114,13 @@ export function Navigation() {
                 <Button
                   variant="default"
                   size="sm"
-                  asChild
                   className="hidden md:inline-flex"
                 >
-                  <Link href="#contact" prefetch={false}>
+                  <Link
+                    href="#contact"
+                    prefetch={false}
+                    className="flex items-center"
+                  >
                     Get in Touch
                   </Link>
                 </Button>

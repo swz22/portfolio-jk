@@ -127,8 +127,12 @@ export const ProjectModal = memo(function ProjectModal({
 
           <div className="flex flex-wrap gap-2 pt-4">
             {project.links.live && (
-              <Button asChild>
-                <Link href={project.links.live} target="_blank">
+              <Button>
+                <Link
+                  href={project.links.live}
+                  target="_blank"
+                  className="flex items-center"
+                >
                   <svg
                     className="mr-2 h-4 w-4"
                     fill="none"
@@ -147,8 +151,12 @@ export const ProjectModal = memo(function ProjectModal({
               </Button>
             )}
             {project.links.github && (
-              <Button variant="outline" asChild>
-                <Link href={project.links.github} target="_blank">
+              <Button variant="outline">
+                <Link
+                  href={project.links.github}
+                  target="_blank"
+                  className="flex items-center"
+                >
                   <svg
                     className="mr-2 h-4 w-4"
                     fill="currentColor"
@@ -161,8 +169,11 @@ export const ProjectModal = memo(function ProjectModal({
               </Button>
             )}
             {project.links.case_study && (
-              <Button variant="outline" asChild>
-                <Link href={project.links.case_study}>
+              <Button variant="outline">
+                <Link
+                  href={project.links.case_study}
+                  className="flex items-center"
+                >
                   <svg
                     className="mr-2 h-4 w-4"
                     fill="none"
