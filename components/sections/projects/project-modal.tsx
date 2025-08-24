@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { Project } from '@/types';
 import {
   Modal,
@@ -19,7 +20,11 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
-export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+export const ProjectModal = memo(function ProjectModal({
+  project,
+  isOpen,
+  onClose,
+}: ProjectModalProps) {
   if (!project) return null;
 
   return (
@@ -34,7 +39,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
               </ModalDescription>
             </div>
             {project.featured && (
-              <Badge variant="default" className="ml-4">
+              <Badge className="ml-4" variant="default">
                 Featured
               </Badge>
             )}
@@ -42,7 +47,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         </ModalHeader>
 
         <div className="mt-6 space-y-6">
-          <div className="from-primary/20 to-primary/5 relative h-64 overflow-hidden rounded-lg bg-gradient-to-br">
+          <div className="relative h-64 overflow-hidden rounded-lg bg-gradient-to-br from-primary/20 to-primary/5">
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-8xl opacity-30">
                 {project.techStack[0]?.icon}
@@ -65,13 +70,13 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                   key={tech.name}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-secondary/50 flex flex-col items-center rounded-lg p-4"
+                  className="flex flex-col items-center rounded-lg bg-secondary/50 p-4"
                 >
                   <span className="mb-2 text-3xl">{tech.icon}</span>
                   <span className="text-sm font-medium">{tech.name}</span>
-                  <div className="bg-secondary mt-2 h-1 w-full overflow-hidden rounded-full">
+                  <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-secondary">
                     <motion.div
-                      className="bg-primary h-full"
+                      className="h-full bg-primary"
                       initial={{ width: 0 }}
                       animate={{ width: `${tech.proficiency}%` }}
                       transition={{ duration: 0.5, delay: 0.2 }}
@@ -87,33 +92,33 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
               <h3 className="mb-3 text-lg font-semibold">Metrics</h3>
               <div className="grid grid-cols-3 gap-4">
                 {project.metrics.performance && (
-                  <div className="bg-secondary/50 rounded-lg p-4 text-center">
-                    <p className="text-primary text-3xl font-bold">
+                  <div className="rounded-lg bg-secondary/50 p-4 text-center">
+                    <p className="text-3xl font-bold text-primary">
                       {project.metrics.performance}%
                     </p>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-sm text-muted-foreground">
                       Performance Score
                     </p>
                   </div>
                 )}
                 {project.metrics.users && (
-                  <div className="bg-secondary/50 rounded-lg p-4 text-center">
-                    <p className="text-primary text-3xl font-bold">
+                  <div className="rounded-lg bg-secondary/50 p-4 text-center">
+                    <p className="text-3xl font-bold text-primary">
                       {project.metrics.users >= 1000
                         ? `${Math.floor(project.metrics.users / 1000)}k`
                         : project.metrics.users}
                     </p>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-sm text-muted-foreground">
                       Active Users
                     </p>
                   </div>
                 )}
                 {project.metrics.rating && (
-                  <div className="bg-secondary/50 rounded-lg p-4 text-center">
-                    <p className="text-primary text-3xl font-bold">
+                  <div className="rounded-lg bg-secondary/50 p-4 text-center">
+                    <p className="text-3xl font-bold text-primary">
                       ★ {project.metrics.rating}
                     </p>
-                    <p className="text-muted-foreground text-sm">User Rating</p>
+                    <p className="text-sm text-muted-foreground">User Rating</p>
                   </div>
                 )}
               </div>
@@ -180,4 +185,4 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
       </ModalContent>
     </Modal>
   );
-}
+});
