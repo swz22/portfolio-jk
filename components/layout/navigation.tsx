@@ -117,7 +117,9 @@ export function Navigation() {
                   asChild
                   className="hidden md:inline-flex"
                 >
-                  <Link href="#contact">Get in Touch</Link>
+                  <Link href="#contact" prefetch={false}>
+                    Get in Touch
+                  </Link>
                 </Button>
               </div>
             </div>
