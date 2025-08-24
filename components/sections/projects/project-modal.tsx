@@ -62,6 +62,39 @@ export const ProjectModal = memo(function ProjectModal({
             </div>
           )}
 
+          {project.highlights && project.highlights.length > 0 && (
+            <div>
+              <h3 className="mb-3 text-lg font-semibold">Key Features</h3>
+              <ul className="space-y-2">
+                {project.highlights.map((highlight, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    className="flex items-start gap-2"
+                  >
+                    <span className="mt-1.5 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                    <span className="text-sm text-muted-foreground">
+                      {highlight}
+                    </span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {project.challenges && (
+            <div>
+              <h3 className="mb-2 text-lg font-semibold">
+                Technical Challenges
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {project.challenges}
+              </p>
+            </div>
+          )}
+
           <div>
             <h3 className="mb-3 text-lg font-semibold">Tech Stack</h3>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -86,44 +119,6 @@ export const ProjectModal = memo(function ProjectModal({
               ))}
             </div>
           </div>
-
-          {project.metrics && (
-            <div>
-              <h3 className="mb-3 text-lg font-semibold">Metrics</h3>
-              <div className="grid grid-cols-3 gap-4">
-                {project.metrics.performance && (
-                  <div className="rounded-lg bg-secondary/50 p-4 text-center">
-                    <p className="text-3xl font-bold text-primary">
-                      {project.metrics.performance}%
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Performance Score
-                    </p>
-                  </div>
-                )}
-                {project.metrics.users && (
-                  <div className="rounded-lg bg-secondary/50 p-4 text-center">
-                    <p className="text-3xl font-bold text-primary">
-                      {project.metrics.users >= 1000
-                        ? `${Math.floor(project.metrics.users / 1000)}k`
-                        : project.metrics.users}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Active Users
-                    </p>
-                  </div>
-                )}
-                {project.metrics.rating && (
-                  <div className="rounded-lg bg-secondary/50 p-4 text-center">
-                    <p className="text-3xl font-bold text-primary">
-                      ★ {project.metrics.rating}
-                    </p>
-                    <p className="text-sm text-muted-foreground">User Rating</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
 
           <div className="flex flex-wrap gap-2 pt-4">
             {project.links.live && (
@@ -168,10 +163,11 @@ export const ProjectModal = memo(function ProjectModal({
                 </Link>
               </Button>
             )}
-            {project.links.case_study && (
+            {project.links.demo && (
               <Button variant="outline">
                 <Link
-                  href={project.links.case_study}
+                  href={project.links.demo}
+                  target="_blank"
                   className="flex items-center"
                 >
                   <svg
@@ -184,10 +180,16 @@ export const ProjectModal = memo(function ProjectModal({
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  Case Study
+                  Watch Demo
                 </Link>
               </Button>
             )}
