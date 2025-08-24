@@ -66,7 +66,7 @@ export function GitHubGraph() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">GitHub Contributions</h3>
-          <span className="text-sm text-muted-foreground">Loading...</span>
+          <div className="h-4 w-32 animate-pulse rounded bg-secondary/50" />
         </div>
         <div className="h-[120px] animate-pulse rounded bg-secondary/20" />
       </div>
