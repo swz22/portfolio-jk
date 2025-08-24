@@ -83,15 +83,9 @@ export function BentoGrid() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="text-center">
-              <p className="text-4xl font-bold">50+</p>
+              <p className="text-4xl font-bold">30+</p>
               <p className="text-sm text-muted-foreground">
                 Projects Completed
-              </p>
-            </div>
-            <div className="text-center">
-              <p className="text-4xl font-bold">95%</p>
-              <p className="text-sm text-muted-foreground">
-                Client Satisfaction
               </p>
             </div>
             <div className="text-center">
