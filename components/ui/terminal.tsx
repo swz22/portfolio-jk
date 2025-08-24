@@ -70,8 +70,8 @@ Type 'projects [number]' for more details.`;
       case 'contact':
         output = `Get in Touch:
 • Email: jkdev220@gmail.com
-• GitHub: github.com/jkdev220
-• LinkedIn: linkedin.com/in/john-kim
+• GitHub: github.com/swz22
+• LinkedIn: linkedin.com/in/jkim022
 • Location: Dallas, Texas`;
         break;
       case 'clear':
@@ -121,9 +121,9 @@ Effects: ${isEffectsEnabled ? 'enabled' : 'disabled'}`;
         break;
       case 'socials':
         output = `Social Links:
-• GitHub: github.com/jkdev220
-• LinkedIn: linkedin.com/in/john-kim
-• Twitter: @johnkim
+• GitHub: github.com/swz22
+• LinkedIn: linkedin.com/in/jkim022
+• Twitter/X: x.com/jkdev220
 • Email: jkdev220@gmail.com`;
         break;
       case 'easter':
