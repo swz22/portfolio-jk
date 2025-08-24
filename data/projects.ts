@@ -2,199 +2,219 @@ import { Project } from '@/types';
 
 export const projects: Project[] = [
   {
-    id: 'portfolio-3d',
-    title: '3D Portfolio Website',
+    id: 'crescendo',
+    title: 'Crescendo',
     description:
-      'Interactive portfolio featuring Three.js animations, particle effects, and immersive user experience.',
+      'Music discovery platform powered by Spotify API for exploring artists, tracks, and creating personalized playlists.',
     longDescription:
-      'A cutting-edge portfolio website built with Next.js 14 and Three.js, featuring interactive 3D graphics, particle systems, and smooth animations. The site showcases modern web development techniques with a focus on performance and user experience.',
-    images: {
-      thumbnail: '/projects/portfolio-3d-thumb.jpg',
-      gallery: [
-        '/projects/portfolio-3d-1.jpg',
-        '/projects/portfolio-3d-2.jpg',
-        '/projects/portfolio-3d-3.jpg',
-      ],
-    },
-    techStack: [
-      { name: 'Next.js', icon: '⚡', color: '#000000', proficiency: 95 },
-      { name: 'Three.js', icon: '🎮', color: '#049EF4', proficiency: 90 },
-      { name: 'TypeScript', icon: '📘', color: '#3178C6', proficiency: 95 },
-      { name: 'Tailwind CSS', icon: '🎨', color: '#06B6D4', proficiency: 90 },
+      'Crescendo is a full-stack music discovery application that leverages the Spotify Web API to provide users with an intuitive platform for exploring music. Features include artist search, top track discovery, related artist recommendations, and seamless playlist creation. Built with React and Node.js, it showcases OAuth authentication, real-time data fetching, and responsive design principles.',
+    highlights: [
+      'Spotify OAuth 2.0 authentication for secure user access',
+      'Real-time artist and track search with autocomplete',
+      'Dynamic playlist creation and management',
+      'Related artist discovery algorithm',
+      'Responsive design optimized for all devices',
+      'RESTful API design with Node.js backend',
     ],
-    metrics: {
-      performance: 98,
-      users: 1000,
-      rating: 5,
-    },
-    links: {
-      live: 'https://portfolio-3d.vercel.app',
-      github: 'https://github.com/johnkim/portfolio-3d',
-    },
-    featured: true,
-    category: '3d-graphics',
-    year: 2024,
-  },
-  {
-    id: 'ecommerce-platform',
-    title: 'E-Commerce Platform',
-    description:
-      'Full-stack e-commerce solution with real-time inventory, payment processing, and admin dashboard.',
-    longDescription:
-      'A comprehensive e-commerce platform built from scratch, featuring user authentication, product management, shopping cart functionality, secure payment processing with Stripe, and a powerful admin dashboard for inventory and order management.',
+    challenges:
+      'Implemented efficient caching strategies to minimize API calls while maintaining real-time data freshness. Solved complex state management for playlist operations and user preferences.',
     images: {
-      thumbnail: '/projects/ecommerce-thumb.jpg',
-      gallery: [
-        '/projects/ecommerce-1.jpg',
-        '/projects/ecommerce-2.jpg',
-        '/projects/ecommerce-3.jpg',
+      thumbnail: '/projects/crescendo/thumbnail.jpg',
+      screenshots: [
+        '/projects/crescendo/screenshot-1.jpg',
+        '/projects/crescendo/screenshot-2.jpg',
+        '/projects/crescendo/screenshot-3.jpg',
       ],
     },
     techStack: [
       { name: 'React', icon: '⚛️', color: '#61DAFB', proficiency: 95 },
       { name: 'Node.js', icon: '🟢', color: '#339933', proficiency: 90 },
-      { name: 'PostgreSQL', icon: '🐘', color: '#4169E1', proficiency: 85 },
-      { name: 'Redis', icon: '📮', color: '#DC382D', proficiency: 80 },
+      { name: 'Spotify API', icon: '🎵', color: '#1DB954', proficiency: 85 },
+      { name: 'Tailwind CSS', icon: '🎨', color: '#06B6D4', proficiency: 90 },
+      { name: 'Express.js', icon: '⚡', color: '#000000', proficiency: 88 },
     ],
     metrics: {
-      performance: 95,
-      users: 5000,
-      rating: 4.8,
-    },
-    links: {
-      live: 'https://shop.example.com',
-      case_study: '/case-studies/ecommerce-platform',
-    },
-    featured: true,
-    category: 'web-app',
-    year: 2024,
-  },
-  {
-    id: 'data-viz-dashboard',
-    title: 'Data Visualization Dashboard',
-    description:
-      'Interactive dashboard with D3.js and WebGL for real-time data analysis and visualization.',
-    longDescription:
-      'A powerful data visualization dashboard that combines D3.js and WebGL to create stunning, interactive visualizations. Features real-time data updates, customizable charts, and export functionality.',
-    images: {
-      thumbnail: '/projects/dataviz-thumb.jpg',
-      gallery: [
-        '/projects/dataviz-1.jpg',
-        '/projects/dataviz-2.jpg',
-        '/projects/dataviz-3.jpg',
-      ],
-    },
-    techStack: [
-      { name: 'D3.js', icon: '📊', color: '#F68E56', proficiency: 90 },
-      { name: 'WebGL', icon: '🎯', color: '#990000', proficiency: 85 },
-      { name: 'Vue.js', icon: '💚', color: '#4FC08D', proficiency: 90 },
-      { name: 'Python', icon: '🐍', color: '#3776AB', proficiency: 85 },
-    ],
-    metrics: {
-      performance: 92,
-      users: 2000,
-      rating: 4.9,
-    },
-    links: {
-      live: 'https://dashboard.example.com',
-      github: 'https://github.com/johnkim/data-viz',
-    },
-    featured: false,
-    category: 'web-app',
-    year: 2023,
-  },
-  {
-    id: 'mobile-fitness-app',
-    title: 'Fitness Tracking App',
-    description:
-      'Cross-platform mobile app for fitness tracking with AI-powered workout recommendations.',
-    longDescription:
-      'A React Native fitness application that helps users track their workouts, monitor progress, and receive AI-powered recommendations. Features include exercise library, progress charts, and social sharing.',
-    images: {
-      thumbnail: '/projects/fitness-thumb.jpg',
-      gallery: [
-        '/projects/fitness-1.jpg',
-        '/projects/fitness-2.jpg',
-        '/projects/fitness-3.jpg',
-      ],
-    },
-    techStack: [
-      { name: 'React Native', icon: '📱', color: '#61DAFB', proficiency: 90 },
-      { name: 'Firebase', icon: '🔥', color: '#FFCA28', proficiency: 85 },
-      { name: 'TensorFlow', icon: '🤖', color: '#FF6F00', proficiency: 75 },
-      { name: 'GraphQL', icon: '◈', color: '#E10098', proficiency: 85 },
-    ],
-    metrics: {
-      performance: 94,
-      users: 10000,
-      rating: 4.7,
-    },
-    links: {
-      live: 'https://apps.apple.com/app/fitness-tracker',
-    },
-    featured: false,
-    category: 'mobile-app',
-    year: 2023,
-  },
-  {
-    id: 'open-source-cli',
-    title: 'DevTools CLI',
-    description:
-      'Open-source command-line tool for streamlining development workflows and automation.',
-    longDescription:
-      'A powerful CLI tool written in Go that helps developers automate repetitive tasks, manage projects, and improve productivity. Features include project scaffolding, git workflow automation, and cloud deployment.',
-    images: {
-      thumbnail: '/projects/cli-thumb.jpg',
-      gallery: ['/projects/cli-1.jpg', '/projects/cli-2.jpg'],
-    },
-    techStack: [
-      { name: 'Go', icon: '🐹', color: '#00ADD8', proficiency: 85 },
-      { name: 'Cobra', icon: '🐍', color: '#333333', proficiency: 90 },
-      { name: 'Docker', icon: '🐳', color: '#2496ED', proficiency: 85 },
-    ],
-    metrics: {
-      performance: 99,
+      performance: 96,
       users: 500,
       rating: 4.9,
     },
     links: {
-      github: 'https://github.com/johnkim/devtools-cli',
+      live: 'https://crescendo-music.netlify.app/',
+      github: 'https://github.com/swz22/crescendo',
     },
-    featured: false,
-    category: 'open-source',
-    year: 2023,
+    featured: true,
+    category: 'music',
+    year: 2024,
   },
   {
-    id: 'ai-chatbot',
-    title: 'AI Customer Support Bot',
+    id: 'insight-buddy',
+    title: 'Insight Buddy',
     description:
-      'Intelligent chatbot using NLP for automated customer support with 95% resolution rate.',
+      'AI-powered journaling assistant that provides personalized insights and tracks emotional patterns for mental wellness.',
     longDescription:
-      'An advanced AI-powered chatbot that handles customer inquiries using natural language processing. Integrates with multiple platforms and features sentiment analysis, multi-language support, and learning capabilities.',
+      "Insight Buddy is an innovative mental wellness application that combines the power of AI with thoughtful journaling practices. Using OpenAI's GPT technology, it analyzes journal entries to provide personalized insights, identify emotional patterns, and offer supportive guidance. The application features a beautiful, calming interface built with Next.js and includes data visualization for mood tracking over time.",
+    highlights: [
+      'AI-powered journal entry analysis using OpenAI API',
+      'Interactive mood tracking with data visualization',
+      'Personalized insights and reflection prompts',
+      'Secure user authentication and data privacy',
+      'Beautiful, accessible UI with smooth animations',
+      'Export functionality for journal entries',
+    ],
+    challenges:
+      'Designed a context-aware AI system that maintains conversation history while respecting user privacy. Implemented sophisticated prompt engineering to ensure supportive and helpful responses.',
     images: {
-      thumbnail: '/projects/chatbot-thumb.jpg',
-      gallery: [
-        '/projects/chatbot-1.jpg',
-        '/projects/chatbot-2.jpg',
-        '/projects/chatbot-3.jpg',
+      thumbnail: '/projects/insight-buddy/thumbnail.jpg',
+      screenshots: [
+        '/projects/insight-buddy/screenshot-1.jpg',
+        '/projects/insight-buddy/screenshot-2.jpg',
+        '/projects/insight-buddy/screenshot-3.jpg',
       ],
     },
     techStack: [
-      { name: 'Python', icon: '🐍', color: '#3776AB', proficiency: 90 },
-      { name: 'FastAPI', icon: '⚡', color: '#009688', proficiency: 85 },
-      { name: 'OpenAI', icon: '🤖', color: '#412991', proficiency: 80 },
-      { name: 'Redis', icon: '📮', color: '#DC382D', proficiency: 85 },
+      { name: 'Next.js', icon: '⚡', color: '#000000', proficiency: 95 },
+      { name: 'TypeScript', icon: '📘', color: '#3178C6', proficiency: 90 },
+      { name: 'OpenAI API', icon: '🤖', color: '#412991', proficiency: 85 },
+      { name: 'Tailwind CSS', icon: '🎨', color: '#06B6D4', proficiency: 90 },
+      { name: 'Framer Motion', icon: '🎭', color: '#FF0080', proficiency: 85 },
     ],
     metrics: {
-      performance: 96,
-      users: 50000,
+      performance: 98,
+      users: 300,
+      rating: 5.0,
+    },
+    links: {
+      live: 'https://insight-buddy-two.vercel.app/',
+      github: 'https://github.com/swz22/insight-buddy',
+    },
+    featured: true,
+    category: 'ai-powered',
+    year: 2024,
+  },
+  {
+    id: 'bearbnb',
+    title: 'Bearbnb',
+    description:
+      'Full-featured Airbnb clone with property listings, search functionality, and interactive map integration.',
+    longDescription:
+      'Bearbnb is a comprehensive vacation rental platform that replicates core Airbnb functionality. It features property search with filters, date-based availability checking, Google Maps integration for location-based browsing, and a responsive design. Built with React and Firebase, it demonstrates proficiency in building complex, real-world applications with modern web technologies.',
+    highlights: [
+      'Advanced search with multiple filter options',
+      'Interactive map view with Google Maps API',
+      'Date picker for checking availability',
+      'Responsive property cards with image galleries',
+      'Firebase integration for data persistence',
+      'Clean, intuitive user interface',
+    ],
+    images: {
+      thumbnail: '/projects/bearbnb/thumbnail.jpg',
+      screenshots: [
+        '/projects/bearbnb/screenshot-1.jpg',
+        '/projects/bearbnb/screenshot-2.jpg',
+        '/projects/bearbnb/screenshot-3.jpg',
+      ],
+    },
+    techStack: [
+      { name: 'React', icon: '⚛️', color: '#61DAFB', proficiency: 95 },
+      { name: 'Firebase', icon: '🔥', color: '#FFCA28', proficiency: 85 },
+      { name: 'Google Maps', icon: '🗺️', color: '#4285F4', proficiency: 80 },
+      { name: 'Material-UI', icon: '🎨', color: '#0081CB', proficiency: 85 },
+    ],
+    metrics: {
+      performance: 92,
+      users: 200,
+      rating: 4.7,
+    },
+    links: {
+      live: 'https://bearbnb.vercel.app/',
+      github: 'https://github.com/swz22/bearbnb',
+    },
+    featured: false,
+    category: 'clone',
+    year: 2023,
+  },
+  {
+    id: 'discord-clone',
+    title: 'Discord Clone',
+    description:
+      'Real-time chat application with channels, direct messaging, and user authentication.',
+    longDescription:
+      'A feature-rich Discord clone that implements real-time messaging, channel management, and user presence indicators. Built with React and Firebase, it showcases expertise in building real-time applications with complex state management using Redux. Features include server creation, channel organization, direct messaging, and Google authentication.',
+    highlights: [
+      'Real-time messaging with Firebase Firestore',
+      'Server and channel creation/management',
+      'Google OAuth authentication',
+      'User presence and online status',
+      'Redux for complex state management',
+      'Responsive design for desktop and mobile',
+    ],
+    images: {
+      thumbnail: '/projects/discord-clone/thumbnail.jpg',
+      screenshots: [
+        '/projects/discord-clone/screenshot-1.jpg',
+        '/projects/discord-clone/screenshot-2.jpg',
+        '/projects/discord-clone/screenshot-3.jpg',
+      ],
+    },
+    techStack: [
+      { name: 'React', icon: '⚛️', color: '#61DAFB', proficiency: 95 },
+      { name: 'Firebase', icon: '🔥', color: '#FFCA28', proficiency: 88 },
+      { name: 'Redux', icon: '🔄', color: '#764ABC', proficiency: 85 },
+      { name: 'Material-UI', icon: '🎨', color: '#0081CB', proficiency: 85 },
+    ],
+    metrics: {
+      performance: 94,
+      users: 150,
+      rating: 4.8,
+    },
+    links: {
+      live: 'https://chatdsc-520c3.web.app/',
+      github: 'https://github.com/swz22/discord_clone',
+    },
+    featured: false,
+    category: 'real-time',
+    year: 2023,
+  },
+  {
+    id: 'chat-buddy',
+    title: 'Chat Buddy AI',
+    description:
+      'AI-powered chatbot interface with customizable personas and conversation history.',
+    longDescription:
+      'Chat Buddy is an intelligent conversational AI application that provides users with a friendly and helpful chat interface. Built with Next.js and the OpenAI API, it features conversation persistence, typing indicators, and a clean, modern UI. The application demonstrates proficiency in working with AI APIs and creating engaging user experiences.',
+    highlights: [
+      'Integration with OpenAI GPT models',
+      'Conversation history and context retention',
+      'Smooth typing indicators and animations',
+      'Responsive design with mobile optimization',
+      'Clean, minimalist user interface',
+      'Fast response times with optimized API calls',
+    ],
+    images: {
+      thumbnail: '/projects/chat-buddy/thumbnail.jpg',
+      screenshots: [
+        '/projects/chat-buddy/screenshot-1.jpg',
+        '/projects/chat-buddy/screenshot-2.jpg',
+        '/projects/chat-buddy/screenshot-3.jpg',
+      ],
+    },
+    techStack: [
+      { name: 'Next.js', icon: '⚡', color: '#000000', proficiency: 95 },
+      { name: 'TypeScript', icon: '📘', color: '#3178C6', proficiency: 90 },
+      { name: 'OpenAI API', icon: '🤖', color: '#412991', proficiency: 85 },
+      { name: 'Tailwind CSS', icon: '🎨', color: '#06B6D4', proficiency: 90 },
+    ],
+    metrics: {
+      performance: 95,
+      users: 250,
       rating: 4.6,
     },
     links: {
-      live: 'https://chatbot.example.com',
+      live: 'https://chatbuddy-sand.vercel.app/',
+      github: 'https://github.com/swz22/chat-buddy-ai',
     },
     featured: false,
-    category: 'machine-learning',
+    category: 'ai-powered',
     year: 2024,
   },
 ];

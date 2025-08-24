@@ -111,11 +111,10 @@ export const TERMINAL_COMMANDS = {
 export const PROJECT_CATEGORIES = [
   { value: 'all', label: 'All Projects' },
   { value: 'web-app', label: 'Web Apps' },
-  { value: 'mobile-app', label: 'Mobile Apps' },
-  { value: 'open-source', label: 'Open Source' },
-  { value: 'client-work', label: 'Client Work' },
-  { value: '3d-graphics', label: '3D Graphics' },
-  { value: 'machine-learning', label: 'Machine Learning' },
+  { value: 'ai-powered', label: 'AI-Powered' },
+  { value: 'real-time', label: 'Real-time' },
+  { value: 'music', label: 'Music' },
+  { value: 'clone', label: 'Clones' },
 ] as const;
 
 export const SKILL_CATEGORIES = [

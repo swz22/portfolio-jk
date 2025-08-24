@@ -3,12 +3,12 @@ export interface Project {
   title: string;
   description: string;
   longDescription?: string;
+  highlights?: string[];
+  challenges?: string;
   images: {
     thumbnail: string;
-    gallery: string[];
-    preview?: string;
+    screenshots: string[];
   };
-  model3D?: string;
   techStack: TechItem[];
   metrics: {
     users?: number;
@@ -18,7 +18,7 @@ export interface Project {
   links: {
     live?: string;
     github?: string;
-    case_study?: string;
+    demo?: string;
   };
   featured: boolean;
   category: ProjectCategory;
@@ -28,10 +28,10 @@ export interface Project {
 export type ProjectCategory =
   | 'web-app'
   | 'mobile-app'
-  | 'open-source'
-  | 'client-work'
-  | '3d-graphics'
-  | 'machine-learning';
+  | 'ai-powered'
+  | 'real-time'
+  | 'music'
+  | 'clone';
 
 export interface TechItem {
   name: string;
