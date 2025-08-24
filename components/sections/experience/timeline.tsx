@@ -1,6 +1,6 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Experience } from '@/types';
 import { cn } from '@/lib/utils';
@@ -17,6 +17,13 @@ export const Timeline = memo(function Timeline({
   selectedId,
   onSelect,
 }: TimelineProps) {
+  const handleSelect = useCallback(
+    (id: string) => {
+      onSelect(id);
+    },
+    [onSelect]
+  );
+
   return (
     <div className="relative">
       <div className="absolute left-8 top-0 h-full w-0.5 bg-border" />
@@ -36,7 +43,7 @@ export const Timeline = memo(function Timeline({
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              onClick={() => onSelect(exp.id)}
+              onClick={() => handleSelect(exp.id)}
               className={cn(
                 'relative cursor-pointer rounded-lg p-4 transition-all',
                 'hover:bg-secondary/50',
