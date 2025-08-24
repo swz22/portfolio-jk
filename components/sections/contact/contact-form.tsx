@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -33,29 +33,32 @@ export function ContactForm() {
     resolver: zodResolver(contactSchema),
   });
 
-  const onSubmit = async (data: ContactFormData) => {
-    setIsSubmitting(true);
-    setSubmitStatus(null);
+  const onSubmit = useCallback(
+    async (data: ContactFormData) => {
+      setIsSubmitting(true);
+      setSubmitStatus(null);
 
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
 
-      if (response.ok) {
-        setSubmitStatus('success');
-        reset();
-      } else {
+        if (response.ok) {
+          setSubmitStatus('success');
+          reset();
+        } else {
+          setSubmitStatus('error');
+        }
+      } catch (error) {
         setSubmitStatus('error');
+      } finally {
+        setIsSubmitting(false);
       }
-    } catch (error) {
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    },
+    [reset]
+  );
 
   return (
     <Card className="border-border/50 bg-card/50 backdrop-blur">
