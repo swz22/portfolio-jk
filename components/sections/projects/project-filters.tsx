@@ -15,7 +15,7 @@ export const ProjectFilters = memo(function ProjectFilters({
   onFilterChange,
 }: ProjectFiltersProps) {
   return (
-    <div className="mb-8 flex flex-wrap justify-center gap-2">
+    <div className="mb-8 flex select-none flex-wrap justify-center gap-2">
       {PROJECT_CATEGORIES.map((category) => (
         <motion.button
           key={category.value}
