@@ -28,6 +28,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'PostgreSQL', icon: '🐘', color: '#4169E1', proficiency: 82 },
       { name: 'MongoDB', icon: '🍃', color: '#47A248', proficiency: 85 },
       { name: 'MySQL', icon: '🐬', color: '#4479A1', proficiency: 88 },
+      { name: 'SQL', icon: '🗄️', color: '#336791', proficiency: 90 },
     ],
   },
   {
@@ -43,8 +44,10 @@ export const skillCategories: SkillCategory[] = [
     name: 'Tools',
     skills: [
       { name: 'Agile/Scrum', icon: '🔄', color: '#41B883', proficiency: 90 },
-      { name: 'SAP', icon: '💼', color: '#0FAAFF', proficiency: 82 },
+      { name: 'SAP', icon: '💼', color: '#0FAAFF', proficiency: 85 },
       { name: 'Bootstrap', icon: '🎨', color: '#7952B3', proficiency: 88 },
+      { name: 'Power BI', icon: '📊', color: '#F2C811', proficiency: 82 },
+      { name: 'Tableau', icon: '📈', color: '#E97627', proficiency: 78 },
     ],
   },
 ];
@@ -122,5 +125,30 @@ export const codeSnippets = [
 # Usage
 results = process_data(sales_data)
 print(f"Processed {results['total']} records")`,
+  },
+  {
+    id: 'sql-analytics',
+    title: 'Analytics Query',
+    language: 'sql',
+    code: `WITH monthly_metrics AS (
+  SELECT 
+    DATE_TRUNC('month', created_at) as month,
+    COUNT(DISTINCT user_id) as active_users,
+    SUM(revenue) as total_revenue,
+    AVG(session_duration) as avg_duration
+  FROM user_activity
+  WHERE created_at >= CURRENT_DATE - INTERVAL '12 months'
+  GROUP BY 1
+)
+SELECT 
+  month,
+  active_users,
+  total_revenue,
+  ROUND(total_revenue / active_users, 2) as revenue_per_user,
+  LAG(total_revenue, 1) OVER (ORDER BY month) as prev_revenue,
+  ROUND(((total_revenue - LAG(total_revenue, 1) OVER (ORDER BY month)) 
+    / LAG(total_revenue, 1) OVER (ORDER BY month) * 100), 2) as growth_rate
+FROM monthly_metrics
+ORDER BY month DESC;`,
   },
 ];
