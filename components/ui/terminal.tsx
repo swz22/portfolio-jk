@@ -45,10 +45,11 @@ Type 'help' for available commands.`,
         output = `John Kim
 Full Stack Developer & Project Manager
 
-Forward-focused Software Developer proficient in various modern web technologies.
-Proven track record of improving application performance, delivering enterprise-grade 
-solutions, and optimizing user experience. Currently leading cross-functional 
-initiatives at Samsung Electronics America.`;
+Full Stack Developer proficient in React, Node.js, and modern web technologies.
+Proven track record of delivering enterprise-grade solutions, leading cross-functional 
+initiatives, and optimizing both application performance and user experiences. 
+Currently driving data-driven insights at Samsung Electronics America while 
+maintaining strong full-stack development expertise.`;
         break;
       case 'skills':
         output = `Technical Skills:
@@ -125,6 +126,31 @@ Effects: ${isEffectsEnabled ? 'enabled' : 'disabled'}`;
 • LinkedIn: linkedin.com/in/jkim022
 • Twitter/X: x.com/jkdev220
 • Email: jkdev220@gmail.com`;
+        break;
+      case 'analytics':
+        output = `Data Analytics Experience:
+• Power BI Dashboard Development
+• SQL Query Optimization
+• Big Data Analysis with SAP
+• Tableau & Superset Visualization
+• Python Data Processing
+• Automated Reporting Pipelines
+
+Currently leveraging these skills at Samsung Electronics 
+to drive data-driven insights while maintaining active 
+development on modern web applications.`;
+        break;
+      case 'stack':
+        output = `Full Technology Stack:
+Frontend: React, Angular, TypeScript, Redux, HTML/CSS
+Backend: Node.js, Express.js, Python, GraphQL, REST APIs
+Database: PostgreSQL, MongoDB, MySQL, SQL
+Analytics: Power BI, Tableau, Superset, SAP
+DevOps: Docker, Git, Firebase, Heroku
+Tools: Agile/Scrum, Bootstrap
+
+Primary Focus: Full Stack Web Development
+Additional Expertise: Data Analytics & Project Management`;
         break;
       case 'easter':
         output = '🥚 Try: matrix, hack, or game';
