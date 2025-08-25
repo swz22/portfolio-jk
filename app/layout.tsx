@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: '%s | John Kim',
   },
   description:
-    'Full Stack Developer & Project Manager specializing in modern web technologies. Currently leading cross-functional initiatives at Samsung Electronics America.',
+    'Full Stack Developer proficient in React, Node.js, and modern web technologies. Proven track record of delivering enterprise-grade solutions, leading cross-functional initiatives, and optimizing both application performance and user experiences.',
   keywords: [
     'Full Stack Developer',
     'Project Manager',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     siteName: 'John Kim Portfolio',
     title: 'John Kim | Full Stack Developer',
     description:
-      'Full Stack Developer & Project Manager specializing in modern web technologies. Currently leading cross-functional initiatives at Samsung Electronics America.',
+      'Full Stack Developer proficient in React, Node.js, and modern web technologies. Proven track record of delivering enterprise-grade solutions, leading cross-functional initiatives, and optimizing both application performance and user experiences.',
     images: [
       {
         url: '/og-image.jpg',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'John Kim | Full Stack Developer',
     description:
-      'Full Stack Developer & Project Manager specializing in modern web technologies. Currently leading cross-functional initiatives at Samsung Electronics America.',
+      'Full Stack Developer proficient in React, Node.js, and modern web technologies. Proven track record of delivering enterprise-grade solutions, leading cross-functional initiatives, and optimizing both application performance and user experiences.',
     creator: '@johnkim',
     images: ['/og-image.jpg'],
   },
