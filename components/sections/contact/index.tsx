@@ -14,7 +14,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-12 text-center"
+          className="mb-12 select-none text-center"
         >
           <h2 className="mb-4 text-3xl font-bold md:text-5xl">Get in Touch</h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
