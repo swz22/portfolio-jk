@@ -22,6 +22,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="select-none"
           >
             <Badge variant="secondary" className="mb-4">
               {SITE_CONFIG.availability}
@@ -98,7 +99,7 @@ export function Hero() {
       >
         <Link
           href="#projects"
-          className="flex flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+          className="flex select-none flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
         >
           <span className="text-sm">Scroll to explore</span>
           <motion.svg
