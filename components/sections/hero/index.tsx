@@ -31,7 +31,7 @@ export function Hero() {
             <h1 className="mb-6 text-5xl font-bold md:text-7xl">
               Hi, I'm{' '}
               <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-                John
+                John.
               </span>
             </h1>
 
@@ -40,9 +40,11 @@ export function Hero() {
             </p>
 
             <p className="mb-8 max-w-lg text-lg text-muted-foreground">
-              Forward-focused Software Developer with proven track record in
-              enterprise solutions. Currently leading cross-functional
-              initiatives at Samsung Electronics America.
+              Software engineer proficient in modern web technologies. Proven
+              track record of delivering enterprise-grade solutions, leading
+              cross-functional initiatives, and optimizing application
+              performance and user experience. Currently driving data-driven
+              insights at Samsung.
             </p>
 
             <div className="flex flex-wrap gap-4">
