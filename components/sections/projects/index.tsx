@@ -25,12 +25,12 @@ export default function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-12 text-center"
+          className="mb-12 select-none text-center"
         >
           <h2 className="mb-4 text-3xl font-bold md:text-5xl">
             Featured Projects
           </h2>
-          <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Explore my latest work showcasing modern web development, 3D
             graphics, and innovative solutions
           </p>
