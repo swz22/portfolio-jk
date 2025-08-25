@@ -62,7 +62,7 @@ export function Hero() {
               </div>
               <div className="h-12 w-px bg-border" />
               <div>
-                <p className="text-3xl font-bold">50+</p>
+                <p className="text-3xl font-bold">30+</p>
                 <p className="text-sm text-muted-foreground">
                   Projects Completed
                 </p>
