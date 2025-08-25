@@ -1,20 +1,63 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
 interface ContributionDay {
   date: string;
-  count: number;
-  level: 0 | 1 | 2 | 3 | 4;
+  contributionCount: number;
+  color: string;
+}
+
+interface ContributionWeek {
+  contributionDays: ContributionDay[];
 }
 
 export function GitHubGraph() {
   const [contributions, setContributions] = useState<ContributionDay[]>([]);
   const [totalContributions, setTotalContributions] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    fetchContributions();
+  }, []);
+
+  useEffect(() => {
+    // Auto-scroll to the right to show recent contributions
+    if (!loading && scrollRef.current) {
+      scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
+    }
+  }, [loading, contributions]);
+
+  const fetchContributions = async () => {
+    try {
+      const response = await fetch('/api/github/contributions');
+      const data = await response.json();
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      const allDays = data.contributions.weeks.flatMap(
+        (week: ContributionWeek) => week.contributionDays
+      );
+
+      setContributions(allDays);
+      setTotalContributions(data.contributions.totalContributions);
+      setLoading(false);
+    } catch (err) {
+      console.error('Failed to fetch contributions:', err);
+      setError(true);
+      setLoading(false);
+      // Fallback to mock data
+      generateMockData();
+    }
+  };
+
+  const generateMockData = () => {
     const weeks = 53;
     const daysPerWeek = 7;
     const days: ContributionDay[] = [];
@@ -26,42 +69,40 @@ export function GitHubGraph() {
         date.setDate(date.getDate() - (week * 7 + day));
 
         const count = Math.floor(Math.random() * 20);
-        let level: 0 | 1 | 2 | 3 | 4 = 0;
-        if (count > 0) level = 1;
-        if (count > 5) level = 2;
-        if (count > 10) level = 3;
-        if (count > 15) level = 4;
-
         days.push({
           date: date.toISOString().split('T')[0],
-          count,
-          level,
+          contributionCount: count,
+          color: getColorForCount(count),
         });
       }
     }
 
     setContributions(days);
-    setTotalContributions(days.reduce((sum, day) => sum + day.count, 0));
-  }, []);
-
-  const getColor = (level: number) => {
-    switch (level) {
-      case 0:
-        return 'bg-secondary';
-      case 1:
-        return 'bg-green-900';
-      case 2:
-        return 'bg-green-700';
-      case 3:
-        return 'bg-green-500';
-      case 4:
-        return 'bg-green-400';
-      default:
-        return 'bg-secondary';
-    }
+    setTotalContributions(
+      days.reduce((sum, day) => sum + day.contributionCount, 0)
+    );
   };
 
-  if (contributions.length === 0) {
+  const getColorForCount = (count: number): string => {
+    if (count === 0) return 'bg-secondary';
+    if (count <= 5) return 'bg-green-900';
+    if (count <= 10) return 'bg-green-700';
+    if (count <= 15) return 'bg-green-500';
+    return 'bg-green-400';
+  };
+
+  const getColorFromGitHub = (color: string): string => {
+    const colorMap: { [key: string]: string } = {
+      '#ebedf0': 'bg-secondary',
+      '#9be9a8': 'bg-green-900',
+      '#40c463': 'bg-green-700',
+      '#30a14e': 'bg-green-500',
+      '#216e39': 'bg-green-400',
+    };
+    return colorMap[color] || 'bg-secondary';
+  };
+
+  if (loading) {
     return (
       <div className="space-y-4">
         <div className="flex items-center justify-between">
@@ -82,7 +123,7 @@ export function GitHubGraph() {
         </span>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto" ref={scrollRef}>
         <div className="inline-grid grid-flow-col grid-rows-7 gap-1 p-2">
           {contributions.map((day, index) => (
             <motion.div
@@ -93,8 +134,13 @@ export function GitHubGraph() {
                 duration: 0.2,
                 delay: (index % 7) * 0.01 + Math.floor(index / 7) * 0.005,
               }}
-              className={cn('h-3 w-3 rounded-sm', getColor(day.level))}
-              title={`${day.count} contributions on ${day.date}`}
+              className={cn(
+                'h-3 w-3 rounded-sm',
+                error
+                  ? getColorForCount(day.contributionCount)
+                  : getColorFromGitHub(day.color)
+              )}
+              title={`${day.contributionCount} contributions on ${day.date}`}
             />
           ))}
         </div>
@@ -106,7 +152,7 @@ export function GitHubGraph() {
           {[0, 1, 2, 3, 4].map((level) => (
             <div
               key={level}
-              className={cn('h-3 w-3 rounded-sm', getColor(level))}
+              className={cn('h-3 w-3 rounded-sm', getColorForCount(level * 5))}
             />
           ))}
         </div>
