@@ -25,7 +25,7 @@ export const Timeline = memo(function Timeline({
   );
 
   return (
-    <div className="relative">
+    <div className="relative select-none">
       <div className="absolute left-8 top-0 h-full w-0.5 bg-border" />
 
       <div className="space-y-8">
