@@ -2,49 +2,96 @@ import { Experience } from '@/types';
 
 export const experiences: Experience[] = [
   {
-    id: 'samsung-electronics',
+    id: 'samsung-data-analyst',
+    company: 'Samsung Electronics America',
+    logo: '/companies/samsung-logo.png',
+    role: 'Data Analyst II',
+    type: 'full-time',
+    duration: {
+      start: new Date('2024-09-01'),
+      end: 'present',
+    },
+    location: 'Plano, TX',
+    description: [
+      'Modernized reporting infrastructure by converting legacy Excel Power Query trackers into a department-wide Power BI dashboard used by 100+ employees, cutting manual reporting effort by 40%',
+      'Built automated data pipelines and standardized reporting frameworks, reducing discrepancies by 30% and improving cross-team accuracy',
+      'Extracted and analyzed large-scale datasets from GCIC & NERP via SAP to support critical operational and financial decision-making',
+      'Leveraged SQL, Tableau, and Superset to convert complex datasets into actionable insights, collaborating with leadership to guide strategic planning',
+    ],
+    achievements: [
+      {
+        icon: '📊',
+        title: 'Power BI Dashboard Implementation',
+        description:
+          'Developed department-wide dashboard replacing legacy Excel systems',
+        impact: '40% reduction in manual reporting effort for 100+ employees',
+      },
+      {
+        icon: '🔧',
+        title: 'Reporting Framework Standardization',
+        description:
+          'Built automated frameworks improving data consistency across teams',
+        impact: '30% reduction in reporting discrepancies',
+      },
+      {
+        icon: '📈',
+        title: 'Data-Driven Decision Support',
+        description:
+          'Delivered actionable insights for operational and financial planning',
+        impact: 'Guided resource allocation and strategic initiatives',
+      },
+    ],
+    technologies: [
+      { name: 'SQL', icon: '🗄️', color: '#336791', proficiency: 90 },
+      { name: 'Power BI', icon: '📊', color: '#F2C811', proficiency: 85 },
+      { name: 'Python', icon: '🐍', color: '#3776AB', proficiency: 85 },
+      { name: 'SAP', icon: '💼', color: '#0FAAFF', proficiency: 85 },
+      { name: 'Tableau', icon: '📈', color: '#E97627', proficiency: 80 },
+    ],
+    projects: [],
+  },
+  {
+    id: 'samsung-project-manager',
     company: 'Samsung Electronics America',
     logo: '/companies/samsung-logo.png',
     role: 'Project Manager',
     type: 'full-time',
     duration: {
-      start: new Date('2024-08-01'),
-      end: 'present',
+      start: new Date('2024-01-01'),
+      end: new Date('2024-09-01'),
     },
     location: 'Plano, TX',
     description: [
-      "Spearheaded cross-functional initiatives to enhance Samsung's device repair ecosystem, acting as the primary liaison between stakeholders, service partners, and development teams",
-      'Managed high-impact projects including platform enhancements, process automation, and service optimizations to improve system performance and user experience',
-      'Drove system improvements for critical software systems integral to device repair operations (GCIC / GSPN), minimizing downtime and enhancing platform stability',
-      'Led the implementation of a KPI tracking dashboard, providing real-time visibility into service center performance and enabling data-driven decision-making',
+      "Directed cross-functional initiatives with engineering, service, and partner teams to improve Samsung's device repair ecosystem, reducing downtime by 20%",
+      'Oversaw improvements to software systems integral to device repair operations (GCIC/GSPN), minimizing critical errors and enhancing customer service metrics',
+      'Defined success metrics and launched a KPI dashboard tracking turnaround time, defect rates, and customer satisfaction, adopted by 50+ service centers',
+      'Developed scalable digital repair solutions for Samsung.com, increasing self-service adoption by 15%',
     ],
     achievements: [
       {
+        icon: '⚡',
+        title: 'Service Efficiency Optimization',
+        description:
+          'Led initiatives reducing device repair ecosystem downtime',
+        impact: '20% reduction in downtime, improved service center efficiency',
+      },
+      {
         icon: '📊',
-        title: 'KPI Dashboard Implementation',
-        description:
-          'Developed and deployed real-time tracking system for service center performance metrics',
-        impact: 'Enabled data-driven decisions across 200+ service centers',
+        title: 'KPI Dashboard Launch',
+        description: 'Implemented comprehensive metrics tracking system',
+        impact: 'Adopted by 50+ service centers nationwide',
       },
       {
-        icon: '🔧',
-        title: 'System Optimization',
+        icon: '🚀',
+        title: 'Digital Solutions Development',
         description:
-          'Enhanced critical repair software systems to improve stability and reduce downtime',
-        impact: 'Reduced system errors by 40% and improved uptime to 99.5%',
-      },
-      {
-        icon: '🤝',
-        title: 'Cross-functional Leadership',
-        description:
-          'Coordinated between development teams, stakeholders, and service partners',
-        impact:
-          'Streamlined communication and reduced project delivery time by 25%',
+          'Created scalable self-service repair solutions for Samsung.com',
+        impact: '15% increase in self-service adoption',
       },
     ],
     technologies: [
-      { name: 'SAP', icon: '💼', color: '#0FAAFF', proficiency: 85 },
       { name: 'JavaScript', icon: '🟨', color: '#F7DF1E', proficiency: 90 },
+      { name: 'SAP', icon: '💼', color: '#0FAAFF', proficiency: 85 },
       { name: 'Python', icon: '🐍', color: '#3776AB', proficiency: 85 },
       { name: 'SQL', icon: '🗄️', color: '#336791', proficiency: 88 },
       { name: 'Agile', icon: '🔄', color: '#41B883', proficiency: 92 },
@@ -55,18 +102,18 @@ export const experiences: Experience[] = [
     id: 'fresh-k-market',
     company: 'Fresh K Market',
     logo: '/companies/fresh-k-market-logo.png',
-    role: 'IT Manager',
+    role: 'IT Director',
     type: 'full-time',
     duration: {
-      start: new Date('2022-11-01'),
-      end: new Date('2023-12-31'),
+      start: new Date('2022-12-01'),
+      end: new Date('2023-11-30'),
     },
     location: 'Carrollton, TX',
     description: [
-      'Oversaw all IT operations including network administration, POS management, and systems security',
-      'Designed, developed, and maintained company website with SEO optimization',
-      'Streamlined workflows by analyzing operational bottlenecks and standardizing processes',
-      'Conducted training sessions for office staff to improve technical proficiency',
+      'Oversaw all IT operations including network infrastructure, POS systems, and cybersecurity, ensuring seamless business continuity',
+      'Designed and optimized company website, driving a 25% traffic increase through SEO improvements',
+      'Modernized POS workflows, cutting transaction errors by 30% and saving 20+ weekly labor hours via automation and staff training',
+      'Reduced system downtime by 40% with proactive maintenance, hardware upgrades, and improved server reliability',
     ],
     achievements: [
       {
@@ -74,21 +121,20 @@ export const experiences: Experience[] = [
         title: 'POS Efficiency Optimization',
         description:
           'Streamlined checkout workflows and automated routine processes',
-        impact: 'Saved 20+ labor hours weekly across all locations',
+        impact: '30% reduction in errors, 20+ hours saved weekly',
       },
       {
         icon: '📈',
         title: 'Website Traffic Growth',
         description:
           'Implemented targeted SEO strategies and content optimization',
-        impact: 'Achieved 25% increase in organic website traffic',
+        impact: '25% increase in organic website traffic',
       },
       {
         icon: '🛡️',
-        title: 'System Stability',
-        description:
-          'Enhanced system reliability through proactive maintenance',
-        impact: 'Reduced system downtime by 80%',
+        title: 'System Reliability',
+        description: 'Enhanced infrastructure through proactive maintenance',
+        impact: '40% reduction in system downtime',
       },
     ],
     technologies: [
@@ -106,15 +152,15 @@ export const experiences: Experience[] = [
     role: 'Full Stack Developer',
     type: 'full-time',
     duration: {
-      start: new Date('2020-02-01'),
-      end: new Date('2022-11-01'),
+      start: new Date('2020-02-15'),
+      end: new Date('2022-11-30'),
     },
     location: 'Remote',
     description: [
-      'Developed and deployed enterprise-level web applications with focus on scalability and performance',
-      'Partnered with designers, back-end engineers, and product owners to deliver client-facing solutions',
-      'Optimized database queries and implemented strategic caching for improved performance',
-      'Mentored junior developers and contributed to agile development cycles',
+      'Developed and deployed enterprise-level web applications with focus on scalability, performance, and usability',
+      'Boosted application speed by 20-40% through code refactoring, optimized database queries, and strategic caching implementations',
+      'Delivered high-impact client projects that increased user satisfaction and retention, driving repeat business',
+      'Integrated modern technologies into enterprise solutions and mentored junior developers',
     ],
     achievements: [
       {
@@ -122,14 +168,14 @@ export const experiences: Experience[] = [
         title: 'Performance Optimization',
         description:
           'Refactored code and optimized database queries across multiple applications',
-        impact: 'Boosted application speed by 20-40%',
+        impact: 'Achieved 20-40% speed improvements',
       },
       {
         icon: '💼',
         title: 'Client Success',
         description:
-          'Delivered high-impact projects that improved user satisfaction',
-        impact: 'Earned repeat business from key enterprise accounts',
+          'Delivered high-impact projects improving user satisfaction',
+        impact: 'Drove repeat business from key enterprise accounts',
       },
       {
         icon: '👥',
