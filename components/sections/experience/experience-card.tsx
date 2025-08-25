@@ -86,37 +86,39 @@ export const ExperienceCard = memo(function ExperienceCard({
             </div>
           )}
 
-          <div>
-            <h4 className="mb-3 font-semibold">Technologies Used</h4>
-            <div className="grid grid-cols-2 gap-3">
-              {experience.technologies.map((tech, index) => (
-                <motion.div
-                  key={tech.name}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3 + index * 0.05 }}
-                  className="flex items-center gap-2 rounded-lg bg-background/50 p-3"
-                >
-                  <span className="text-2xl">{tech.icon}</span>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">{tech.name}</p>
-                    <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-secondary">
-                      <motion.div
-                        className="h-full bg-primary"
-                        initial={{ width: 0 }}
-                        animate={{ width: `${tech.proficiency}%` }}
-                        transition={{
-                          duration: 0.5,
-                          delay: 0.5 + index * 0.05,
-                        }}
-                        style={{ backgroundColor: tech.color }}
-                      />
+          {experience.technologies.length > 0 && (
+            <div>
+              <h4 className="mb-3 font-semibold">Technologies Used</h4>
+              <div className="grid grid-cols-2 gap-3">
+                {experience.technologies.map((tech, index) => (
+                  <motion.div
+                    key={tech.name}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.3 + index * 0.05 }}
+                    className="flex items-center gap-2 rounded-lg bg-background/50 p-3"
+                  >
+                    <span className="text-2xl">{tech.icon}</span>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium">{tech.name}</p>
+                      <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-secondary">
+                        <motion.div
+                          className="h-full bg-primary"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${tech.proficiency}%` }}
+                          transition={{
+                            duration: 0.5,
+                            delay: 0.5 + index * 0.05,
+                          }}
+                          style={{ backgroundColor: tech.color }}
+                        />
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </CardContent>
       </Card>
     </TiltCard>
