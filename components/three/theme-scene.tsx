@@ -3,6 +3,7 @@
 import { Suspense, lazy } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from '@/contexts/theme-context';
+import { usePassiveControls } from '@/hooks/use-passive-controls';
 
 const StarfallTheme = lazy(() =>
   import('./space-theme').then((mod) => ({ default: mod.SpaceTheme }))
@@ -21,6 +22,7 @@ const themeComponents = {
 
 export function ThemeScene() {
   const { currentTheme, isEffectsEnabled, isTransitioning } = useTheme();
+  usePassiveControls();
 
   if (!isEffectsEnabled || !currentTheme) {
     return null;

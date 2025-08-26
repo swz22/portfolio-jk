@@ -276,6 +276,11 @@ export function NeuralTheme() {
             rotateSpeed={0.5}
             autoRotate
             autoRotateSpeed={0.3}
+            makeDefault
+            addEventListener={undefined}
+            hasEventListener={undefined}
+            removeEventListener={undefined}
+            dispatchEvent={undefined}
           />
         </Suspense>
       </Canvas>
