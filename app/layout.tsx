@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     'Python',
     'Samsung',
     'Web Developer',
-    'Dallas',
+    'Allen',
     'Portfolio',
   ],
   authors: [{ name: 'John Kim' }],

@@ -74,7 +74,7 @@ Type 'projects [number]' for more details.`;
 • Email: jkdev220@gmail.com
 • GitHub: github.com/swz22
 • LinkedIn: linkedin.com/in/jkim022
-• Location: Dallas, Texas`;
+• Location: Allen, Texas`;
         break;
       case 'clear':
         setHistory([]);

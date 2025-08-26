@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
     'Software engineer proficient in modern web technologies. Proven ability to deliver enterprise solutions, lead cross-functional initiatives, optimize application performance, and enhance user experience. Currently driving data-driven insights at Samsung Electronics America.',
   url: 'https://johnkim.dev',
   email: 'jkdev220@gmail.com',
-  location: 'Dallas, Texas',
+  location: 'Allen, Texas',
   availability: 'Available for freelance',
 } as const;
 
