@@ -80,7 +80,7 @@ export function ContactForm() {
                   'w-full rounded-lg border bg-background px-4 py-2 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20',
                   errors.name && 'border-destructive'
                 )}
-                placeholder="John Doe"
+                placeholder="Your name"
               />
               {errors.name && (
                 <p className="mt-1 text-sm text-destructive">
@@ -101,7 +101,7 @@ export function ContactForm() {
                   'w-full rounded-lg border bg-background px-4 py-2 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20',
                   errors.email && 'border-destructive'
                 )}
-                placeholder="john@example.com"
+                placeholder="you@company.com"
               />
               {errors.email && (
                 <p className="mt-1 text-sm text-destructive">
