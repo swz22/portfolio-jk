@@ -30,11 +30,11 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group h-[400px]"
+      className="group h-full min-h-[450px]"
     >
       <Card className="relative flex h-full transform-gpu flex-col overflow-hidden border-border/50 bg-card/50 backdrop-blur transition-all duration-300 hover:scale-[1.02]">
         <CardHeader className="flex-none p-0">
-          <div className="relative h-56 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent">
+          <div className="relative h-48 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent">
             <div className="absolute right-4 top-4 flex gap-2">
               <Badge variant="default">Production App</Badge>
               {project.metrics.users && (
@@ -56,13 +56,13 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
           </div>
         </CardHeader>
 
-        <CardContent className="flex-1 p-6">
+        <CardContent className="flex-1 overflow-hidden p-6">
           <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">
             {project.description}
           </p>
 
           {project.highlights && (
-            <div className="mb-4 space-y-2">
+            <div className="mb-4 space-y-1">
               {project.highlights.slice(0, 3).map((highlight, idx) => (
                 <div key={idx} className="flex items-start gap-2">
                   <span className="mt-1 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
@@ -74,24 +74,30 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
             </div>
           )}
 
-          <div className="flex flex-wrap gap-1.5">
-            {project.techStack.map((tech) => (
+          <div className="flex flex-wrap gap-1">
+            {project.techStack.slice(0, 5).map((tech) => (
               <Badge key={tech.name} variant="secondary" className="text-xs">
                 {tech.icon} {tech.name}
               </Badge>
             ))}
+            {project.techStack.length > 5 && (
+              <Badge variant="secondary" className="text-xs">
+                +{project.techStack.length - 5}
+              </Badge>
+            )}
           </div>
         </CardContent>
 
-        <CardFooter className="flex flex-none gap-2 border-t border-border/20 p-6">
+        <CardFooter className="flex flex-none gap-2 border-t border-border/20 p-4">
           <Button
             variant="default"
+            size="sm"
             onClick={() => onOpenModal(project)}
             className="flex-1"
           >
             View Case Study
           </Button>
-          <Button variant="outline" size="icon" className="flex-none">
+          <Button variant="outline" size="icon" className="h-8 w-8">
             <Link
               href={project.links.live!}
               target="_blank"
@@ -101,7 +107,7 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
               <ExternalLinkIcon />
             </Link>
           </Button>
-          <Button variant="outline" size="icon" className="flex-none">
+          <Button variant="outline" size="icon" className="h-8 w-8">
             <Link
               href={project.links.github!}
               target="_blank"
