@@ -8,7 +8,6 @@ export const SITE_CONFIG = {
   url: 'https://johnkim.dev',
   email: 'jkdev220@gmail.com',
   location: 'Allen, Texas',
-  availability: 'Available for freelance',
 } as const;
 
 export const NAV_ITEMS: NavItem[] = [

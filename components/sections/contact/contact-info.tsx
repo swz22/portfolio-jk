@@ -16,11 +16,6 @@ const contactDetails = [
     label: 'Location',
     value: SITE_CONFIG.location,
   },
-  {
-    icon: '💼',
-    label: 'Availability',
-    value: SITE_CONFIG.availability,
-  },
 ];
 
 export function ContactInfo() {

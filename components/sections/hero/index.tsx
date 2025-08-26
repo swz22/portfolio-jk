@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { ThemeScene } from '@/components/three/theme-scene';
 import { Terminal } from '@/components/ui/terminal';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { SITE_CONFIG } from '@/constants';
 import Link from 'next/link';
 
@@ -24,10 +23,6 @@ export function Hero() {
             transition={{ duration: 0.5 }}
             className="select-none"
           >
-            <Badge variant="secondary" className="mb-4">
-              {SITE_CONFIG.availability}
-            </Badge>
-
             <h1 className="mb-6 text-5xl font-bold md:text-7xl">
               Hi, I'm{' '}
               <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
