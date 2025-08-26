@@ -30,7 +30,7 @@ export const ProjectModal = memo(function ProjectModal({
     <Modal open={isOpen} onOpenChange={onClose}>
       <ModalContent className="max-h-[90vh] max-w-4xl overflow-y-auto">
         <ModalHeader>
-          <div className="flex items-start justify-between">
+          <div className="flex items-start justify-between pr-8">
             <div>
               <ModalTitle className="mb-2 text-2xl">{project.title}</ModalTitle>
               <ModalDescription className="text-base">
@@ -38,7 +38,7 @@ export const ProjectModal = memo(function ProjectModal({
               </ModalDescription>
             </div>
             {project.featured && (
-              <Badge className="ml-4" variant="default">
+              <Badge className="ml-4 flex-shrink-0" variant="default">
                 Featured
               </Badge>
             )}
