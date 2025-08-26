@@ -2,14 +2,23 @@ import { SkillCategory, TechItem } from '@/types';
 
 export const skillCategories: SkillCategory[] = [
   {
-    name: 'Frontend',
+    name: 'Languages',
     skills: [
       { name: 'JavaScript', icon: '🟨', color: '#F7DF1E', proficiency: 92 },
       { name: 'TypeScript', icon: '📘', color: '#3178C6', proficiency: 88 },
+      { name: 'Python', icon: '🐍', color: '#3776AB', proficiency: 82 },
+      { name: 'SQL', icon: '🗄️', color: '#336791', proficiency: 90 },
+      { name: 'HTML/CSS', icon: '🎨', color: '#E34C26', proficiency: 95 },
+    ],
+  },
+  {
+    name: 'Frontend',
+    skills: [
       { name: 'React', icon: '⚛️', color: '#61DAFB', proficiency: 90 },
       { name: 'Angular', icon: '🅰️', color: '#DD0031', proficiency: 85 },
       { name: 'Redux', icon: '🔄', color: '#764ABC', proficiency: 82 },
-      { name: 'HTML/CSS', icon: '🎨', color: '#E34C26', proficiency: 95 },
+      { name: 'Next.js', icon: '▲', color: '#000000', proficiency: 88 },
+      { name: 'Tailwind CSS', icon: '🎨', color: '#06B6D4', proficiency: 90 },
     ],
   },
   {
@@ -17,9 +26,9 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       { name: 'Node.js', icon: '🟢', color: '#339933', proficiency: 88 },
       { name: 'Express.js', icon: '⚡', color: '#000000', proficiency: 85 },
-      { name: 'Python', icon: '🐍', color: '#3776AB', proficiency: 82 },
+      { name: 'Django', icon: '🐍', color: '#092E20', proficiency: 80 },
       { name: 'GraphQL', icon: '◈', color: '#E10098', proficiency: 78 },
-      { name: 'REST APIs', icon: '🔌', color: '#FF6C37', proficiency: 90 },
+      { name: 'REST APIs', icon: '🌐', color: '#FF6C37', proficiency: 90 },
     ],
   },
   {
@@ -28,24 +37,23 @@ export const skillCategories: SkillCategory[] = [
       { name: 'PostgreSQL', icon: '🐘', color: '#4169E1', proficiency: 82 },
       { name: 'MongoDB', icon: '🍃', color: '#47A248', proficiency: 85 },
       { name: 'MySQL', icon: '🐬', color: '#4479A1', proficiency: 88 },
-      { name: 'SQL', icon: '🗄️', color: '#336791', proficiency: 90 },
+      { name: 'Firebase', icon: '🔥', color: '#FFCA28', proficiency: 80 },
+      { name: 'Supabase', icon: '⚡', color: '#3ECF8E', proficiency: 85 },
     ],
   },
   {
     name: 'DevOps',
     skills: [
-      { name: 'Docker', icon: '🐳', color: '#2496ED', proficiency: 78 },
       { name: 'Git', icon: '📦', color: '#F05032', proficiency: 92 },
-      { name: 'Firebase', icon: '🔥', color: '#FFCA28', proficiency: 80 },
+      { name: 'Docker', icon: '🐳', color: '#2496ED', proficiency: 78 },
+      { name: 'AWS', icon: '🔶', color: '#FF9900', proficiency: 75 },
+      { name: 'Vercel', icon: '▲', color: '#000000', proficiency: 85 },
       { name: 'Heroku', icon: '☁️', color: '#430098', proficiency: 75 },
     ],
   },
   {
-    name: 'Tools',
+    name: 'Other',
     skills: [
-      { name: 'Agile/Scrum', icon: '🔄', color: '#41B883', proficiency: 90 },
-      { name: 'SAP', icon: '💼', color: '#0FAAFF', proficiency: 85 },
-      { name: 'Bootstrap', icon: '🎨', color: '#7952B3', proficiency: 88 },
       { name: 'Power BI', icon: '📊', color: '#F2C811', proficiency: 82 },
       { name: 'Tableau', icon: '📈', color: '#E97627', proficiency: 78 },
     ],
