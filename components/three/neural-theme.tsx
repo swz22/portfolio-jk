@@ -2,9 +2,8 @@
 
 import { Suspense, useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Float, PerformanceMonitor } from '@react-three/drei';
+import { OrbitControls, Float } from '@react-three/drei';
 import * as THREE from 'three';
-import { useState } from 'react';
 
 function Neuron({ position }: { position: [number, number, number] }) {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -22,7 +21,7 @@ function Neuron({ position }: { position: [number, number, number] }) {
   return (
     <group position={position}>
       <mesh ref={meshRef}>
-        <sphereGeometry args={[0.2, 16, 16]} />
+        <sphereGeometry args={[0.2, 32, 32]} />
         <meshPhysicalMaterial
           color="#00ffff"
           emissive="#00ffff"
@@ -102,13 +101,12 @@ function NeuralNetwork() {
       end: [number, number, number];
     }[] = [];
 
-    // Reduced complexity for better performance
     const layers = [
-      { count: 2, x: -3 },
-      { count: 3, x: -1 },
-      { count: 4, x: 1 },
-      { count: 3, x: 3 },
-      { count: 2, x: 5 },
+      { count: 3, x: -3 },
+      { count: 4, x: -1 },
+      { count: 5, x: 1 },
+      { count: 4, x: 3 },
+      { count: 3, x: 5 },
     ];
 
     const layerNeurons: [number, number, number][][] = [];
@@ -168,7 +166,7 @@ function NeuralNetwork() {
 
 function BackgroundParticles() {
   const mesh = useRef<THREE.Points>(null);
-  const count = 200; // Reduced from 500
+  const count = 300; // Balanced count
 
   const particles = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -186,7 +184,7 @@ function BackgroundParticles() {
       colors[i * 3 + 1] = color.g;
       colors[i * 3 + 2] = color.b;
 
-      sizes[i] = Math.min(Math.random() * 0.08 + 0.04, 0.1);
+      sizes[i] = Math.random() * 0.1 + 0.05;
     }
 
     return { positions, colors, sizes };
@@ -221,10 +219,10 @@ function BackgroundParticles() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.08}
+        size={0.1}
         vertexColors
         transparent
-        opacity={0.6}
+        opacity={0.8}
         blending={THREE.AdditiveBlending}
         sizeAttenuation={true}
       />
@@ -233,8 +231,6 @@ function BackgroundParticles() {
 }
 
 export function NeuralTheme() {
-  const [dpr, setDpr] = useState(1);
-
   return (
     <div className="absolute inset-0 h-full w-full">
       <Canvas
@@ -249,16 +245,10 @@ export function NeuralTheme() {
           toneMapping: THREE.ACESFilmicToneMapping,
           toneMappingExposure: 1.2,
           powerPreference: 'high-performance',
+          alpha: true,
         }}
-        dpr={dpr}
+        dpr={[1, 2]}
       >
-        <PerformanceMonitor
-          onDecline={() => setDpr(0.5)}
-          onIncline={() => setDpr(1)}
-          flipflops={3}
-          onFallback={() => setDpr(0.5)}
-        />
-
         <Suspense fallback={null}>
           <color attach="background" args={['#000510']} />
           <fog attach="fog" args={['#000510', 10, 30]} />
