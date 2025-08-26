@@ -25,12 +25,12 @@ export function BentoGrid() {
   const [activeSnippet, setActiveSnippet] = useState(0);
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="md:col-span-1"
+        className="sm:col-span-1"
       >
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
           <CardHeader>
@@ -55,7 +55,7 @@ export function BentoGrid() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="md:col-span-1"
+        className="sm:col-span-1"
       >
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
           <CardHeader>
@@ -103,7 +103,7 @@ export function BentoGrid() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="md:col-span-2"
+        className="col-span-1 sm:col-span-2"
       >
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
           <CardHeader>
@@ -130,7 +130,7 @@ export function BentoGrid() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="md:col-span-2"
+        className="col-span-1 sm:col-span-2 lg:col-span-2"
       >
         <Card className="flex h-full flex-col border-border/50 bg-card/50 backdrop-blur">
           <CardContent className="flex flex-1 items-center justify-center p-6">
@@ -143,12 +143,12 @@ export function BentoGrid() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.4 }}
-        className="md:col-span-2 lg:col-span-2"
+        className="col-span-1 sm:col-span-2 lg:col-span-2"
       >
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
           <CardHeader>
-            <CardTitle>Code Snippets</CardTitle>
-            <div className="mt-2 flex gap-2">
+            <CardTitle className="mb-2 sm:mb-0">Code Snippets</CardTitle>
+            <div className="mt-2 flex flex-wrap gap-2">
               {codeSnippets.map((snippet, index) => (
                 <button
                   key={snippet.id}
