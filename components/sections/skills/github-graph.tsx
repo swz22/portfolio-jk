@@ -103,20 +103,24 @@ export function GitHubGraph() {
   if (loading) {
     return (
       <div className="w-full space-y-4">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold">GitHub Contributions</h3>
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+          <h3 className="text-base font-semibold sm:text-lg">
+            GitHub Contributions
+          </h3>
           <div className="h-4 w-32 animate-pulse rounded bg-secondary/50" />
         </div>
-        <div className="h-[120px] animate-pulse rounded bg-secondary/20" />
+        <div className="h-[100px] animate-pulse rounded bg-secondary/20 sm:h-[120px]" />
       </div>
     );
   }
 
   return (
     <div className="w-full space-y-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold">GitHub Contributions</h3>
-        <span className="text-sm text-muted-foreground">
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+        <h3 className="text-base font-semibold sm:text-lg">
+          GitHub Contributions
+        </h3>
+        <span className="text-xs text-muted-foreground sm:text-sm">
           {totalContributions.toLocaleString()} contributions this year
         </span>
       </div>
@@ -134,7 +138,7 @@ export function GitHubGraph() {
                   delay: (index % 7) * 0.01 + Math.floor(index / 7) * 0.005,
                 }}
                 className={cn(
-                  'h-3 w-3 rounded-sm',
+                  'h-2 w-2 rounded-sm sm:h-3 sm:w-3',
                   error
                     ? getColorForCount(day.contributionCount)
                     : getColorFromGitHub(day.color)
@@ -152,7 +156,10 @@ export function GitHubGraph() {
           {[0, 1, 2, 3, 4].map((level) => (
             <div
               key={level}
-              className={cn('h-3 w-3 rounded-sm', getColorForCount(level * 5))}
+              className={cn(
+                'h-2 w-2 rounded-sm sm:h-3 sm:w-3',
+                getColorForCount(level * 5)
+              )}
             />
           ))}
         </div>
