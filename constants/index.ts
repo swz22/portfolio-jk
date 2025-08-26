@@ -102,7 +102,6 @@ export const TERMINAL_COMMANDS = {
   clear: 'Clear terminal',
   theme: 'Theme commands (list, set, current)',
   'effects on/off': 'Toggle visual effects',
-  resume: 'Download resume',
   socials: 'View social links',
   easter: 'Try to find easter eggs',
   analytics: 'View data analytics experience',
