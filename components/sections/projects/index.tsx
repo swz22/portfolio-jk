@@ -27,12 +27,9 @@ export default function Projects() {
           viewport={{ once: true }}
           className="mb-12 select-none text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-            Featured Projects
-          </h2>
+          <h2 className="mb-4 text-3xl font-bold md:text-5xl">Projects</h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Explore my latest work showcasing modern web development, 3D
-            graphics, and innovative solutions
+            Explore my latest work showcasing modern web development
           </p>
         </motion.div>
 
