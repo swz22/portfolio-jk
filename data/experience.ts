@@ -5,7 +5,7 @@ export const experiences: Experience[] = [
     id: 'samsung-data-analyst',
     company: 'Samsung Electronics America',
     logo: '/companies/samsung-logo.png',
-    role: 'Data Analyst II (Big Data Team)',
+    role: 'Data Analyst II ',
     type: 'full-time',
     duration: {
       start: new Date('2024-09-01'),
