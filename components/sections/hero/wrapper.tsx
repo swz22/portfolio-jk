@@ -8,9 +8,13 @@ const Hero = dynamic(
     ssr: false,
     loading: () => (
       <section className="relative flex min-h-screen items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-b-2 border-primary"></div>
-          <p className="mt-4 text-muted-foreground">Loading scene...</p>
+        <div className="container relative z-10 mx-auto px-4 py-20">
+          <div className="animate-pulse">
+            <div className="mb-6 h-16 w-3/4 rounded bg-secondary/20"></div>
+            <div className="mb-4 h-8 w-1/2 rounded bg-secondary/20"></div>
+            <div className="mb-2 h-4 w-full rounded bg-secondary/20"></div>
+            <div className="h-4 w-5/6 rounded bg-secondary/20"></div>
+          </div>
         </div>
       </section>
     ),

@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { Navigation } from './navigation';
 import { Footer } from './footer';
@@ -22,6 +22,12 @@ const ScrollProgress = dynamic(
   }
 );
 
+const MinimalLoader = () => (
+  <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
+    <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary" />
+  </div>
+);
+
 interface LayoutWrapperProps {
   children: ReactNode;
 }
@@ -29,8 +35,12 @@ interface LayoutWrapperProps {
 export function LayoutWrapper({ children }: LayoutWrapperProps) {
   return (
     <ThemeProvider>
-      <LoadingScreen />
-      <ScrollProgress />
+      <Suspense fallback={<MinimalLoader />}>
+        <LoadingScreen />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ScrollProgress />
+      </Suspense>
       <Navigation />
       <main className="min-h-screen">{children}</main>
       <Footer />

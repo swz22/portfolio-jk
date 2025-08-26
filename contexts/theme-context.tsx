@@ -82,22 +82,47 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [currentTheme, setCurrentTheme] = useState<ThemeId>('neural');
   const [isEffectsEnabled, setIsEffectsEnabled] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme');
-    const savedEffects = localStorage.getItem('portfolio-effects');
+    setMounted(true);
 
-    if (savedEffects !== null) {
-      setIsEffectsEnabled(savedEffects === 'true');
-    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        const savedTheme = localStorage.getItem('portfolio-theme');
+        const savedEffects = localStorage.getItem('portfolio-effects');
 
-    if (savedTheme) {
-      const isValidTheme = themes.some(
-        (t) => t.id === savedTheme && t.available
-      );
-      if (isValidTheme) {
-        setCurrentTheme(savedTheme as ThemeId);
-      }
+        if (savedEffects !== null) {
+          setIsEffectsEnabled(savedEffects === 'true');
+        }
+
+        if (savedTheme) {
+          const isValidTheme = themes.some(
+            (t) => t.id === savedTheme && t.available
+          );
+          if (isValidTheme) {
+            setCurrentTheme(savedTheme as ThemeId);
+          }
+        }
+      });
+    } else {
+      setTimeout(() => {
+        const savedTheme = localStorage.getItem('portfolio-theme');
+        const savedEffects = localStorage.getItem('portfolio-effects');
+
+        if (savedEffects !== null) {
+          setIsEffectsEnabled(savedEffects === 'true');
+        }
+
+        if (savedTheme) {
+          const isValidTheme = themes.some(
+            (t) => t.id === savedTheme && t.available
+          );
+          if (isValidTheme) {
+            setCurrentTheme(savedTheme as ThemeId);
+          }
+        }
+      }, 0);
     }
   }, []);
 
@@ -107,7 +132,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentTheme(theme);
-      localStorage.setItem('portfolio-theme', theme);
+      if (mounted) {
+        localStorage.setItem('portfolio-theme', theme);
+      }
       setTimeout(() => setIsTransitioning(false), 300);
     }, 300);
   };
@@ -115,7 +142,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const toggleEffects = () => {
     const newState = !isEffectsEnabled;
     setIsEffectsEnabled(newState);
-    localStorage.setItem('portfolio-effects', String(newState));
+    if (mounted) {
+      localStorage.setItem('portfolio-effects', String(newState));
+    }
   };
 
   return (
