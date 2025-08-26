@@ -6,7 +6,7 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       { name: 'JavaScript', icon: '🟨', color: '#F7DF1E', proficiency: 92 },
       { name: 'TypeScript', icon: '📘', color: '#3178C6', proficiency: 88 },
-      { name: 'Python', icon: '🐍', color: '#3776AB', proficiency: 82 },
+      { name: 'Python', icon: '🐍', color: '#3FB950', proficiency: 82 },
       { name: 'SQL', icon: '🗄️', color: '#336791', proficiency: 90 },
       { name: 'HTML/CSS', icon: '🎨', color: '#E34C26', proficiency: 95 },
     ],
