@@ -1,0 +1,18 @@
+{
+  "name": "John Kim - Full Stack Developer",
+  "short_name": "JK Portfolio",
+  "description": "Software engineer proficient in modern web technologies. Portfolio showcasing full stack development expertise.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["portfolio", "developer", "business"]
+}
