@@ -3,10 +3,11 @@
 import { Suspense, lazy } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from '@/contexts/theme-context';
+import { usePerformance } from '@/contexts/performance-context';
 import { usePassiveControls } from '@/hooks/use-passive-controls';
 
 const StarfallTheme = lazy(() =>
-  import('./space-theme').then((mod) => ({ default: mod.SpaceTheme }))
+  import('./starfall-theme').then((mod) => ({ default: mod.StarfallTheme }))
 );
 const NeuralTheme = lazy(() =>
   import('./neural-theme').then((mod) => ({ default: mod.NeuralTheme }))
@@ -22,9 +23,14 @@ const themeComponents = {
 
 export function ThemeScene() {
   const { currentTheme, isEffectsEnabled, isTransitioning } = useTheme();
+  const { quality, isLowPerformance } = usePerformance();
   usePassiveControls();
 
-  if (!isEffectsEnabled || !currentTheme) {
+  if (
+    !isEffectsEnabled ||
+    !currentTheme ||
+    (isLowPerformance && quality === 'low')
+  ) {
     return null;
   }
 
