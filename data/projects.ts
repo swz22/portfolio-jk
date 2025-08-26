@@ -160,48 +160,6 @@ export const projects: Project[] = [
     year: 2023,
   },
   {
-    id: 'discord-clone',
-    title: 'Discord Clone',
-    description:
-      'Real-time chat application with channels, direct messaging, and user authentication.',
-    longDescription:
-      'A feature-rich Discord clone that implements real-time messaging, channel management, and user presence indicators. Built with React and Firebase, it showcases expertise in building real-time applications with complex state management using Redux. Features include server creation, channel organization, direct messaging, and Google authentication.',
-    highlights: [
-      'Real-time messaging with Firebase Firestore',
-      'Server and channel creation/management',
-      'Google OAuth authentication',
-      'User presence and online status',
-      'Redux for complex state management',
-      'Responsive design for desktop and mobile',
-    ],
-    images: {
-      thumbnail: '/projects/discord-clone/thumbnail.jpg',
-      screenshots: [
-        '/projects/discord-clone/screenshot-1.jpg',
-        '/projects/discord-clone/screenshot-2.jpg',
-        '/projects/discord-clone/screenshot-3.jpg',
-      ],
-    },
-    techStack: [
-      { name: 'React', icon: '⚛️', color: '#61DAFB', proficiency: 95 },
-      { name: 'Firebase', icon: '🔥', color: '#FFCA28', proficiency: 88 },
-      { name: 'Redux', icon: '🔄', color: '#764ABC', proficiency: 85 },
-      { name: 'Material-UI', icon: '🎨', color: '#0081CB', proficiency: 85 },
-    ],
-    metrics: {
-      performance: 94,
-      users: 150,
-      rating: 4.8,
-    },
-    links: {
-      live: 'https://chatdsc-520c3.web.app/',
-      github: 'https://github.com/swz22/discord_clone',
-    },
-    featured: false,
-    category: 'prototype',
-    year: 2023,
-  },
-  {
     id: 'chat-buddy',
     title: 'Chat Buddy AI',
     description:
@@ -242,5 +200,47 @@ export const projects: Project[] = [
     featured: false,
     category: 'prototype',
     year: 2024,
+  },
+  {
+    id: 'discord-clone',
+    title: 'Discord Clone',
+    description:
+      'Real-time chat application with channels, direct messaging, and user authentication.',
+    longDescription:
+      'A feature-rich Discord clone that implements real-time messaging, channel management, and user presence indicators. Built with React and Firebase, it showcases expertise in building real-time applications with complex state management using Redux. Features include server creation, channel organization, direct messaging, and Google authentication.',
+    highlights: [
+      'Real-time messaging with Firebase Firestore',
+      'Server and channel creation/management',
+      'Google OAuth authentication',
+      'User presence and online status',
+      'Redux for complex state management',
+      'Responsive design for desktop and mobile',
+    ],
+    images: {
+      thumbnail: '/projects/discord-clone/thumbnail.jpg',
+      screenshots: [
+        '/projects/discord-clone/screenshot-1.jpg',
+        '/projects/discord-clone/screenshot-2.jpg',
+        '/projects/discord-clone/screenshot-3.jpg',
+      ],
+    },
+    techStack: [
+      { name: 'React', icon: '⚛️', color: '#61DAFB', proficiency: 95 },
+      { name: 'Firebase', icon: '🔥', color: '#FFCA28', proficiency: 88 },
+      { name: 'Redux', icon: '🔄', color: '#764ABC', proficiency: 85 },
+      { name: 'Material-UI', icon: '🎨', color: '#0081CB', proficiency: 85 },
+    ],
+    metrics: {
+      performance: 94,
+      users: 150,
+      rating: 4.8,
+    },
+    links: {
+      live: 'https://chatdsc-520c3.web.app/',
+      github: 'https://github.com/swz22/discord_clone',
+    },
+    featured: false,
+    category: 'prototype',
+    year: 2023,
   },
 ];
