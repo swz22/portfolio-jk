@@ -112,8 +112,8 @@ export const TERMINAL_COMMANDS = {
 
 export const PROJECT_CATEGORIES = [
   { value: 'all', label: 'All Projects' },
-  { value: 'production', label: 'Production Apps' },
-  { value: 'prototype', label: 'Prototypes' },
+  { value: 'production', label: 'Featured Apps' },
+  { value: 'prototype', label: 'Other Projects' },
 ] as const;
 
 export const SKILL_CATEGORIES = [
