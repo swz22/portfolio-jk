@@ -4,7 +4,7 @@ export const SITE_CONFIG = {
   name: 'John Kim',
   title: 'Full Stack Developer',
   description:
-    'Full Stack Developer proficient in React, Node.js, and modern web technologies. Proven track record of delivering enterprise-grade solutions, leading cross-functional initiatives, and optimizing both application performance and user experiences. Currently driving data-driven insights at Samsung Electronics America.',
+    'Software engineer proficient in modern web technologies. Proven ability to deliver enterprise solutions, lead cross-functional initiatives, optimize application performance, and enhance user experience. Currently driving data-driven insights at Samsung Electronics America.',
   url: 'https://johnkim.dev',
   email: 'jkdev220@gmail.com',
   location: 'Dallas, Texas',

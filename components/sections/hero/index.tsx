@@ -36,15 +36,14 @@ export function Hero() {
             </h1>
 
             <p className="mb-8 text-xl text-muted-foreground md:text-2xl">
-              {SITE_CONFIG.title} & Project Manager
+              Full Stack Developer
             </p>
 
             <p className="mb-8 max-w-lg text-lg text-muted-foreground">
               Software engineer proficient in modern web technologies. Proven
-              track record of delivering enterprise-grade solutions, leading
-              cross-functional initiatives, and optimizing application
-              performance and user experience. Currently driving data-driven
-              insights at Samsung.
+              ability to deliver enterprise solutions, lead cross-functional
+              initiatives, optimize application performance, and enhance user
+              experience. Currently driving data-driven insights at Samsung.
             </p>
 
             <div className="flex flex-wrap gap-4">

@@ -43,13 +43,14 @@ Type 'help' for available commands.`,
         break;
       case 'about':
         output = `John Kim
-Full Stack Developer & Project Manager
+Full Stack Developer
 
-Full Stack Developer proficient in React, Node.js, and modern web technologies.
-Proven track record of delivering enterprise-grade solutions, leading cross-functional 
-initiatives, and optimizing both application performance and user experiences. 
-Currently driving data-driven insights at Samsung Electronics America while 
-maintaining strong full-stack development expertise.`;
+Software engineer proficient in modern web technologies. Proven 
+ability to deliver enterprise solutions, lead cross-functional 
+initiatives, optimize application performance, and enhance user 
+experience. Currently driving data-driven insights at Samsung 
+Electronics America while maintaining strong full-stack 
+development expertise.`;
         break;
       case 'skills':
         output = `Technical Skills:
@@ -150,7 +151,7 @@ DevOps: Docker, Git, Firebase, Heroku
 Tools: Agile/Scrum, Bootstrap
 
 Primary Focus: Full Stack Web Development
-Additional Expertise: Data Analytics & Project Management`;
+Additional Expertise: Data Analytics`;
         break;
       case 'easter':
         output = '🥚 Try: matrix, hack, or game';

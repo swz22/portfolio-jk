@@ -15,10 +15,9 @@ export const metadata: Metadata = {
     template: '%s | John Kim',
   },
   description:
-    'Full Stack Developer proficient in React, Node.js, and modern web technologies. Proven track record of delivering enterprise-grade solutions, leading cross-functional initiatives, and optimizing both application performance and user experiences.',
+    'Software engineer proficient in modern web technologies. Proven ability to deliver enterprise solutions, lead cross-functional initiatives, optimize application performance, and enhance user experience.',
   keywords: [
     'Full Stack Developer',
-    'Project Manager',
     'React',
     'Next.js',
     'Node.js',
@@ -39,7 +38,7 @@ export const metadata: Metadata = {
     siteName: 'John Kim Portfolio',
     title: 'John Kim | Full Stack Developer',
     description:
-      'Full Stack Developer proficient in React, Node.js, and modern web technologies. Proven track record of delivering enterprise-grade solutions, leading cross-functional initiatives, and optimizing both application performance and user experiences.',
+      'Software engineer proficient in modern web technologies. Proven ability to deliver enterprise solutions, lead cross-functional initiatives, optimize application performance, and enhance user experience.',
     images: [
       {
         url: '/og-image.jpg',
@@ -53,7 +52,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'John Kim | Full Stack Developer',
     description:
-      'Full Stack Developer proficient in React, Node.js, and modern web technologies. Proven track record of delivering enterprise-grade solutions, leading cross-functional initiatives, and optimizing both application performance and user experiences.',
+      'Software engineer proficient in modern web technologies. Proven ability to deliver enterprise solutions, lead cross-functional initiatives, optimize application performance, and enhance user experience.',
     creator: '@johnkim',
     images: ['/og-image.jpg'],
   },
