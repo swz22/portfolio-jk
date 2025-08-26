@@ -133,12 +133,8 @@ export const projects: Project[] = [
       'Smooth Transitions - Progress indicators and animations for enhanced user experience',
     ],
     images: {
-      thumbnail: '/projects/bearbnb/thumbnail.jpg',
-      screenshots: [
-        '/projects/bearbnb/screenshot-1.jpg',
-        '/projects/bearbnb/screenshot-2.jpg',
-        '/projects/bearbnb/screenshot-3.jpg',
-      ],
+      thumbnail: '',
+      screenshots: [],
     },
     techStack: [
       { name: 'React 18', icon: '⚛️', color: '#61DAFB', proficiency: 95 },
@@ -177,12 +173,8 @@ export const projects: Project[] = [
       'Auto-scroll - Automatically scrolls to the latest message for better UX',
     ],
     images: {
-      thumbnail: '/projects/chat-buddy/thumbnail.jpg',
-      screenshots: [
-        '/projects/chat-buddy/screenshot-1.jpg',
-        '/projects/chat-buddy/screenshot-2.jpg',
-        '/projects/chat-buddy/screenshot-3.jpg',
-      ],
+      thumbnail: '',
+      screenshots: [],
     },
     techStack: [
       { name: 'JavaScript', icon: 'JS', color: '#F7DF1E', proficiency: 92 },
@@ -221,12 +213,8 @@ export const projects: Project[] = [
       'Live Updates - See new channels and messages appear instantly without refresh',
     ],
     images: {
-      thumbnail: '/projects/discord-clone/thumbnail.jpg',
-      screenshots: [
-        '/projects/discord-clone/screenshot-1.jpg',
-        '/projects/discord-clone/screenshot-2.jpg',
-        '/projects/discord-clone/screenshot-3.jpg',
-      ],
+      thumbnail: '',
+      screenshots: [],
     },
     techStack: [
       { name: 'React 18', icon: '⚛️', color: '#61DAFB', proficiency: 95 },
