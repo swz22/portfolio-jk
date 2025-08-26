@@ -36,7 +36,7 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
         <CardHeader className="flex-none p-0">
           <div className="relative h-48 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent">
             <div className="absolute right-4 top-4 flex gap-2">
-              <Badge variant="default">Production App</Badge>
+              <Badge variant="default">Featured App</Badge>
               {project.metrics.users && (
                 <Badge variant="secondary">
                   {project.metrics.users}+ users
@@ -95,7 +95,7 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
             onClick={() => onOpenModal(project)}
             className="flex-1"
           >
-            View Case Study
+            View Details
           </Button>
           <Button variant="outline" size="icon" className="h-8 w-8">
             <Link
