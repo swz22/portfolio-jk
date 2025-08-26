@@ -64,34 +64,23 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
           </Link>
         </CardHeader>
 
-        <CardContent className="flex-1 overflow-hidden p-6">
-          <p className="mb-4 line-clamp-2 text-base text-muted-foreground">
-            {project.description}
-          </p>
+        <CardContent className="flex flex-1 flex-col justify-between p-6">
+          <div>
+            <p className="mb-6 text-base text-muted-foreground">
+              {project.description}
+            </p>
 
-          {project.highlights && (
-            <div className="mb-4 space-y-1.5">
-              {project.highlights.slice(0, 3).map((highlight, idx) => (
-                <div key={idx} className="flex items-start gap-2">
-                  <span className="mt-1 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                  <span className="line-clamp-1 text-sm text-muted-foreground">
-                    {highlight}
-                  </span>
-                </div>
+            <div className="flex flex-wrap gap-1.5">
+              {project.techStack.map((tech) => (
+                <Badge
+                  key={tech.name}
+                  variant="secondary"
+                  className="px-3 py-1 text-sm"
+                >
+                  {tech.icon} {tech.name}
+                </Badge>
               ))}
             </div>
-          )}
-
-          <div className="flex flex-wrap gap-1.5">
-            {project.techStack.map((tech) => (
-              <Badge
-                key={tech.name}
-                variant="secondary"
-                className="px-3 py-1 text-sm"
-              >
-                {tech.icon} {tech.name}
-              </Badge>
-            ))}
           </div>
         </CardContent>
 
