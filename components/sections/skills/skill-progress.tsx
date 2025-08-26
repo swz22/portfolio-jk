@@ -35,7 +35,10 @@ export function SkillProgress({ skill, index }: SkillProgressProps) {
       <div className="relative h-2 overflow-hidden rounded-full bg-secondary">
         <motion.div
           className="absolute left-0 top-0 h-full rounded-full"
-          style={{ backgroundColor: skill.color }}
+          style={{
+            backgroundColor:
+              skill.color === '#000000' ? '#4B5563' : skill.color,
+          }}
           initial={{ width: 0 }}
           animate={isVisible ? { width: `${skill.proficiency}%` } : {}}
           transition={{
