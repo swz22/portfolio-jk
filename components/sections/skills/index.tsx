@@ -24,8 +24,7 @@ export default function Skills() {
             Skills & Expertise
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            A comprehensive overview of my technical skills, tools, and
-            technologies I work with
+            My technical toolkit at a glance
           </p>
         </motion.div>
 

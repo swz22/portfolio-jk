@@ -27,8 +27,7 @@ export default function Experience() {
             Professional Experience
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            My journey through different roles and companies, building products
-            that make a difference
+            An overview of my roles and contributions across various companies
           </p>
         </motion.div>
 
