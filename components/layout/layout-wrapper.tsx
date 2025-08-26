@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { Navigation } from './navigation';
 import { Footer } from './footer';
 import { ThemeProvider } from '@/contexts/theme-context';
+import { PerformanceProvider } from '@/contexts/performance-context';
 
 const LoadingScreen = dynamic(
   () =>
@@ -34,16 +35,18 @@ interface LayoutWrapperProps {
 
 export function LayoutWrapper({ children }: LayoutWrapperProps) {
   return (
-    <ThemeProvider>
-      <Suspense fallback={<MinimalLoader />}>
-        <LoadingScreen />
-      </Suspense>
-      <Suspense fallback={null}>
-        <ScrollProgress />
-      </Suspense>
-      <Navigation />
-      <main className="min-h-screen">{children}</main>
-      <Footer />
-    </ThemeProvider>
+    <PerformanceProvider>
+      <ThemeProvider>
+        <Suspense fallback={<MinimalLoader />}>
+          <LoadingScreen />
+        </Suspense>
+        <Suspense fallback={null}>
+          <ScrollProgress />
+        </Suspense>
+        <Navigation />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
+      </ThemeProvider>
+    </PerformanceProvider>
   );
 }
