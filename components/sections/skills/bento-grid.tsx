@@ -30,51 +30,6 @@ export function BentoGrid() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="md:col-span-2"
-      >
-        <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
-          <CardContent className="p-6">
-            <GitHubGraph />
-          </CardContent>
-        </Card>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="md:col-span-2 lg:col-span-2"
-      >
-        <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
-          <CardHeader>
-            <CardTitle>Code Snippets</CardTitle>
-            <div className="mt-2 flex gap-2">
-              {codeSnippets.map((snippet, index) => (
-                <button
-                  key={snippet.id}
-                  onClick={() => setActiveSnippet(index)}
-                  className={cn(
-                    'rounded-md px-3 py-1 text-sm transition-colors',
-                    activeSnippet === index
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-secondary hover:bg-secondary/80'
-                  )}
-                >
-                  {snippet.language}
-                </button>
-              ))}
-            </div>
-          </CardHeader>
-          <CardContent>
-            <CodeSnippet {...codeSnippets[activeSnippet]} />
-          </CardContent>
-        </Card>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
         className="md:col-span-1"
       >
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
@@ -99,7 +54,7 @@ export function BentoGrid() {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
         className="md:col-span-1"
       >
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
@@ -147,7 +102,7 @@ export function BentoGrid() {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
         className="md:col-span-2"
       >
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
@@ -167,6 +122,51 @@ export function BentoGrid() {
                 <p className="text-xs text-muted-foreground">Fluent</p>
               </div>
             </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="md:col-span-2"
+      >
+        <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
+          <CardContent className="p-6">
+            <GitHubGraph />
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="md:col-span-2 lg:col-span-2"
+      >
+        <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
+          <CardHeader>
+            <CardTitle>Code Snippets</CardTitle>
+            <div className="mt-2 flex gap-2">
+              {codeSnippets.map((snippet, index) => (
+                <button
+                  key={snippet.id}
+                  onClick={() => setActiveSnippet(index)}
+                  className={cn(
+                    'rounded-md px-3 py-1 text-sm transition-colors',
+                    activeSnippet === index
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-secondary hover:bg-secondary/80'
+                  )}
+                >
+                  {snippet.language}
+                </button>
+              ))}
+            </div>
+          </CardHeader>
+          <CardContent>
+            <CodeSnippet {...codeSnippets[activeSnippet]} />
           </CardContent>
         </Card>
       </motion.div>
