@@ -164,16 +164,17 @@ export const projects: Project[] = [
     id: 'chat-buddy',
     title: 'Chat Buddy AI',
     description:
-      'AI-powered chatbot interface with customizable personas and conversation history.',
+      'Conversational AI chatbot featuring real-time responses, typing animations, and a familiar messaging experience powered by GPT-3.',
     longDescription:
-      'Chat Buddy is an intelligent conversational AI application that provides users with a friendly and helpful chat interface. Built with Next.js and the OpenAI API, it features conversation persistence, typing indicators, and a clean, modern UI. The application demonstrates proficiency in working with AI APIs and creating engaging user experiences.',
+      "Chat Buddy AI is an intelligent conversational interface powered by OpenAI's GPT-3 model. This web application provides users with an intuitive chat experience where they can ask questions, seek assistance, and engage in natural language conversations with an AI assistant. The clean, modern interface mimics popular messaging platforms, making AI interaction accessible and familiar to all users.",
     highlights: [
-      'Integration with OpenAI GPT models',
-      'Conversation history and context retention',
-      'Smooth typing indicators and animations',
-      'Responsive design with mobile optimization',
-      'Clean, minimalist user interface',
-      'Fast response times with optimized API calls',
+      "Real-time AI Responses - Seamless integration with OpenAI's GPT-3 API for intelligent, context-aware conversations",
+      'Typing Animation - Smooth typewriter effect that simulates natural conversation flow',
+      'Loading Indicators - Visual feedback with animated dots during response generation',
+      'Clean Chat Interface - User-friendly design with distinct styling for user and AI messages',
+      'Responsive Design - Mobile-first approach ensuring optimal experience across all devices',
+      'Persistent Chat History - Maintains conversation context throughout the session',
+      'Auto-scroll - Automatically scrolls to the latest message for better UX',
     ],
     images: {
       thumbnail: '/projects/chat-buddy/thumbnail.jpg',
@@ -184,10 +185,11 @@ export const projects: Project[] = [
       ],
     },
     techStack: [
-      { name: 'Next.js', icon: '⚡', color: '#000000', proficiency: 95 },
-      { name: 'TypeScript', icon: '📘', color: '#3178C6', proficiency: 90 },
+      { name: 'JavaScript', icon: 'JS', color: '#F7DF1E', proficiency: 92 },
+      { name: 'Node.js', icon: '🟢', color: '#339933', proficiency: 88 },
+      { name: 'Express.js', icon: '⚡', color: '#000000', proficiency: 85 },
       { name: 'OpenAI API', icon: '🤖', color: '#412991', proficiency: 85 },
-      { name: 'Tailwind CSS', icon: '🎨', color: '#06B6D4', proficiency: 90 },
+      { name: 'CSS3', icon: '🎨', color: '#1572B6', proficiency: 90 },
     ],
     metrics: {
       performance: 95,
