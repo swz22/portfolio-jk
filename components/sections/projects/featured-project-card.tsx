@@ -34,22 +34,34 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
     >
       <Card className="relative flex h-full transform-gpu flex-col overflow-hidden border-border/50 bg-card/50 backdrop-blur transition-all duration-300 hover:scale-[1.02]">
         <CardHeader className="flex-none p-0">
-          <div className="relative h-96 overflow-hidden">
-            <img
-              src={project.images.thumbnail}
-              alt={project.title}
-              className="h-full w-full object-cover object-top"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-            <div className="absolute right-4 top-4 flex gap-2">
-              <Badge variant="default">Featured App</Badge>
+          <Link
+            href={project.links.live!}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+          >
+            <div className="group relative h-96 overflow-hidden">
+              <img
+                src={project.images.thumbnail}
+                alt={project.title}
+                className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+              <div className="absolute right-4 top-4 flex gap-2">
+                <Badge variant="default">Featured App</Badge>
+              </div>
+              <div className="absolute bottom-4 left-4 right-4">
+                <h3 className="text-2xl font-bold text-white drop-shadow-lg">
+                  {project.title}
+                </h3>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <div className="rounded-full bg-white/90 p-3">
+                  <ExternalLinkIcon className="h-6 w-6 text-black" />
+                </div>
+              </div>
             </div>
-            <div className="absolute bottom-4 left-4 right-4">
-              <h3 className="text-2xl font-bold text-white drop-shadow-lg">
-                {project.title}
-              </h3>
-            </div>
-          </div>
+          </Link>
         </CardHeader>
 
         <CardContent className="flex-1 overflow-hidden p-6">
