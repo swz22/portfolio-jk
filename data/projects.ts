@@ -121,16 +121,16 @@ export const projects: Project[] = [
     id: 'bearbnb',
     title: 'Bearbnb',
     description:
-      'Full-featured Airbnb clone with property listings, search functionality, and interactive map integration.',
+      'Modern vacation rental platform with bear-themed design. Full-stack Airbnb clone featuring SSR, dynamic routing, and interactive map integration.',
     longDescription:
-      'Bearbnb is a comprehensive vacation rental platform that replicates core Airbnb functionality. It features property search with filters, date-based availability checking, Google Maps integration for location-based browsing, and a responsive design. Built with React and Firebase, it demonstrates proficiency in building complex, real-world applications with modern web technologies.',
+      'Bearbnb is a full-stack Airbnb clone featuring a playful bear-themed design. Built with Next.js and React, this responsive web application demonstrates advanced frontend development skills through server-side rendering, dynamic routing, and seamless third-party integrations. Users can search destinations, select dates, specify guest counts, and explore properties through an interactive map interface.',
     highlights: [
-      'Advanced search with multiple filter options',
-      'Interactive map view with Google Maps API',
-      'Date picker for checking availability',
-      'Responsive property cards with image galleries',
-      'Firebase integration for data persistence',
-      'Clean, intuitive user interface',
+      'Smart Search System - Location-based search with integrated calendar for date selection and guest count management',
+      'Interactive Map View - Live Mapbox integration with clickable property markers and detailed popup information',
+      'Server-Side Rendering - Optimized performance and SEO using Next.js SSR and static generation',
+      'Responsive Design - Mobile-first approach ensuring seamless experience across all devices',
+      'Dynamic Filtering - Property filters for price, room types, cancellation policies, and amenities',
+      'Smooth Transitions - Progress indicators and animations for enhanced user experience',
     ],
     images: {
       thumbnail: '/projects/bearbnb/thumbnail.jpg',
@@ -141,10 +141,11 @@ export const projects: Project[] = [
       ],
     },
     techStack: [
-      { name: 'React', icon: '⚛️', color: '#61DAFB', proficiency: 95 },
-      { name: 'Firebase', icon: '🔥', color: '#FFCA28', proficiency: 85 },
-      { name: 'Google Maps', icon: '🗺️', color: '#4285F4', proficiency: 80 },
-      { name: 'Material-UI', icon: '🎨', color: '#0081CB', proficiency: 85 },
+      { name: 'React 18', icon: '⚛️', color: '#61DAFB', proficiency: 95 },
+      { name: 'Next.js', icon: '▲', color: '#000000', proficiency: 90 },
+      { name: 'Tailwind CSS', icon: '🎨', color: '#06B6D4', proficiency: 90 },
+      { name: 'Mapbox GL', icon: '🗺️', color: '#4264FB', proficiency: 85 },
+      { name: 'Date-fns', icon: '📅', color: '#770C56', proficiency: 88 },
     ],
     metrics: {
       performance: 92,
@@ -154,6 +155,48 @@ export const projects: Project[] = [
     links: {
       live: 'https://bearbnb.vercel.app/',
       github: 'https://github.com/swz22/bearbnb',
+    },
+    featured: false,
+    category: 'prototype',
+    year: 2023,
+  },
+  {
+    id: 'discord-clone',
+    title: 'Discord Clone',
+    description:
+      'Real-time chat application with channels, direct messaging, and user authentication.',
+    longDescription:
+      'A feature-rich Discord clone that implements real-time messaging, channel management, and user presence indicators. Built with React and Firebase, it showcases expertise in building real-time applications with complex state management using Redux. Features include server creation, channel organization, direct messaging, and Google authentication.',
+    highlights: [
+      'Real-time messaging with Firebase Firestore',
+      'Server and channel creation/management',
+      'Google OAuth authentication',
+      'User presence and online status',
+      'Redux for complex state management',
+      'Responsive design for desktop and mobile',
+    ],
+    images: {
+      thumbnail: '/projects/discord-clone/thumbnail.jpg',
+      screenshots: [
+        '/projects/discord-clone/screenshot-1.jpg',
+        '/projects/discord-clone/screenshot-2.jpg',
+        '/projects/discord-clone/screenshot-3.jpg',
+      ],
+    },
+    techStack: [
+      { name: 'React', icon: '⚛️', color: '#61DAFB', proficiency: 95 },
+      { name: 'Firebase', icon: '🔥', color: '#FFCA28', proficiency: 88 },
+      { name: 'Redux', icon: '🔄', color: '#764ABC', proficiency: 85 },
+      { name: 'Material-UI', icon: '🎨', color: '#0081CB', proficiency: 85 },
+    ],
+    metrics: {
+      performance: 94,
+      users: 150,
+      rating: 4.8,
+    },
+    links: {
+      live: 'https://chatdsc-520c3.web.app/',
+      github: 'https://github.com/swz22/discord_clone',
     },
     featured: false,
     category: 'prototype',
@@ -200,47 +243,5 @@ export const projects: Project[] = [
     featured: false,
     category: 'prototype',
     year: 2024,
-  },
-  {
-    id: 'discord-clone',
-    title: 'Discord Clone',
-    description:
-      'Real-time chat application with channels, direct messaging, and user authentication.',
-    longDescription:
-      'A feature-rich Discord clone that implements real-time messaging, channel management, and user presence indicators. Built with React and Firebase, it showcases expertise in building real-time applications with complex state management using Redux. Features include server creation, channel organization, direct messaging, and Google authentication.',
-    highlights: [
-      'Real-time messaging with Firebase Firestore',
-      'Server and channel creation/management',
-      'Google OAuth authentication',
-      'User presence and online status',
-      'Redux for complex state management',
-      'Responsive design for desktop and mobile',
-    ],
-    images: {
-      thumbnail: '/projects/discord-clone/thumbnail.jpg',
-      screenshots: [
-        '/projects/discord-clone/screenshot-1.jpg',
-        '/projects/discord-clone/screenshot-2.jpg',
-        '/projects/discord-clone/screenshot-3.jpg',
-      ],
-    },
-    techStack: [
-      { name: 'React', icon: '⚛️', color: '#61DAFB', proficiency: 95 },
-      { name: 'Firebase', icon: '🔥', color: '#FFCA28', proficiency: 88 },
-      { name: 'Redux', icon: '🔄', color: '#764ABC', proficiency: 85 },
-      { name: 'Material-UI', icon: '🎨', color: '#0081CB', proficiency: 85 },
-    ],
-    metrics: {
-      performance: 94,
-      users: 150,
-      rating: 4.8,
-    },
-    links: {
-      live: 'https://chatdsc-520c3.web.app/',
-      github: 'https://github.com/swz22/discord_clone',
-    },
-    featured: false,
-    category: 'prototype',
-    year: 2023,
   },
 ];
