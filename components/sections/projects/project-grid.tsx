@@ -4,7 +4,6 @@ import { useMemo } from 'react';
 import { Project } from '@/types';
 import { ProjectCard } from './project-card';
 import { FeaturedProjectCard } from './featured-project-card';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface ProjectGridProps {
   projects: Project[];
@@ -56,7 +55,7 @@ export function ProjectGrid({ projects, onOpenModal }: ProjectGridProps) {
             <h3 className="text-2xl font-bold">Featured Apps</h3>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <AnimatePresence mode="popLayout">{featuredCards}</AnimatePresence>
+            {featuredCards}
           </div>
         </div>
       )}
@@ -67,7 +66,7 @@ export function ProjectGrid({ projects, onOpenModal }: ProjectGridProps) {
             <h3 className="text-xl font-semibold">Other Projects</h3>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 [&>*]:!h-[500px]">
-            <AnimatePresence mode="popLayout">{regularCards}</AnimatePresence>
+            {regularCards}
           </div>
         </div>
       )}
