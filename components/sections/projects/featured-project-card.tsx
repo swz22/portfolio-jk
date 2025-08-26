@@ -36,12 +36,7 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
         <CardHeader className="flex-none p-0">
           <div className="relative h-48 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent">
             <div className="absolute right-4 top-4 flex gap-2">
-              <Badge variant="default">Featured App</Badge>
-              {project.metrics.users && (
-                <Badge variant="secondary">
-                  {project.metrics.users}+ users
-                </Badge>
-              )}
+              <Badge variant="default">Featured</Badge>
             </div>
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-8xl opacity-30">
