@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { usePerformance } from '@/contexts/performance-context';
 
-export function SpaceTheme() {
+export function StarfallTheme() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
   const lastFrameTime = useRef<number>(0);
+  const { quality } = usePerformance();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -23,7 +25,15 @@ export function SpaceTheme() {
 
     let time = 0;
 
-    const stars = Array.from({ length: 150 }, () => ({
+    const particleCounts = {
+      low: { stars: 75, petals: 15, energy: 16 },
+      medium: { stars: 100, petals: 20, energy: 24 },
+      high: { stars: 150, petals: 30, energy: 32 },
+    };
+
+    const counts = particleCounts[quality];
+
+    const stars = Array.from({ length: counts.stars }, () => ({
       x: Math.random(),
       y: Math.random(),
       size: Math.random() * 3 + 1,
@@ -35,7 +45,7 @@ export function SpaceTheme() {
       ],
     }));
 
-    const petals = Array.from({ length: 30 }, () => ({
+    const petals = Array.from({ length: counts.petals }, () => ({
       x: Math.random(),
       y: Math.random(),
       size: Math.random() * 15 + 10,
@@ -61,7 +71,7 @@ export function SpaceTheme() {
 
     const shootingStars: ShootingStar[] = [];
 
-    const energyParticles = Array.from({ length: 32 }, () => ({
+    const energyParticles = Array.from({ length: counts.energy }, () => ({
       x: Math.random(),
       y: Math.random(),
       vx: (Math.random() - 0.5) * 0.0002,
@@ -436,13 +446,16 @@ export function SpaceTheme() {
 
     const animate = (currentTime: number) => {
       const deltaTime = currentTime - lastFrameTime.current;
+      const targetFrameTime = quality === 'low' ? 33 : 16;
 
-      if (deltaTime >= 16) {
+      if (deltaTime >= targetFrameTime) {
         lastFrameTime.current = currentTime;
         time++;
 
         drawBackground();
-        drawAnimeNebula();
+        if (quality !== 'low') {
+          drawAnimeNebula();
+        }
         drawStars();
         drawPetals();
         drawEnergyParticles();
@@ -461,7 +474,7 @@ export function SpaceTheme() {
       }
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, []);
+  }, [quality]);
 
   return (
     <canvas
