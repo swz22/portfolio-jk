@@ -12,7 +12,6 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -67,18 +66,12 @@ export const ProjectModal = memo(function ProjectModal({
               <h3 className="mb-3 text-lg font-semibold">Key Features</h3>
               <ul className="space-y-2">
                 {project.highlights.map((highlight, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    className="flex items-start gap-2"
-                  >
+                  <li key={index} className="flex items-start gap-2">
                     <span className="mt-1.5 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
                     <span className="text-sm text-muted-foreground">
                       {highlight}
                     </span>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -99,23 +92,19 @@ export const ProjectModal = memo(function ProjectModal({
             <h3 className="mb-3 text-lg font-semibold">Tech Stack</h3>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
               {project.techStack.map((tech) => (
-                <motion.div
+                <div
                   key={tech.name}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
                   className="flex flex-col items-center rounded-lg bg-secondary/50 p-4"
                 >
                   <span className="mb-2 text-3xl">{tech.icon}</span>
                   <span className="text-sm font-medium">{tech.name}</span>
                   <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-secondary">
-                    <motion.div
-                      className="h-full bg-primary"
-                      initial={{ width: 0 }}
-                      animate={{ width: `${tech.proficiency}%` }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
+                    <div
+                      className="h-full bg-primary transition-all duration-500"
+                      style={{ width: `${tech.proficiency}%` }}
                     />
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
