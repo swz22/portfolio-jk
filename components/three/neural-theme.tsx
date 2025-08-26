@@ -2,8 +2,9 @@
 
 import { Suspense, useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Float } from '@react-three/drei';
+import { OrbitControls, Float, PerformanceMonitor } from '@react-three/drei';
 import * as THREE from 'three';
+import { useState } from 'react';
 
 function Neuron({ position }: { position: [number, number, number] }) {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -21,7 +22,7 @@ function Neuron({ position }: { position: [number, number, number] }) {
   return (
     <group position={position}>
       <mesh ref={meshRef}>
-        <sphereGeometry args={[0.2, 32, 32]} />
+        <sphereGeometry args={[0.2, 16, 16]} />
         <meshPhysicalMaterial
           color="#00ffff"
           emissive="#00ffff"
@@ -101,12 +102,13 @@ function NeuralNetwork() {
       end: [number, number, number];
     }[] = [];
 
+    // Reduced complexity for better performance
     const layers = [
-      { count: 3, x: -3 },
-      { count: 5, x: -1 },
-      { count: 7, x: 1 },
-      { count: 5, x: 3 },
-      { count: 3, x: 5 },
+      { count: 2, x: -3 },
+      { count: 3, x: -1 },
+      { count: 4, x: 1 },
+      { count: 3, x: 3 },
+      { count: 2, x: 5 },
     ];
 
     const layerNeurons: [number, number, number][][] = [];
@@ -123,12 +125,13 @@ function NeuralNetwork() {
       layerNeurons.push(layerPositions);
     });
 
+    // Reduced connections for performance
     for (let i = 0; i < layerNeurons.length - 1; i++) {
       const currentLayer = layerNeurons[i];
       const nextLayer = layerNeurons[i + 1];
 
       currentLayer.forEach((neuron) => {
-        const connectionCount = Math.floor(Math.random() * 2) + 2;
+        const connectionCount = Math.floor(Math.random() * 2) + 1;
         const shuffled = [...nextLayer].sort(() => Math.random() - 0.5);
 
         for (let j = 0; j < Math.min(connectionCount, shuffled.length); j++) {
@@ -165,7 +168,7 @@ function NeuralNetwork() {
 
 function BackgroundParticles() {
   const mesh = useRef<THREE.Points>(null);
-  const count = 500;
+  const count = 200; // Reduced from 500
 
   const particles = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -183,7 +186,6 @@ function BackgroundParticles() {
       colors[i * 3 + 1] = color.g;
       colors[i * 3 + 2] = color.b;
 
-      // Add size variation but cap the maximum
       sizes[i] = Math.min(Math.random() * 0.08 + 0.04, 0.1);
     }
 
@@ -231,6 +233,8 @@ function BackgroundParticles() {
 }
 
 export function NeuralTheme() {
+  const [dpr, setDpr] = useState(1);
+
   return (
     <div className="absolute inset-0 h-full w-full">
       <Canvas
@@ -244,8 +248,17 @@ export function NeuralTheme() {
           antialias: true,
           toneMapping: THREE.ACESFilmicToneMapping,
           toneMappingExposure: 1.2,
+          powerPreference: 'high-performance',
         }}
+        dpr={dpr}
       >
+        <PerformanceMonitor
+          onDecline={() => setDpr(0.5)}
+          onIncline={() => setDpr(1)}
+          flipflops={3}
+          onFallback={() => setDpr(0.5)}
+        />
+
         <Suspense fallback={null}>
           <color attach="background" args={['#000510']} />
           <fog attach="fog" args={['#000510', 10, 30]} />
@@ -276,11 +289,6 @@ export function NeuralTheme() {
             rotateSpeed={0.5}
             autoRotate
             autoRotateSpeed={0.3}
-            makeDefault
-            addEventListener={undefined}
-            hasEventListener={undefined}
-            removeEventListener={undefined}
-            dispatchEvent={undefined}
           />
         </Suspense>
       </Canvas>
