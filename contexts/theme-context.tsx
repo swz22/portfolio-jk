@@ -79,7 +79,7 @@ const themes: ThemeConfig[] = [
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [currentTheme, setCurrentTheme] = useState<ThemeId>('starfall');
+  const [currentTheme, setCurrentTheme] = useState<ThemeId>('neural');
   const [isEffectsEnabled, setIsEffectsEnabled] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
