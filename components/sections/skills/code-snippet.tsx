@@ -21,7 +21,7 @@ export function CodeSnippet({ title, language, code }: CodeSnippetProps) {
 
   return (
     <div className="glass overflow-hidden rounded-lg">
-      <div className="bg-background/50 border-border flex items-center justify-between border-b px-4 py-2">
+      <div className="flex items-center justify-between border-b border-border bg-background/50 px-4 py-2">
         <div className="flex items-center gap-2">
           <div className="flex gap-1.5">
             <div className="h-3 w-3 rounded-full bg-red-500" />
@@ -31,10 +31,10 @@ export function CodeSnippet({ title, language, code }: CodeSnippetProps) {
           <span className="text-sm font-medium">{title}</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-muted-foreground text-xs">{language}</span>
+          <span className="text-xs text-muted-foreground">{language}</span>
           <button
             onClick={handleCopy}
-            className="hover:bg-secondary rounded p-1.5 transition-colors"
+            className="rounded p-1.5 transition-colors hover:bg-secondary"
           >
             {copied ? (
               <svg
@@ -69,10 +69,11 @@ export function CodeSnippet({ title, language, code }: CodeSnippetProps) {
         </div>
       </div>
 
-      <div className="overflow-x-auto p-4">
-        <pre className="text-sm">
+      <div className="relative max-h-[200px] overflow-y-auto">
+        <pre className="p-4 text-sm">
           <code className={cn('language-' + language)}>{code}</code>
         </pre>
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-background/50 to-transparent" />
       </div>
     </div>
   );
