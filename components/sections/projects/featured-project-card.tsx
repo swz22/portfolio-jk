@@ -34,13 +34,13 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
     >
       <Card className="relative flex h-full transform-gpu flex-col overflow-hidden border-border/50 bg-card/50 backdrop-blur transition-all duration-300 hover:scale-[1.02]">
         <CardHeader className="flex-none p-0">
-          <div className="relative h-48 overflow-hidden">
+          <div className="relative h-96 overflow-hidden">
             <img
               src={project.images.thumbnail}
               alt={project.title}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover object-top"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             <div className="absolute right-4 top-4 flex gap-2">
               <Badge variant="default">Featured App</Badge>
             </div>
