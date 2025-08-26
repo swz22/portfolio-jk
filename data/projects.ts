@@ -161,48 +161,6 @@ export const projects: Project[] = [
     year: 2023,
   },
   {
-    id: 'discord-clone',
-    title: 'Discord Clone',
-    description:
-      'Real-time chat application with channels, direct messaging, and user authentication.',
-    longDescription:
-      'A feature-rich Discord clone that implements real-time messaging, channel management, and user presence indicators. Built with React and Firebase, it showcases expertise in building real-time applications with complex state management using Redux. Features include server creation, channel organization, direct messaging, and Google authentication.',
-    highlights: [
-      'Real-time messaging with Firebase Firestore',
-      'Server and channel creation/management',
-      'Google OAuth authentication',
-      'User presence and online status',
-      'Redux for complex state management',
-      'Responsive design for desktop and mobile',
-    ],
-    images: {
-      thumbnail: '/projects/discord-clone/thumbnail.jpg',
-      screenshots: [
-        '/projects/discord-clone/screenshot-1.jpg',
-        '/projects/discord-clone/screenshot-2.jpg',
-        '/projects/discord-clone/screenshot-3.jpg',
-      ],
-    },
-    techStack: [
-      { name: 'React', icon: '⚛️', color: '#61DAFB', proficiency: 95 },
-      { name: 'Firebase', icon: '🔥', color: '#FFCA28', proficiency: 88 },
-      { name: 'Redux', icon: '🔄', color: '#764ABC', proficiency: 85 },
-      { name: 'Material-UI', icon: '🎨', color: '#0081CB', proficiency: 85 },
-    ],
-    metrics: {
-      performance: 94,
-      users: 150,
-      rating: 4.8,
-    },
-    links: {
-      live: 'https://chatdsc-520c3.web.app/',
-      github: 'https://github.com/swz22/discord_clone',
-    },
-    featured: false,
-    category: 'prototype',
-    year: 2023,
-  },
-  {
     id: 'chat-buddy',
     title: 'Chat Buddy AI',
     description:
@@ -243,5 +201,49 @@ export const projects: Project[] = [
     featured: false,
     category: 'prototype',
     year: 2024,
+  },
+  {
+    id: 'discord-clone',
+    title: 'Discord Clone',
+    description:
+      'Full-featured Discord clone with real-time chat functionality. Create channels, send messages, and collaborate in a familiar Discord-like interface.',
+    longDescription:
+      'A full-featured Discord clone built with React and Firebase that enables real-time chat functionality. Users can create channels, send messages, and collaborate in a familiar Discord-like interface. Features Google authentication for secure sign-in and real-time message synchronization across all connected users.',
+    highlights: [
+      "Real-time Messaging - Instant message delivery using Firebase Firestore's real-time listeners",
+      'Channel Management - Create and organize multiple text channels for different topics',
+      'Google Authentication - Secure sign-in with Google OAuth integration',
+      'User Profiles - Display user avatars, names, and unique identifiers',
+      'Responsive UI - Discord-inspired dark theme with Material-UI components',
+      'Message History - Persistent message storage with timestamps',
+      'Live Updates - See new channels and messages appear instantly without refresh',
+    ],
+    images: {
+      thumbnail: '/projects/discord-clone/thumbnail.jpg',
+      screenshots: [
+        '/projects/discord-clone/screenshot-1.jpg',
+        '/projects/discord-clone/screenshot-2.jpg',
+        '/projects/discord-clone/screenshot-3.jpg',
+      ],
+    },
+    techStack: [
+      { name: 'React 18', icon: '⚛️', color: '#61DAFB', proficiency: 95 },
+      { name: 'Redux Toolkit', icon: '🔄', color: '#764ABC', proficiency: 85 },
+      { name: 'Firebase', icon: '🔥', color: '#FFCA28', proficiency: 88 },
+      { name: 'Material-UI', icon: '🎨', color: '#0081CB', proficiency: 85 },
+      { name: 'CSS3', icon: '🎨', color: '#1572B6', proficiency: 90 },
+    ],
+    metrics: {
+      performance: 94,
+      users: 150,
+      rating: 4.8,
+    },
+    links: {
+      live: 'https://chatdsc-520c3.web.app/',
+      github: 'https://github.com/swz22/discord_clone',
+    },
+    featured: false,
+    category: 'prototype',
+    year: 2023,
   },
 ];
