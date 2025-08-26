@@ -115,12 +115,6 @@ Effects: ${isEffectsEnabled ? 'enabled' : 'disabled'}`;
           output = 'Effects are already enabled.';
         }
         break;
-      case 'resume':
-        output = 'Downloading resume...';
-        setTimeout(() => {
-          window.open('/resume.pdf', '_blank');
-        }, 500);
-        break;
       case 'socials':
         output = `Social Links:
 • GitHub: github.com/swz22
