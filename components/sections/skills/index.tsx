@@ -29,7 +29,13 @@ export default function Skills() {
           </p>
         </motion.div>
 
-        <div className="mb-16">
+        <div className="mb-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {skillCategories.map((category, index) => (
+            <SkillCard key={category.name} category={category} index={index} />
+          ))}
+        </div>
+
+        <div>
           <Suspense
             fallback={
               <div className="flex h-[400px] items-center justify-center">
@@ -39,12 +45,6 @@ export default function Skills() {
           >
             <BentoGrid />
           </Suspense>
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {skillCategories.map((category, index) => (
-            <SkillCard key={category.name} category={category} index={index} />
-          ))}
         </div>
       </div>
     </section>
