@@ -25,13 +25,7 @@ export interface Project {
   year: number;
 }
 
-export type ProjectCategory =
-  | 'web-app'
-  | 'mobile-app'
-  | 'ai-powered'
-  | 'real-time'
-  | 'music'
-  | 'clone';
+export type ProjectCategory = 'production' | 'prototype';
 
 export interface TechItem {
   name: string;
