@@ -3,6 +3,7 @@
 import { Suspense, useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Float } from '@react-three/drei';
+import { usePerformance } from '@/contexts/performance-context';
 import * as THREE from 'three';
 
 function Neuron({ position }: { position: [number, number, number] }) {
@@ -93,6 +94,7 @@ function Connection({
 
 function NeuralNetwork() {
   const groupRef = useRef<THREE.Group>(null);
+  const { quality } = usePerformance();
 
   const network = useMemo(() => {
     const neurons: [number, number, number][] = [];
@@ -101,17 +103,32 @@ function NeuralNetwork() {
       end: [number, number, number];
     }[] = [];
 
-    const layers = [
-      { count: 3, x: -3 },
-      { count: 4, x: -1 },
-      { count: 5, x: 1 },
-      { count: 4, x: 3 },
-      { count: 3, x: 5 },
-    ];
+    const layerConfig =
+      quality === 'low'
+        ? [
+            { count: 2, x: -3 },
+            { count: 3, x: -1 },
+            { count: 3, x: 1 },
+            { count: 2, x: 3 },
+          ]
+        : quality === 'medium'
+          ? [
+              { count: 3, x: -3 },
+              { count: 4, x: -1 },
+              { count: 4, x: 1 },
+              { count: 3, x: 3 },
+            ]
+          : [
+              { count: 3, x: -3 },
+              { count: 4, x: -1 },
+              { count: 5, x: 1 },
+              { count: 4, x: 3 },
+              { count: 3, x: 5 },
+            ];
 
     const layerNeurons: [number, number, number][][] = [];
 
-    layers.forEach((layer) => {
+    layerConfig.forEach((layer) => {
       const layerPositions: [number, number, number][] = [];
       for (let i = 0; i < layer.count; i++) {
         const y = (i - layer.count / 2) * 1.5;
@@ -123,13 +140,13 @@ function NeuralNetwork() {
       layerNeurons.push(layerPositions);
     });
 
-    // Reduced connections for performance
     for (let i = 0; i < layerNeurons.length - 1; i++) {
       const currentLayer = layerNeurons[i];
       const nextLayer = layerNeurons[i + 1];
 
       currentLayer.forEach((neuron) => {
-        const connectionCount = Math.floor(Math.random() * 2) + 1;
+        const connectionCount =
+          quality === 'low' ? 1 : Math.floor(Math.random() * 2) + 1;
         const shuffled = [...nextLayer].sort(() => Math.random() - 0.5);
 
         for (let j = 0; j < Math.min(connectionCount, shuffled.length); j++) {
@@ -142,7 +159,7 @@ function NeuralNetwork() {
     }
 
     return { neurons, connections };
-  }, []);
+  }, [quality]);
 
   useFrame((state) => {
     if (groupRef.current) {
@@ -166,7 +183,9 @@ function NeuralNetwork() {
 
 function BackgroundParticles() {
   const mesh = useRef<THREE.Points>(null);
-  const count = 300; // Balanced count
+  const { quality } = usePerformance();
+
+  const count = quality === 'low' ? 100 : quality === 'medium' ? 200 : 300;
 
   const particles = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -231,6 +250,10 @@ function BackgroundParticles() {
 }
 
 export function NeuralTheme() {
+  const { quality } = usePerformance();
+
+  const pixelRatio = quality === 'low' ? 1 : quality === 'medium' ? 1.5 : 2;
+
   return (
     <div className="absolute inset-0 h-full w-full">
       <Canvas
@@ -241,13 +264,13 @@ export function NeuralTheme() {
           far: 1000,
         }}
         gl={{
-          antialias: true,
+          antialias: quality !== 'low',
           toneMapping: THREE.ACESFilmicToneMapping,
           toneMappingExposure: 1.2,
           powerPreference: 'high-performance',
           alpha: true,
         }}
-        dpr={[1, 2]}
+        dpr={[1, pixelRatio]}
       >
         <Suspense fallback={null}>
           <color attach="background" args={['#000510']} />
