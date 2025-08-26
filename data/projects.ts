@@ -60,7 +60,7 @@ export const projects: Project[] = [
       github: 'https://github.com/swz22/crescendo',
     },
     featured: true,
-    category: 'music',
+    category: 'production',
     year: 2024,
   },
   {
@@ -114,7 +114,7 @@ export const projects: Project[] = [
       github: 'https://github.com/swz22/insight-buddy',
     },
     featured: true,
-    category: 'ai-powered',
+    category: 'production',
     year: 2024,
   },
   {
@@ -156,7 +156,7 @@ export const projects: Project[] = [
       github: 'https://github.com/swz22/bearbnb',
     },
     featured: false,
-    category: 'clone',
+    category: 'prototype',
     year: 2023,
   },
   {
@@ -198,7 +198,7 @@ export const projects: Project[] = [
       github: 'https://github.com/swz22/discord_clone',
     },
     featured: false,
-    category: 'real-time',
+    category: 'prototype',
     year: 2023,
   },
   {
@@ -240,7 +240,7 @@ export const projects: Project[] = [
       github: 'https://github.com/swz22/chat-buddy-ai',
     },
     featured: false,
-    category: 'ai-powered',
+    category: 'prototype',
     year: 2024,
   },
 ];
