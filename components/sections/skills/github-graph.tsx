@@ -26,7 +26,6 @@ export function GitHubGraph() {
   }, []);
 
   useEffect(() => {
-    // Auto-scroll to the right to show recent contributions
     if (!loading && scrollRef.current) {
       scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
     }
@@ -52,7 +51,6 @@ export function GitHubGraph() {
       console.error('Failed to fetch contributions:', err);
       setError(true);
       setLoading(false);
-      // Fallback to mock data
       generateMockData();
     }
   };
@@ -104,7 +102,7 @@ export function GitHubGraph() {
 
   if (loading) {
     return (
-      <div className="space-y-4">
+      <div className="w-full space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">GitHub Contributions</h3>
           <div className="h-4 w-32 animate-pulse rounded bg-secondary/50" />
@@ -115,7 +113,7 @@ export function GitHubGraph() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="w-full space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">GitHub Contributions</h3>
         <span className="text-sm text-muted-foreground">
@@ -123,26 +121,28 @@ export function GitHubGraph() {
         </span>
       </div>
 
-      <div className="overflow-x-auto" ref={scrollRef}>
-        <div className="inline-grid grid-flow-col grid-rows-7 gap-1 p-2">
-          {contributions.map((day, index) => (
-            <motion.div
-              key={day.date}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 0.2,
-                delay: (index % 7) * 0.01 + Math.floor(index / 7) * 0.005,
-              }}
-              className={cn(
-                'h-3 w-3 rounded-sm',
-                error
-                  ? getColorForCount(day.contributionCount)
-                  : getColorFromGitHub(day.color)
-              )}
-              title={`${day.contributionCount} contributions on ${day.date}`}
-            />
-          ))}
+      <div className="w-full overflow-hidden rounded-lg bg-secondary/10 p-2">
+        <div className="overflow-x-auto" ref={scrollRef}>
+          <div className="inline-grid grid-flow-col grid-rows-7 gap-1">
+            {contributions.map((day, index) => (
+              <motion.div
+                key={day.date}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.2,
+                  delay: (index % 7) * 0.01 + Math.floor(index / 7) * 0.005,
+                }}
+                className={cn(
+                  'h-3 w-3 rounded-sm',
+                  error
+                    ? getColorForCount(day.contributionCount)
+                    : getColorFromGitHub(day.color)
+                )}
+                title={`${day.contributionCount} contributions on ${day.date}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
 

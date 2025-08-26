@@ -130,6 +130,19 @@ export function BentoGrid() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.3 }}
+        className="md:col-span-2"
+      >
+        <Card className="flex h-full flex-col border-border/50 bg-card/50 backdrop-blur">
+          <CardContent className="flex flex-1 items-center justify-center p-6">
+            <GitHubGraph />
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
         className="md:col-span-2 lg:col-span-2"
       >
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
@@ -154,19 +167,6 @@ export function BentoGrid() {
           </CardHeader>
           <CardContent>
             <CodeSnippet {...codeSnippets[activeSnippet]} />
-          </CardContent>
-        </Card>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="md:col-span-2"
-      >
-        <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
-          <CardContent className="p-6">
-            <GitHubGraph />
           </CardContent>
         </Card>
       </motion.div>
