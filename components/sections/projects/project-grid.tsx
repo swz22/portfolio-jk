@@ -53,10 +53,7 @@ export function ProjectGrid({ projects, onOpenModal }: ProjectGridProps) {
       {featuredProjects.length > 0 && (
         <div className="space-y-4">
           <div className="text-center">
-            <h3 className="text-2xl font-bold">Production Apps</h3>
-            <p className="text-muted-foreground">
-              Full-featured applications deployed to production
-            </p>
+            <h3 className="text-2xl font-bold">Featured Apps</h3>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <AnimatePresence mode="popLayout">{featuredCards}</AnimatePresence>
@@ -68,9 +65,6 @@ export function ProjectGrid({ projects, onOpenModal }: ProjectGridProps) {
         <div className="space-y-4">
           <div className="text-center">
             <h3 className="text-xl font-semibold">Other Projects</h3>
-            <p className="text-sm text-muted-foreground">
-              Prototypes and experiments
-            </p>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 [&>*]:!h-[500px]">
             <AnimatePresence mode="popLayout">{regularCards}</AnimatePresence>
