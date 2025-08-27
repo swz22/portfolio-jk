@@ -60,6 +60,7 @@ export const ProjectModal = memo(function ProjectModal({
                       src={project.images.thumbnail}
                       alt={project.title}
                       className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -96,6 +97,7 @@ export const ProjectModal = memo(function ProjectModal({
                   src={project.images.thumbnail}
                   alt={project.title}
                   className="h-full w-full object-cover object-top"
+                  loading="lazy"
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
