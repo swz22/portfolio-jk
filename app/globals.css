@@ -134,6 +134,18 @@ body {
     backface-visibility: hidden;
     perspective: 1000px;
   }
+
+  .contain-paint {
+    contain: paint;
+  }
+
+  .contain-layout {
+    contain: layout;
+  }
+
+  .contain-strict {
+    contain: strict;
+  }
 }
 
 html {
