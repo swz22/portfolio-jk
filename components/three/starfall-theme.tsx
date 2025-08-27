@@ -48,7 +48,7 @@ export function StarfallTheme() {
       y: Math.random(),
       size: Math.random() * 3 + 1,
       sparklePhase: Math.random() * Math.PI * 2,
-      sparkleSpeed: Math.random() * 0.018 + 0.006,
+      sparkleSpeed: Math.random() * 0.019 + 0.0063,
       type: Math.random() > 0.7 ? 'sparkle' : 'normal',
       color: ['#ffffff', '#ffd4e5', '#d4e5ff', '#fffbeb'][
         Math.floor(Math.random() * 4)
@@ -60,10 +60,10 @@ export function StarfallTheme() {
       y: Math.random(),
       size: Math.random() * 15 + 10,
       rotation: Math.random() * Math.PI * 2,
-      rotationSpeed: (Math.random() - 0.5) * 0.012,
-      fallSpeed: Math.random() * 0.0003 + 0.00012,
+      rotationSpeed: (Math.random() - 0.5) * 0.0126,
+      fallSpeed: Math.random() * 0.000316 + 0.000126,
       swayAmount: Math.random() * 50 + 20,
-      swaySpeed: Math.random() * 0.0012 + 0.0006,
+      swaySpeed: Math.random() * 0.00126 + 0.00063,
       opacity: Math.random() * 0.3 + 0.1,
       color: Math.random() > 0.5 ? '#ff6b6b' : '#ff8cc8',
     }));
@@ -86,9 +86,10 @@ export function StarfallTheme() {
       y: Math.random(),
       vx: (Math.random() - 0.5) * 0.0002,
       vy: (Math.random() - 0.5) * 0.0002,
-      size: Math.random() * 4 + 2,
+      size: Math.random() * 3 + 1.5,
       energy: Math.random(),
-      pulseSpeed: Math.random() * 0.012 + 0.006,
+      pulseSpeed: Math.random() * 0.0126 + 0.0063,
+      color: '#ffd700',
     }));
 
     const drawBackground = () => {
@@ -120,35 +121,35 @@ export function StarfallTheme() {
         {
           x: 0.3,
           y: 0.4,
-          color1: 'rgba(139, 92, 246, 0.2)',
-          color2: 'rgba(236, 72, 153, 0.1)',
+          color1: 'rgba(139, 92, 246, 0.25)',
+          color2: 'rgba(236, 72, 153, 0.12)',
         },
         {
           x: 0.7,
           y: 0.6,
-          color1: 'rgba(59, 130, 246, 0.2)',
-          color2: 'rgba(34, 211, 238, 0.1)',
+          color1: 'rgba(59, 130, 246, 0.25)',
+          color2: 'rgba(34, 211, 238, 0.12)',
         },
         {
           x: 0.5,
           y: 0.2,
-          color1: 'rgba(251, 146, 60, 0.15)',
-          color2: 'rgba(254, 215, 170, 0.08)',
+          color1: 'rgba(251, 146, 60, 0.18)',
+          color2: 'rgba(254, 215, 170, 0.1)',
         },
       ];
 
       nebulaColors.forEach((nebula, i) => {
-        const x = window.innerWidth * nebula.x + Math.sin(time * 0.00006 + i) * 30;
-        const y = window.innerHeight * nebula.y + Math.cos(time * 0.00006 + i) * 30;
+        const x = window.innerWidth * nebula.x + Math.sin(time * 0.000063 + i) * 35;
+        const y = window.innerHeight * nebula.y + Math.cos(time * 0.000063 + i) * 35;
 
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, 200);
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, 250);
         gradient.addColorStop(0, nebula.color1);
         gradient.addColorStop(0.5, nebula.color2);
         gradient.addColorStop(1, 'transparent');
 
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(x, y, 300, 0, Math.PI * 2);
+        ctx.arc(x, y, 350, 0, Math.PI * 2);
         ctx.fill();
       });
 
@@ -187,7 +188,7 @@ export function StarfallTheme() {
 
           ctx.save();
           ctx.translate(screenX, screenY);
-          ctx.rotate(time * 0.001);
+          ctx.rotate(time * 0.00126);
           ctx.beginPath();
           ctx.moveTo(0, -size * 3);
           ctx.lineTo(-size * 0.3, -size * 0.3);
@@ -259,7 +260,7 @@ export function StarfallTheme() {
 
         const centerX = 0.5;
         const centerY = 0.5;
-        const rotationSpeed = 0.00015;
+        const rotationSpeed = 0.000152;
         const angle = time * rotationSpeed;
 
         const dx = petal.x - centerX;
@@ -342,31 +343,24 @@ export function StarfallTheme() {
 
         ctx.beginPath();
         ctx.arc(x, y, size, 0, Math.PI * 2);
-        const energyGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-        energyGradient.addColorStop(0, '#ffffff');
-        energyGradient.addColorStop(0.3, '#ffd23f');
-        energyGradient.addColorStop(0.7, '#ee6c4d');
-        energyGradient.addColorStop(1, '#c9184a');
-        ctx.fillStyle = energyGradient;
+        ctx.fillStyle = '#ffd23f';
         ctx.fill();
 
-        if (quality === 'high') {
-          const auraGradient = ctx.createRadialGradient(
-            x,
-            y,
-            size,
-            x,
-            y,
-            size * 4
-          );
-          auraGradient.addColorStop(0, 'rgba(255, 210, 63, 0.4)');
-          auraGradient.addColorStop(0.5, 'rgba(238, 108, 77, 0.2)');
-          auraGradient.addColorStop(1, 'transparent');
-          ctx.fillStyle = auraGradient;
-          ctx.beginPath();
-          ctx.arc(x, y, size * 4, 0, Math.PI * 2);
-          ctx.fill();
-        }
+        const glowGradient = ctx.createRadialGradient(
+          x,
+          y,
+          0,
+          x,
+          y,
+          size * 3
+        );
+        glowGradient.addColorStop(0, '#ffd23f');
+        glowGradient.addColorStop(0.5, 'rgba(255, 210, 63, 0.5)');
+        glowGradient.addColorStop(1, 'transparent');
+        ctx.fillStyle = glowGradient;
+        ctx.beginPath();
+        ctx.arc(x, y, size * 3, 0, Math.PI * 2);
+        ctx.fill();
       });
 
       ctx.restore();
@@ -375,12 +369,12 @@ export function StarfallTheme() {
     const createShootingStar = () => {
       if (shouldReduceMotion || quality === 'low') return;
       
-      if (shootingStars.length < 3 && Math.random() < 0.0025) {
+      if (shootingStars.length < 3 && Math.random() < 0.0028) {
         const star: ShootingStar = {
           x: Math.random(),
           y: Math.random() * 0.5,
           length: 150,
-          speed: 0.0035,
+          speed: 0.0038,
           angle: Math.PI * 0.25,
           opacity: 1,
           trail: [],
