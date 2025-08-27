@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { TiltCard } from '@/components/three/tilt-card';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { usePerformance } from '@/contexts/performance-context';
 
 interface ProjectCardProps {
   project: Project;
@@ -25,11 +26,13 @@ export const ProjectCard = memo(function ProjectCard({
   index,
   onOpenModal,
 }: ProjectCardProps) {
+  const { shouldReduceMotion } = usePerformance();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
     >
       <TiltCard>
         <Card className="h-full overflow-hidden border-border/50 bg-card/50 backdrop-blur">
