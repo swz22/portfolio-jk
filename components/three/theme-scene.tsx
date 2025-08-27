@@ -1,25 +1,30 @@
 'use client';
 
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, memo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from '@/contexts/theme-context';
 import { usePerformance } from '@/contexts/performance-context';
 import { usePassiveControls } from '@/hooks/use-passive-controls';
 
-const StarfallTheme = lazy(() =>
-  import('./starfall-theme').then((mod) => ({ default: mod.StarfallTheme }))
-);
-const NeuralTheme = lazy(() =>
-  import('./neural-theme').then((mod) => ({ default: mod.NeuralTheme }))
-);
-
 const themeComponents = {
-  starfall: StarfallTheme,
+  starfall: lazy(() =>
+    import('./starfall-theme').then((mod) => ({ default: mod.StarfallTheme }))
+  ),
+  neural: lazy(() =>
+    import('./neural-theme').then((mod) => ({ default: mod.NeuralTheme }))
+  ),
   matrix: null,
   cyberpunk: null,
-  neural: NeuralTheme,
   underwater: null,
 };
+
+const ThemeLoader = memo(() => (
+  <div className="flex h-full w-full items-center justify-center">
+    <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary" />
+  </div>
+));
+
+ThemeLoader.displayName = 'ThemeLoader';
 
 export function ThemeScene() {
   const { currentTheme, isEffectsEnabled, isTransitioning } = useTheme();
@@ -51,13 +56,7 @@ export function ThemeScene() {
       </AnimatePresence>
 
       <div className="absolute inset-0 z-0">
-        <Suspense
-          fallback={
-            <div className="flex h-full w-full items-center justify-center">
-              <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary" />
-            </div>
-          }
-        >
+        <Suspense fallback={<ThemeLoader />}>
           {ThemeComponent && <ThemeComponent />}
         </Suspense>
       </div>
