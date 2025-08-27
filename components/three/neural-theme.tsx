@@ -4,11 +4,22 @@ import { Suspense, useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Float } from '@react-three/drei';
 import { usePerformance } from '@/contexts/performance-context';
-import * as THREE from 'three';
+import {
+  Mesh,
+  Points,
+  Group,
+  Vector3,
+  Quaternion,
+  MeshBasicMaterial,
+  PointLight,
+  Color,
+  AdditiveBlending,
+  ACESFilmicToneMapping,
+} from 'three';
 
 function Neuron({ position }: { position: [number, number, number] }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const lightRef = useRef<THREE.PointLight>(null);
+  const meshRef = useRef<Mesh>(null);
+  const lightRef = useRef<PointLight>(null);
   const pulseSpeed = useMemo(() => Math.random() * 2 + 1, []);
 
   useFrame((state) => {
@@ -45,19 +56,17 @@ function Connection({
   start: [number, number, number];
   end: [number, number, number];
 }) {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const meshRef = useRef<Mesh>(null);
 
   const { position, rotation, scale } = useMemo(() => {
-    const startVec = new THREE.Vector3(...start);
-    const endVec = new THREE.Vector3(...end);
-    const midpoint = new THREE.Vector3().lerpVectors(startVec, endVec, 0.5);
+    const startVec = new Vector3(...start);
+    const endVec = new Vector3(...end);
+    const midpoint = new Vector3().lerpVectors(startVec, endVec, 0.5);
     const distance = startVec.distanceTo(endVec);
 
-    const direction = new THREE.Vector3()
-      .subVectors(endVec, startVec)
-      .normalize();
-    const quaternion = new THREE.Quaternion().setFromUnitVectors(
-      new THREE.Vector3(0, 1, 0),
+    const direction = new Vector3().subVectors(endVec, startVec).normalize();
+    const quaternion = new Quaternion().setFromUnitVectors(
+      new Vector3(0, 1, 0),
       direction
     );
 
@@ -74,7 +83,7 @@ function Connection({
 
   useFrame((state) => {
     if (meshRef.current) {
-      const material = meshRef.current.material as THREE.MeshBasicMaterial;
+      const material = meshRef.current.material as MeshBasicMaterial;
       material.opacity = 0.3 + Math.sin(state.clock.elapsedTime * 1.5) * 0.2;
     }
   });
@@ -86,14 +95,14 @@ function Connection({
         color="#00ffff"
         transparent
         opacity={0.4}
-        blending={THREE.AdditiveBlending}
+        blending={AdditiveBlending}
       />
     </mesh>
   );
 }
 
 function NeuralNetwork() {
-  const groupRef = useRef<THREE.Group>(null);
+  const groupRef = useRef<Group>(null);
   const { quality } = usePerformance();
 
   const network = useMemo(() => {
@@ -182,7 +191,7 @@ function NeuralNetwork() {
 }
 
 function BackgroundParticles() {
-  const mesh = useRef<THREE.Points>(null);
+  const mesh = useRef<Points>(null);
   const { quality } = usePerformance();
 
   const count = quality === 'low' ? 100 : quality === 'medium' ? 200 : 300;
@@ -197,7 +206,7 @@ function BackgroundParticles() {
       positions[i * 3 + 1] = (Math.random() - 0.5) * 30;
       positions[i * 3 + 2] = (Math.random() - 0.5) * 30;
 
-      const color = new THREE.Color();
+      const color = new Color();
       color.setHSL(0.5 + Math.random() * 0.1, 1, 0.5);
       colors[i * 3] = color.r;
       colors[i * 3 + 1] = color.g;
@@ -242,7 +251,7 @@ function BackgroundParticles() {
         vertexColors
         transparent
         opacity={0.8}
-        blending={THREE.AdditiveBlending}
+        blending={AdditiveBlending}
         sizeAttenuation={true}
       />
     </points>
@@ -265,7 +274,7 @@ export function NeuralTheme() {
         }}
         gl={{
           antialias: quality !== 'low',
-          toneMapping: THREE.ACESFilmicToneMapping,
+          toneMapping: ACESFilmicToneMapping,
           toneMappingExposure: 1.2,
           powerPreference: 'high-performance',
           alpha: true,
