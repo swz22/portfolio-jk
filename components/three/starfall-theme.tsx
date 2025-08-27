@@ -7,21 +7,31 @@ export function StarfallTheme() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
   const lastFrameTime = useRef<number>(0);
-  const { quality } = usePerformance();
+  const { quality, shouldReduceMotion } = usePerformance();
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d', { alpha: false });
+    const ctx = canvas.getContext('2d', { 
+      alpha: false,
+      desynchronized: true,
+      willReadFrequently: false
+    });
     if (!ctx) return;
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = quality === 'low' ? 1 : Math.min(window.devicePixelRatio, 2);
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      ctx.scale(dpr, dpr);
     };
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+
+    const resizeObserver = new ResizeObserver(resizeCanvas);
+    resizeObserver.observe(canvas);
 
     let time = 0;
 
@@ -82,11 +92,12 @@ export function StarfallTheme() {
     }));
 
     const drawBackground = () => {
+      ctx.save();
       const gradient = ctx.createLinearGradient(
         0,
         0,
-        canvas.width,
-        canvas.height
+        window.innerWidth,
+        window.innerHeight
       );
       gradient.addColorStop(0, '#0f0c29');
       gradient.addColorStop(0.3, '#24243e');
@@ -95,10 +106,13 @@ export function StarfallTheme() {
       gradient.addColorStop(1, '#0f0c29');
 
       ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+      ctx.restore();
     };
 
     const drawAnimeNebula = () => {
+      if (quality === 'low') return;
+      
       ctx.save();
       ctx.globalCompositeOperation = 'screen';
 
@@ -124,8 +138,8 @@ export function StarfallTheme() {
       ];
 
       nebulaColors.forEach((nebula, i) => {
-        const x = canvas.width * nebula.x + Math.sin(time * 0.00006 + i) * 30;
-        const y = canvas.height * nebula.y + Math.cos(time * 0.00006 + i) * 30;
+        const x = window.innerWidth * nebula.x + Math.sin(time * 0.00006 + i) * 30;
+        const y = window.innerHeight * nebula.y + Math.cos(time * 0.00006 + i) * 30;
 
         const gradient = ctx.createRadialGradient(x, y, 0, x, y, 200);
         gradient.addColorStop(0, nebula.color1);
@@ -142,11 +156,12 @@ export function StarfallTheme() {
     };
 
     const drawStars = () => {
+      const rotationSpeed = shouldReduceMotion ? 0 : 0.0001;
+      const angle = time * rotationSpeed;
+
       stars.forEach((star) => {
         const centerX = 0.5;
         const centerY = 0.5;
-        const rotationSpeed = 0.00015;
-        const angle = time * rotationSpeed;
 
         const dx = star.x - centerX;
         const dy = star.y - centerY;
@@ -162,11 +177,11 @@ export function StarfallTheme() {
         if (y < -0.1) y += 1.2;
         if (y > 1.1) y -= 1.2;
 
-        const screenX = x * canvas.width;
-        const screenY = y * canvas.height;
+        const screenX = x * window.innerWidth;
+        const screenY = y * window.innerHeight;
 
-        if (star.type === 'sparkle') {
-          const sparkle =
+        if (star.type === 'sparkle' && quality !== 'low') {
+          const sparkle = shouldReduceMotion ? 1 :
             Math.sin(time * star.sparkleSpeed + star.sparklePhase) * 0.5 + 0.5;
           const size = star.size * (1 + sparkle * 0.5);
 
@@ -205,26 +220,30 @@ export function StarfallTheme() {
           ctx.fillStyle = star.color;
           ctx.fill();
 
-          const glowGradient = ctx.createRadialGradient(
-            screenX,
-            screenY,
-            0,
-            screenX,
-            screenY,
-            star.size * 4
-          );
-          glowGradient.addColorStop(0, star.color + '60');
-          glowGradient.addColorStop(0.5, star.color + '20');
-          glowGradient.addColorStop(1, 'transparent');
-          ctx.fillStyle = glowGradient;
-          ctx.beginPath();
-          ctx.arc(screenX, screenY, star.size * 4, 0, Math.PI * 2);
-          ctx.fill();
+          if (quality === 'high') {
+            const glowGradient = ctx.createRadialGradient(
+              screenX,
+              screenY,
+              0,
+              screenX,
+              screenY,
+              star.size * 4
+            );
+            glowGradient.addColorStop(0, star.color + '60');
+            glowGradient.addColorStop(0.5, star.color + '20');
+            glowGradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = glowGradient;
+            ctx.beginPath();
+            ctx.arc(screenX, screenY, star.size * 4, 0, Math.PI * 2);
+            ctx.fill();
+          }
         }
       });
     };
 
     const drawPetals = () => {
+      if (shouldReduceMotion) return;
+      
       ctx.save();
       ctx.globalCompositeOperation = 'screen';
 
@@ -240,7 +259,7 @@ export function StarfallTheme() {
 
         const centerX = 0.5;
         const centerY = 0.5;
-        const rotationSpeed = 0.0001;
+        const rotationSpeed = 0.00015;
         const angle = time * rotationSpeed;
 
         const dx = petal.x - centerX;
@@ -250,8 +269,8 @@ export function StarfallTheme() {
         const rotatedY =
           centerY + (dx * Math.sin(angle) + dy * Math.cos(angle));
 
-        const x = rotatedX * canvas.width;
-        const y = rotatedY * canvas.height;
+        const x = rotatedX * window.innerWidth;
+        const y = rotatedY * window.innerHeight;
 
         ctx.save();
         ctx.translate(x, y);
@@ -298,6 +317,8 @@ export function StarfallTheme() {
     };
 
     const drawEnergyParticles = () => {
+      if (quality === 'low') return;
+      
       ctx.save();
       ctx.globalCompositeOperation = 'screen';
 
@@ -313,9 +334,10 @@ export function StarfallTheme() {
         if (particle.y > 1) particle.y = 0;
         if (particle.y < 0) particle.y = 1;
 
-        const x = particle.x * canvas.width;
-        const y = particle.y * canvas.height;
-        const pulse = Math.sin(time * particle.pulseSpeed) * 0.5 + 0.5;
+        const x = particle.x * window.innerWidth;
+        const y = particle.y * window.innerHeight;
+        const pulse = shouldReduceMotion ? 1 :
+          Math.sin(time * particle.pulseSpeed) * 0.5 + 0.5;
         const size = particle.size * (1 + pulse * 0.5);
 
         ctx.beginPath();
@@ -328,27 +350,31 @@ export function StarfallTheme() {
         ctx.fillStyle = energyGradient;
         ctx.fill();
 
-        const auraGradient = ctx.createRadialGradient(
-          x,
-          y,
-          size,
-          x,
-          y,
-          size * 4
-        );
-        auraGradient.addColorStop(0, 'rgba(255, 210, 63, 0.4)');
-        auraGradient.addColorStop(0.5, 'rgba(238, 108, 77, 0.2)');
-        auraGradient.addColorStop(1, 'transparent');
-        ctx.fillStyle = auraGradient;
-        ctx.beginPath();
-        ctx.arc(x, y, size * 4, 0, Math.PI * 2);
-        ctx.fill();
+        if (quality === 'high') {
+          const auraGradient = ctx.createRadialGradient(
+            x,
+            y,
+            size,
+            x,
+            y,
+            size * 4
+          );
+          auraGradient.addColorStop(0, 'rgba(255, 210, 63, 0.4)');
+          auraGradient.addColorStop(0.5, 'rgba(238, 108, 77, 0.2)');
+          auraGradient.addColorStop(1, 'transparent');
+          ctx.fillStyle = auraGradient;
+          ctx.beginPath();
+          ctx.arc(x, y, size * 4, 0, Math.PI * 2);
+          ctx.fill();
+        }
       });
 
       ctx.restore();
     };
 
     const createShootingStar = () => {
+      if (shouldReduceMotion || quality === 'low') return;
+      
       if (shootingStars.length < 3 && Math.random() < 0.0025) {
         const star: ShootingStar = {
           x: Math.random(),
@@ -385,8 +411,8 @@ export function StarfallTheme() {
         }
 
         star.trail.forEach((point, i) => {
-          const x = point.x * canvas.width;
-          const y = point.y * canvas.height;
+          const x = point.x * window.innerWidth;
+          const y = point.y * window.innerHeight;
           const size = ((star.trail.length - i) / star.trail.length) * 3;
           const opacity =
             ((star.trail.length - i) / star.trail.length) * star.opacity;
@@ -398,8 +424,8 @@ export function StarfallTheme() {
           ctx.fill();
         });
 
-        const headX = star.x * canvas.width;
-        const headY = star.y * canvas.height;
+        const headX = star.x * window.innerWidth;
+        const headY = star.y * window.innerHeight;
 
         ctx.beginPath();
         ctx.arc(headX, headY, 5, 0, Math.PI * 2);
@@ -436,9 +462,7 @@ export function StarfallTheme() {
         time++;
 
         drawBackground();
-        if (quality !== 'low') {
-          drawAnimeNebula();
-        }
+        drawAnimeNebula();
         drawStars();
         drawPetals();
         drawEnergyParticles();
@@ -455,9 +479,9 @@ export function StarfallTheme() {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
-      window.removeEventListener('resize', resizeCanvas);
+      resizeObserver.disconnect();
     };
-  }, [quality]);
+  }, [quality, shouldReduceMotion]);
 
   return (
     <canvas
@@ -469,6 +493,8 @@ export function StarfallTheme() {
         left: 0,
         width: '100%',
         height: '100%',
+        transform: 'translateZ(0)',
+        willChange: 'transform',
       }}
     />
   );
