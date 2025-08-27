@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TiltCard } from '@/components/three/tilt-card';
 import { SkillCategory } from '@/types';
 import { SkillProgress } from './skill-progress';
+import { usePerformance } from '@/contexts/performance-context';
 
 interface SkillCardProps {
   category: SkillCategory;
@@ -16,11 +17,14 @@ export const SkillCard = memo(function SkillCard({
   category,
   index,
 }: SkillCardProps) {
+  const { shouldReduceMotion } = usePerformance();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
+      style={{ transform: 'translateZ(0)' }}
     >
       <TiltCard max={10}>
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
