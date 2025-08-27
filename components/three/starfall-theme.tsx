@@ -38,7 +38,7 @@ export function StarfallTheme() {
       y: Math.random(),
       size: Math.random() * 3 + 1,
       sparklePhase: Math.random() * Math.PI * 2,
-      sparkleSpeed: Math.random() * 0.015 + 0.005,
+      sparkleSpeed: Math.random() * 0.018 + 0.006,
       type: Math.random() > 0.7 ? 'sparkle' : 'normal',
       color: ['#ffffff', '#ffd4e5', '#d4e5ff', '#fffbeb'][
         Math.floor(Math.random() * 4)
@@ -50,10 +50,10 @@ export function StarfallTheme() {
       y: Math.random(),
       size: Math.random() * 15 + 10,
       rotation: Math.random() * Math.PI * 2,
-      rotationSpeed: (Math.random() - 0.5) * 0.01,
-      fallSpeed: Math.random() * 0.00025 + 0.0001,
+      rotationSpeed: (Math.random() - 0.5) * 0.012,
+      fallSpeed: Math.random() * 0.0003 + 0.00012,
       swayAmount: Math.random() * 50 + 20,
-      swaySpeed: Math.random() * 0.001 + 0.0005,
+      swaySpeed: Math.random() * 0.0012 + 0.0006,
       opacity: Math.random() * 0.3 + 0.1,
       color: Math.random() > 0.5 ? '#ff6b6b' : '#ff8cc8',
     }));
@@ -78,7 +78,7 @@ export function StarfallTheme() {
       vy: (Math.random() - 0.5) * 0.0002,
       size: Math.random() * 4 + 2,
       energy: Math.random(),
-      pulseSpeed: Math.random() * 0.01 + 0.005,
+      pulseSpeed: Math.random() * 0.012 + 0.006,
     }));
 
     const drawBackground = () => {
@@ -96,23 +96,6 @@ export function StarfallTheme() {
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
-      ctx.lineWidth = 1;
-      const gridSize = 50;
-
-      for (let x = 0; x < canvas.width; x += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);
-        ctx.stroke();
-      }
-
-      for (let y = 0; y < canvas.height; y += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
-        ctx.stroke();
-      }
     };
 
     const drawAnimeNebula = () => {
@@ -141,8 +124,8 @@ export function StarfallTheme() {
       ];
 
       nebulaColors.forEach((nebula, i) => {
-        const x = canvas.width * nebula.x + Math.sin(time * 0.00005 + i) * 30;
-        const y = canvas.height * nebula.y + Math.cos(time * 0.00005 + i) * 30;
+        const x = canvas.width * nebula.x + Math.sin(time * 0.00006 + i) * 30;
+        const y = canvas.height * nebula.y + Math.cos(time * 0.00006 + i) * 30;
 
         const gradient = ctx.createRadialGradient(x, y, 0, x, y, 200);
         gradient.addColorStop(0, nebula.color1);
@@ -162,7 +145,7 @@ export function StarfallTheme() {
       stars.forEach((star) => {
         const centerX = 0.5;
         const centerY = 0.5;
-        const rotationSpeed = 0.00008;
+        const rotationSpeed = 0.00015;
         const angle = time * rotationSpeed;
 
         const dx = star.x - centerX;
@@ -257,7 +240,7 @@ export function StarfallTheme() {
 
         const centerX = 0.5;
         const centerY = 0.5;
-        const rotationSpeed = 0.00012;
+        const rotationSpeed = 0.0001;
         const angle = time * rotationSpeed;
 
         const dx = petal.x - centerX;
@@ -366,12 +349,12 @@ export function StarfallTheme() {
     };
 
     const createShootingStar = () => {
-      if (shootingStars.length < 3 && Math.random() < 0.002) {
+      if (shootingStars.length < 3 && Math.random() < 0.0025) {
         const star: ShootingStar = {
           x: Math.random(),
           y: Math.random() * 0.5,
           length: 150,
-          speed: 0.003,
+          speed: 0.0035,
           angle: Math.PI * 0.25,
           opacity: 1,
           trail: [],
