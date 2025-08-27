@@ -1,17 +1,17 @@
 import { Hero } from '@/components/sections/hero/wrapper';
-import { ProjectsWrapper } from '@/components/sections/projects/wrapper';
-import { SkillsWrapper } from '@/components/sections/skills/wrapper';
-import { ExperienceWrapper } from '@/components/sections/experience/wrapper';
-import { ContactWrapper } from '@/components/sections/contact/wrapper';
+import Projects from '@/components/sections/projects';
+import Skills from '@/components/sections/skills';
+import Experience from '@/components/sections/experience';
+import Contact from '@/components/sections/contact';
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <ProjectsWrapper />
-      <SkillsWrapper />
-      <ExperienceWrapper />
-      <ContactWrapper />
+      <Projects />
+      <Skills />
+      <Experience />
+      <Contact />
     </>
   );
 }
