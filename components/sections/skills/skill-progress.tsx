@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { TechItem } from '@/types';
 import { useRef } from 'react';
 import { useIntersectionObserver } from '@/hooks/use-intersection-observer';
+import { usePerformance } from '@/contexts/performance-context';
 
 interface SkillProgressProps {
   skill: TechItem;
@@ -13,14 +14,16 @@ interface SkillProgressProps {
 export function SkillProgress({ skill, index }: SkillProgressProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isVisible = useIntersectionObserver(ref, { threshold: 0.1 });
+  const { shouldReduceMotion } = usePerformance();
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, x: -20 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
       animate={isVisible ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
       className="select-none space-y-2"
+      style={{ transform: 'translateZ(0)' }}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -38,14 +41,20 @@ export function SkillProgress({ skill, index }: SkillProgressProps) {
           style={{
             backgroundColor:
               skill.color === '#000000' ? '#4B5563' : skill.color,
+            transform: 'translateZ(0)',
+            willChange: 'width',
           }}
           initial={{ width: 0 }}
           animate={isVisible ? { width: `${skill.proficiency}%` } : {}}
-          transition={{
-            duration: 1,
-            delay: index * 0.1 + 0.2,
-            ease: 'easeOut',
-          }}
+          transition={
+            shouldReduceMotion 
+              ? { duration: 0 }
+              : {
+                  duration: 1,
+                  delay: index * 0.1 + 0.2,
+                  ease: 'easeOut',
+                }
+          }
         />
       </div>
     </motion.div>
