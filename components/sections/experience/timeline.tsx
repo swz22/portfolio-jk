@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Experience } from '@/types';
 import { cn } from '@/lib/utils';
 import { formatDate, calculateDuration } from '@/lib/utils';
+import { usePerformance } from '@/contexts/performance-context';
 
 interface TimelineProps {
   experiences: Experience[];
@@ -17,6 +18,8 @@ export const Timeline = memo(function Timeline({
   selectedId,
   onSelect,
 }: TimelineProps) {
+  const { shouldReduceMotion } = usePerformance();
+  
   const handleSelect = useCallback(
     (id: string) => {
       onSelect(id);
@@ -39,9 +42,9 @@ export const Timeline = memo(function Timeline({
           return (
             <motion.div
               key={exp.id}
-              initial={{ opacity: 0, x: -20 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
               onClick={() => handleSelect(exp.id)}
               className={cn(
@@ -49,6 +52,7 @@ export const Timeline = memo(function Timeline({
                 'hover:bg-secondary/50',
                 isSelected && 'bg-secondary'
               )}
+              style={{ transform: 'translateZ(0)' }}
             >
               <div className="flex items-start gap-4">
                 <div
@@ -65,7 +69,7 @@ export const Timeline = memo(function Timeline({
                     {exp.type === 'internship' && '🎓'}
                   </span>
 
-                  {index === 0 && (
+                  {index === 0 && !shouldReduceMotion && (
                     <motion.div
                       className="absolute -inset-2 rounded-full border-2 border-primary"
                       animate={{
@@ -146,6 +150,7 @@ export const Timeline = memo(function Timeline({
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
+                      transition={shouldReduceMotion ? { duration: 0 } : {}}
                       className="mt-3 flex flex-wrap gap-2"
                     >
                       {exp.technologies.slice(0, 4).map((tech) => (
