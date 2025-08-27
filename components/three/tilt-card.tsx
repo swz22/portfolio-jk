@@ -3,6 +3,7 @@
 import { useRef, ReactNode } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { usePerformance } from '@/contexts/performance-context';
 
 interface TiltCardProps {
   children: ReactNode;
@@ -19,6 +20,7 @@ export function TiltCard({
   scale = 1.05,
   speed = 400,
 }: TiltCardProps) {
+  const { shouldReduceMotion, quality } = usePerformance();
   const cardRef = useRef<HTMLDivElement>(null);
 
   const x = useMotionValue(0);
@@ -37,6 +39,10 @@ export function TiltCard({
     [-0.5, 0.5],
     [`-${max}deg`, `${max}deg`]
   );
+
+  if (shouldReduceMotion || quality === 'low') {
+    return <div className={cn('relative', className)}>{children}</div>;
+  }
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -68,6 +74,8 @@ export function TiltCard({
         rotateX,
         rotateY,
         transformStyle: 'preserve-3d',
+        transform: 'translateZ(0)',
+        willChange: 'transform',
       }}
       whileHover={{ scale }}
       className={cn('relative', className)}
