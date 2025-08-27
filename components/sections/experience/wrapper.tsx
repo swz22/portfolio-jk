@@ -1,9 +1,10 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { useIntersectionObserver } from '@/hooks/use-intersection-observer';
+import { useRef } from 'react';
 
 const Experience = dynamic(() => import('./index'), {
-  ssr: true,
   loading: () => (
     <section className="py-20">
       <div className="container mx-auto px-4">
@@ -18,4 +19,24 @@ const Experience = dynamic(() => import('./index'), {
   ),
 });
 
-export { Experience };
+export function ExperienceWrapper() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isVisible = useIntersectionObserver(ref, {
+    threshold: 0.1,
+    rootMargin: '50px',
+  });
+
+  return (
+    <div ref={ref}>
+      {isVisible ? (
+        <Experience />
+      ) : (
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <div className="h-[400px]" />
+          </div>
+        </section>
+      )}
+    </div>
+  );
+}
