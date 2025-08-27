@@ -20,18 +20,25 @@ export function StarfallTheme() {
     });
     if (!ctx) return;
 
-    const resizeCanvas = () => {
-      const dpr = quality === 'low' ? 1 : Math.min(window.devicePixelRatio, 2);
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
-      ctx.scale(dpr, dpr);
-    };
-    resizeCanvas();
+    let canvasWidth = 0;
+    let canvasHeight = 0;
 
-    const resizeObserver = new ResizeObserver(resizeCanvas);
-    resizeObserver.observe(canvas);
+    const resizeCanvas = () => {
+      const rect = canvas.getBoundingClientRect();
+      canvasWidth = rect.width;
+      canvasHeight = rect.height;
+      
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+    };
+
+    const handleResize = () => {
+      resizeCanvas();
+    };
+
+    resizeCanvas();
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
 
     let time = 0;
 
@@ -62,7 +69,7 @@ export function StarfallTheme() {
       rotation: Math.random() * Math.PI * 2,
       rotationSpeed: (Math.random() - 0.5) * 0.0126,
       fallSpeed: Math.random() * 0.000316 + 0.000126,
-      swayAmount: Math.random() * 50 + 20,
+      swayAmount: Math.random() * 20 + 10,
       swaySpeed: Math.random() * 0.00126 + 0.00063,
       opacity: Math.random() * 0.3 + 0.1,
       color: Math.random() > 0.5 ? '#ff6b6b' : '#ff8cc8',
@@ -94,12 +101,7 @@ export function StarfallTheme() {
 
     const drawBackground = () => {
       ctx.save();
-      const gradient = ctx.createLinearGradient(
-        0,
-        0,
-        window.innerWidth,
-        window.innerHeight
-      );
+      const gradient = ctx.createLinearGradient(0, 0, canvasWidth, canvasHeight);
       gradient.addColorStop(0, '#0f0c29');
       gradient.addColorStop(0.3, '#24243e');
       gradient.addColorStop(0.5, '#302b63');
@@ -107,7 +109,7 @@ export function StarfallTheme() {
       gradient.addColorStop(1, '#0f0c29');
 
       ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
       ctx.restore();
     };
 
@@ -139,17 +141,22 @@ export function StarfallTheme() {
       ];
 
       nebulaColors.forEach((nebula, i) => {
-        const x = window.innerWidth * nebula.x + Math.sin(time * 0.000063 + i) * 35;
-        const y = window.innerHeight * nebula.y + Math.cos(time * 0.000063 + i) * 35;
+        const baseX = canvasWidth * nebula.x;
+        const baseY = canvasHeight * nebula.y;
+        const offsetX = Math.sin(time * 0.000063 + i) * 15;
+        const offsetY = Math.cos(time * 0.000063 + i) * 15;
+        
+        const x = baseX + offsetX;
+        const y = baseY + offsetY;
 
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, 250);
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, 120);
         gradient.addColorStop(0, nebula.color1);
         gradient.addColorStop(0.5, nebula.color2);
         gradient.addColorStop(1, 'transparent');
 
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(x, y, 350, 0, Math.PI * 2);
+        ctx.arc(x, y, 180, 0, Math.PI * 2);
         ctx.fill();
       });
 
@@ -166,20 +173,19 @@ export function StarfallTheme() {
 
         const dx = star.x - centerX;
         const dy = star.y - centerY;
-        const rotatedX =
-          centerX + (dx * Math.cos(angle) - dy * Math.sin(angle));
-        const rotatedY =
-          centerY + (dx * Math.sin(angle) + dy * Math.cos(angle));
+        const rotatedX = centerX + (dx * Math.cos(angle) - dy * Math.sin(angle));
+        const rotatedY = centerY + (dx * Math.sin(angle) + dy * Math.cos(angle));
 
         let x = rotatedX;
         let y = rotatedY;
-        if (x < -0.1) x += 1.2;
-        if (x > 1.1) x -= 1.2;
-        if (y < -0.1) y += 1.2;
-        if (y > 1.1) y -= 1.2;
+        
+        if (x < 0) x += 1;
+        if (x > 1) x -= 1;
+        if (y < 0) y += 1;
+        if (y > 1) y -= 1;
 
-        const screenX = x * window.innerWidth;
-        const screenY = y * window.innerHeight;
+        const screenX = x * canvasWidth;
+        const screenY = y * canvasHeight;
 
         if (star.type === 'sparkle' && quality !== 'low') {
           const sparkle = shouldReduceMotion ? 1 :
@@ -200,14 +206,7 @@ export function StarfallTheme() {
           ctx.lineTo(size * 0.3, -size * 0.3);
           ctx.closePath();
 
-          const starGradient = ctx.createRadialGradient(
-            0,
-            0,
-            0,
-            0,
-            0,
-            size * 3
-          );
+          const starGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, size * 3);
           starGradient.addColorStop(0, star.color);
           starGradient.addColorStop(0.5, star.color + '80');
           starGradient.addColorStop(1, 'transparent');
@@ -250,13 +249,15 @@ export function StarfallTheme() {
 
       petals.forEach((petal) => {
         petal.y += petal.fallSpeed;
-        petal.x +=
-          Math.sin(time * petal.swaySpeed) * petal.swayAmount * 0.00001;
+        
+        const swayOffset = Math.sin(time * petal.swaySpeed) * petal.swayAmount * 0.00001;
+        petal.x += swayOffset;
         petal.rotation += petal.rotationSpeed;
 
-        if (petal.y > 1) petal.y = -0.1;
-        if (petal.x > 1.1) petal.x = -0.1;
-        if (petal.x < -0.1) petal.x = 1.1;
+        if (petal.y > 1.05) petal.y = -0.05;
+        
+        if (petal.x > 1.05) petal.x = -0.05;
+        if (petal.x < -0.05) petal.x = 1.05;
 
         const centerX = 0.5;
         const centerY = 0.5;
@@ -265,13 +266,11 @@ export function StarfallTheme() {
 
         const dx = petal.x - centerX;
         const dy = petal.y - centerY;
-        const rotatedX =
-          centerX + (dx * Math.cos(angle) - dy * Math.sin(angle));
-        const rotatedY =
-          centerY + (dx * Math.sin(angle) + dy * Math.cos(angle));
+        const rotatedX = centerX + (dx * Math.cos(angle) - dy * Math.sin(angle));
+        const rotatedY = centerY + (dx * Math.sin(angle) + dy * Math.cos(angle));
 
-        const x = rotatedX * window.innerWidth;
-        const y = rotatedY * window.innerHeight;
+        const x = Math.max(0, Math.min(1, rotatedX)) * canvasWidth;
+        const y = Math.max(0, Math.min(1, rotatedY)) * canvasHeight;
 
         ctx.save();
         ctx.translate(x, y);
@@ -297,14 +296,7 @@ export function StarfallTheme() {
           -petal.size
         );
 
-        const petalGradient = ctx.createRadialGradient(
-          0,
-          0,
-          0,
-          0,
-          0,
-          petal.size
-        );
+        const petalGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, petal.size);
         petalGradient.addColorStop(0, petal.color);
         petalGradient.addColorStop(0.7, petal.color + '80');
         petalGradient.addColorStop(1, petal.color + '00');
@@ -335,8 +327,8 @@ export function StarfallTheme() {
         if (particle.y > 1) particle.y = 0;
         if (particle.y < 0) particle.y = 1;
 
-        const x = particle.x * window.innerWidth;
-        const y = particle.y * window.innerHeight;
+        const x = particle.x * canvasWidth;
+        const y = particle.y * canvasHeight;
         const pulse = shouldReduceMotion ? 1 :
           Math.sin(time * particle.pulseSpeed) * 0.5 + 0.5;
         const size = particle.size * (1 + pulse * 0.5);
@@ -346,14 +338,7 @@ export function StarfallTheme() {
         ctx.fillStyle = '#ffd23f';
         ctx.fill();
 
-        const glowGradient = ctx.createRadialGradient(
-          x,
-          y,
-          0,
-          x,
-          y,
-          size * 3
-        );
+        const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, size * 3);
         glowGradient.addColorStop(0, '#ffd23f');
         glowGradient.addColorStop(0.5, 'rgba(255, 210, 63, 0.5)');
         glowGradient.addColorStop(1, 'transparent');
@@ -405,11 +390,10 @@ export function StarfallTheme() {
         }
 
         star.trail.forEach((point, i) => {
-          const x = point.x * window.innerWidth;
-          const y = point.y * window.innerHeight;
+          const x = Math.max(0, Math.min(1, point.x)) * canvasWidth;
+          const y = Math.max(0, Math.min(1, point.y)) * canvasHeight;
           const size = ((star.trail.length - i) / star.trail.length) * 3;
-          const opacity =
-            ((star.trail.length - i) / star.trail.length) * star.opacity;
+          const opacity = ((star.trail.length - i) / star.trail.length) * star.opacity;
 
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
@@ -418,27 +402,17 @@ export function StarfallTheme() {
           ctx.fill();
         });
 
-        const headX = star.x * window.innerWidth;
-        const headY = star.y * window.innerHeight;
+        const headX = Math.max(0, Math.min(1, star.x)) * canvas.clientWidth;
+        const headY = Math.max(0, Math.min(1, star.y)) * canvas.clientHeight;
 
         ctx.beginPath();
         ctx.arc(headX, headY, 5, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
         ctx.fill();
 
-        const headGlow = ctx.createRadialGradient(
-          headX,
-          headY,
-          0,
-          headX,
-          headY,
-          15
-        );
+        const headGlow = ctx.createRadialGradient(headX, headY, 0, headX, headY, 15);
         headGlow.addColorStop(0, `rgba(255, 255, 255, ${star.opacity * 0.8})`);
-        headGlow.addColorStop(
-          0.5,
-          `rgba(255, 210, 210, ${star.opacity * 0.4})`
-        );
+        headGlow.addColorStop(0.5, `rgba(255, 210, 210, ${star.opacity * 0.4})`);
         headGlow.addColorStop(1, 'transparent');
         ctx.fillStyle = headGlow;
         ctx.beginPath();
@@ -473,22 +447,18 @@ export function StarfallTheme() {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
-      resizeObserver.disconnect();
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
     };
   }, [quality, shouldReduceMotion]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 h-full w-full"
+      className="absolute inset-0 block h-full w-full"
       style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
         width: '100%',
         height: '100%',
-        transform: 'translateZ(0)',
-        willChange: 'transform',
       }}
     />
   );
