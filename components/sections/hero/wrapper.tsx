@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 
 const Hero = dynamic(
   () => import('./index').then((mod) => ({ default: mod.Hero })),
