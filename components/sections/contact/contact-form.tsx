@@ -37,6 +37,7 @@ export function ContactForm() {
     resolver: zodResolver(contactSchema),
   });
 
+  // Watch form values for character counts
   const watchedMessage = watch('message', '');
   const watchedSubject = watch('subject', '');
 
@@ -174,7 +175,7 @@ export function ContactForm() {
                 'w-full rounded-lg border bg-background px-4 py-2 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20',
                 errors.subject && 'border-destructive focus:border-destructive focus:ring-destructive/20'
               )}
-              placeholder="Project inquiry, collaboration, or just saying hi"
+              placeholder="What can I help you with?"
               disabled={isSubmitting}
             />
             <AnimatePresence>
@@ -209,7 +210,7 @@ export function ContactForm() {
                 'w-full rounded-lg border bg-background px-4 py-2 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 resize-y',
                 errors.message && 'border-destructive focus:border-destructive focus:ring-destructive/20'
               )}
-              placeholder="Tell me about your project, ask a question, or just say hello! "
+              placeholder="Tell me about your project, ask a question, or just say hello! I love hearing from fellow developers and potential collaborators."
               disabled={isSubmitting}
             />
             <AnimatePresence>
@@ -314,6 +315,35 @@ export function ContactForm() {
             )}
           </AnimatePresence>
         </form>
+
+        <div className="mt-6 rounded-lg bg-secondary/20 p-4 text-sm text-muted-foreground">
+          <p className="flex items-center gap-2">
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <strong>Quick Response Time:</strong> I typically respond within 24 hours. 
+          </p>
+          <p className="mt-2 opacity-75">
+            Looking for something urgent? Feel free to reach out on{' '}
+            <a 
+              href="https://www.linkedin.com/in/jkim022/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="underline hover:text-primary transition-colors"
+            >
+              LinkedIn
+            </a>{' '}
+            or{' '}
+            <a 
+              href="https://x.com/jkdev220" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="underline hover:text-primary transition-colors"
+            >
+              Twitter/X
+            </a>.
+          </p>
+        </div>
       </CardContent>
     </Card>
   );
