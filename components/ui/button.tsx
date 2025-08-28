@@ -34,17 +34,19 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Comp
         className={cn(
-          'inline-flex select-none items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+          'inline-flex select-none items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
           {
-            'bg-primary text-primary-foreground hover:bg-primary/90':
+            'bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/95':
               variant === 'default',
-            'bg-destructive text-destructive-foreground hover:bg-destructive/90':
+            'bg-destructive text-destructive-foreground hover:bg-destructive/90 active:bg-destructive/95':
               variant === 'destructive',
-            'bg-white text-black hover:bg-white/90': variant === 'outline',
-            'bg-secondary text-secondary-foreground hover:bg-secondary/80':
+            'border border-input bg-background hover:bg-accent hover:text-accent-foreground active:bg-accent/90':
+              variant === 'outline',
+            'bg-secondary text-secondary-foreground hover:bg-secondary/80 active:bg-secondary/90':
               variant === 'secondary',
-            'hover:bg-accent hover:text-accent-foreground': variant === 'ghost',
-            'text-primary underline-offset-4 hover:underline':
+            'hover:bg-accent hover:text-accent-foreground active:bg-accent/90': 
+              variant === 'ghost',
+            'text-primary underline-offset-4 hover:underline active:text-primary/90':
               variant === 'link',
           },
           {
@@ -53,6 +55,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             'h-11 rounded-md px-8': size === 'lg',
             'h-10 w-10': size === 'icon',
           },
+          loading && 'cursor-not-allowed',
           className
         )}
         ref={ref}
@@ -61,7 +64,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading && (
           <svg
-            className="mr-2 h-4 w-4 animate-spin"
+            className="h-4 w-4 animate-spin"
             fill="none"
             viewBox="0 0 24 24"
           >
