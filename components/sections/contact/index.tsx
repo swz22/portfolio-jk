@@ -7,24 +7,24 @@ import { SocialLinks } from './social-links';
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-20">
+    <section id="contact" className="py-16">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-12 select-none text-center"
+          className="mb-8 select-none text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-5xl">Get in Touch</h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+          <h2 className="mb-3 text-3xl font-bold md:text-4xl">Get in Touch</h2>
+          <p className="mx-auto max-w-2xl text-base text-muted-foreground">
             Have a project in mind? Let's work together to bring your ideas to
             life. I'm always open to discussing new opportunities.
           </p>
         </motion.div>
 
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-3">
+          <div className="grid gap-6 lg:grid-cols-3">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -40,7 +40,7 @@ export default function Contact() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
-              className="space-y-8"
+              className="space-y-6"
             >
               <ContactInfo />
               <SocialLinks />

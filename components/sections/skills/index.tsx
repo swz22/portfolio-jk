@@ -28,7 +28,7 @@ export default function Skills() {
           </p>
         </motion.div>
 
-        <div className="mb-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+        <div className="mb-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
           {skillCategories.map((category, index) => (
             <SkillCard key={category.name} category={category} index={index} />
           ))}
