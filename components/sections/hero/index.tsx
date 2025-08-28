@@ -6,6 +6,7 @@ import { Terminal } from '@/components/ui/terminal';
 import { Button } from '@/components/ui/button';
 import { SITE_CONFIG } from '@/constants';
 import Link from 'next/link';
+import { TypingAnimation } from '@/components/ui/typing-animation';
 
 export function Hero() {
   return (
@@ -31,7 +32,11 @@ export function Hero() {
             </h1>
 
             <p className="mb-8 text-xl text-muted-foreground md:text-2xl">
-              Full Stack Developer
+              <TypingAnimation 
+                text="Full Stack Developer & Data Analyst"
+                speed={80}
+                delay={1000}
+              />
             </p>
 
             <p className="mb-8 max-w-lg text-lg text-muted-foreground">
