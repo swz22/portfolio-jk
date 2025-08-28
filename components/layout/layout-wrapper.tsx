@@ -39,6 +39,14 @@ const Breadcrumb = dynamic(
   }
 );
 
+const ScrollToTop = dynamic(
+  () =>
+    import('@/components/ui/scroll-to-top').then((mod) => mod.ScrollToTop),
+  {
+    ssr: false,
+  }
+);
+
 const MinimalLoader = () => (
   <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
     <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary" />
@@ -64,6 +72,9 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
         </Suspense>
         <Suspense fallback={null}>
           <Breadcrumb />
+        </Suspense>
+        <Suspense fallback={null}>
+          <ScrollToTop />
         </Suspense>
         <Navigation />
         <main className="min-h-screen">{children}</main>
