@@ -56,6 +56,8 @@
 
   html {
     @apply scroll-smooth;
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
   }
 
   body {
