@@ -48,24 +48,24 @@ export function ProjectGrid({ projects, onOpenModal }: ProjectGridProps) {
   );
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-8">
       {featuredProjects.length > 0 && (
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="text-center">
             <h3 className="text-2xl font-bold">Featured Apps</h3>
           </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {featuredCards}
           </div>
         </div>
       )}
 
       {regularProjects.length > 0 && (
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="text-center">
             <h3 className="text-xl font-semibold">Other Projects</h3>
           </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 [&>*]:!h-[500px]">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {regularCards}
           </div>
         </div>

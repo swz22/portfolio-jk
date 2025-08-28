@@ -35,32 +35,32 @@ export const ProjectCard = memo(function ProjectCard({
       transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
     >
       <TiltCard>
-        <Card className="h-full overflow-hidden border-border/50 bg-card/50 backdrop-blur">
+        <Card className="h-[380px] overflow-hidden border-border/50 bg-card/50 backdrop-blur">
           <CardHeader className="p-0">
-            <div className="relative h-48 bg-gradient-to-br from-primary/20 to-primary/5">
+            <div className="relative h-36 bg-gradient-to-br from-primary/20 to-primary/5">
               {project.featured && (
                 <Badge
-                  className="absolute right-4 top-4 z-10"
+                  className="absolute right-3 top-3 z-10"
                   variant="default"
                 >
                   Featured
                 </Badge>
               )}
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-6xl opacity-50">
+                <span className="text-5xl opacity-50">
                   {project.techStack[0]?.icon}
                 </span>
               </div>
             </div>
           </CardHeader>
 
-          <CardContent className="p-6">
-            <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
-            <p className="mb-4 text-sm text-muted-foreground">
+          <CardContent className="p-4">
+            <h3 className="mb-2 text-lg font-semibold">{project.title}</h3>
+            <p className="mb-3 text-sm text-muted-foreground">
               {project.description}
             </p>
 
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-1">
               {project.techStack.map((tech) => (
                 <Badge key={tech.name} variant="secondary" className="text-xs">
                   {tech.icon} {tech.name}
@@ -69,7 +69,7 @@ export const ProjectCard = memo(function ProjectCard({
             </div>
           </CardContent>
 
-          <CardFooter className="flex gap-2 p-6 pt-0">
+          <CardFooter className="flex gap-2 p-4 pt-0">
             <Button
               variant="default"
               size="sm"
