@@ -73,7 +73,7 @@ export function Navigation() {
                     <Link
                       href={item.href}
                       className={cn(
-                        'text-sm font-medium transition-colors hover:text-primary',
+                        'text-sm font-medium transition-all duration-200 hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:rounded-md px-2 py-1',
                         mounted && activeSection === item.href.substring(1)
                           ? 'text-primary'
                           : 'text-muted-foreground'
