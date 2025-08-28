@@ -35,7 +35,7 @@ export function SkillProgress({ skill, index }: SkillProgressProps) {
         </span>
       </div>
 
-      <div className="relative h-1.5 overflow-hidden rounded-full bg-secondary">
+      <div className="relative h-1.5 overflow-hidden rounded-full bg-primary/10">
         <motion.div
           className="absolute left-0 top-0 h-full rounded-full"
           style={{
