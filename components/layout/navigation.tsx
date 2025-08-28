@@ -72,6 +72,11 @@ export function Navigation() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const target = document.querySelector(item.href);
+                        target?.scrollIntoView({ behavior: 'smooth' });
+                      }}
                       className={cn(
                         'text-sm font-medium transition-all duration-200 hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:rounded-md px-2 py-1',
                         mounted && activeSection === item.href.substring(1)
