@@ -31,6 +31,14 @@ const PerformanceMonitor = dynamic(
   }
 );
 
+const Breadcrumb = dynamic(
+  () =>
+    import('@/components/ui/breadcrumb').then((mod) => mod.Breadcrumb),
+  {
+    ssr: false,
+  }
+);
+
 const MinimalLoader = () => (
   <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
     <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary" />
@@ -53,6 +61,9 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
         </Suspense>
         <Suspense fallback={null}>
           <PerformanceMonitor />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Breadcrumb />
         </Suspense>
         <Navigation />
         <main className="min-h-screen">{children}</main>
