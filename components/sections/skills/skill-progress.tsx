@@ -22,20 +22,20 @@ export function SkillProgress({ skill, index }: SkillProgressProps) {
       initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
       animate={isVisible ? { opacity: 1, x: 0 } : {}}
       transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
-      className="select-none space-y-2"
+      className="select-none space-y-1.5"
       style={{ transform: 'translateZ(0)' }}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-2xl">{skill.icon}</span>
-          <span className="font-medium">{skill.name}</span>
+          <span className="text-lg">{skill.icon}</span>
+          <span className="text-sm font-medium">{skill.name}</span>
         </div>
-        <span className="text-sm text-muted-foreground">
+        <span className="text-xs text-muted-foreground">
           {skill.proficiency}%
         </span>
       </div>
 
-      <div className="relative h-2 overflow-hidden rounded-full bg-secondary">
+      <div className="relative h-1.5 overflow-hidden rounded-full bg-secondary">
         <motion.div
           className="absolute left-0 top-0 h-full rounded-full"
           style={{

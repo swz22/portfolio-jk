@@ -25,13 +25,14 @@ export const SkillCard = memo(function SkillCard({
       animate={{ opacity: 1, y: 0 }}
       transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
       style={{ transform: 'translateZ(0)' }}
+      className="h-full"
     >
       <TiltCard max={10}>
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur">
-          <CardHeader>
-            <CardTitle className="text-xl">{category.name}</CardTitle>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">{category.name}</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-3">
             {category.skills.map((skill, skillIndex) => (
               <SkillProgress
                 key={skill.name}
