@@ -35,11 +35,17 @@ Type 'help' for available commands.`,
 
     switch (trimmedCmd) {
       case 'help':
-        output = Object.entries(TERMINAL_COMMANDS)
-          .map(
-            ([command, description]) => `${command.padEnd(12)} - ${description}`
-          )
-          .join('\n');
+        output = `🚀 Available Commands:
+        
+${Object.entries(TERMINAL_COMMANDS)
+  .map(([command, description]) => `  ${command.padEnd(15)} - ${description}`)
+  .join('\n')}
+
+💡 Pro Tips:
+  • Type commands exactly as shown
+  • Use 'clear' to clean up the terminal
+  • All commands are case-insensitive
+  • Try typing 'easter' for hidden features!`;
         break;
       case 'about':
         output = `John Kim
@@ -151,12 +157,46 @@ Additional Expertise: Data Analytics`;
         output = '🥚 Try: matrix, hack, or game';
         break;
       case 'matrix':
-        if (themes.find((t) => t.id === 'matrix')?.available) {
-          setTheme('matrix');
-          output = 'Entering the Matrix...';
-        } else {
-          output = 'Matrix theme coming soon...';
-        }
+        output = `🔢 ENTERING THE MATRIX...
+        
+Wake up, Neo...
+The Matrix has you...
+Follow the white rabbit...
+
+01001000 01100101 01101100 01101100 01101111
+01010111 01101111 01110010 01101100 01100100
+
+🕶️ Unfortunately, the Matrix theme is still in development.
+But you can experience the Neural Network theme instead!
+Type 'theme set Neural Network' to enter the digital realm.`;
+        break;
+      case 'hack':
+        output = `🚨 HACKING INITIATED...
+
+[████████████████████████████████] 100%
+
+ACCESS GRANTED
+Welcome, elite hacker! 😎
+
+Just kidding - I'm a web developer, not a security expert.
+But I can build you some pretty cool web applications!
+Check out my projects with 'projects' command.`;
+        break;
+      case 'konami':
+      case 'up up down down left right left right b a':
+        output = `🎮 KONAMI CODE ACTIVATED!
+
+    ↑ ↑ ↓ ↓ ← → ← → B A
+
+🎉 Achievement Unlocked: "Old School Gamer"
+🚀 You found a secret! Here's a bonus fact:
+
+I actually started programming by modifying game files
+and creating scripts for online games. Gaming taught me
+problem-solving and logical thinking - skills I use
+every day as a developer!
+
+Fun fact: This terminal was inspired by retro computing!`;
         break;
       case '':
         return;
@@ -188,7 +228,7 @@ Additional Expertise: Data Analytics`;
   };
 
   return (
-    <div className="terminal-container glass-hover flex h-[450px] w-full flex-col rounded-xl bg-black/40 p-6 font-mono text-sm shadow-2xl backdrop-blur-lg">
+    <div className="terminal-container glass glass-hover flex h-[450px] w-full flex-col rounded-xl bg-black/40 p-6 font-mono text-sm shadow-2xl backdrop-blur-lg">
       <div className="terminal-header mb-4 flex select-none items-center gap-2">
         <div className="flex gap-1.5">
           <div className="h-3 w-3 rounded-full bg-red-500" />
