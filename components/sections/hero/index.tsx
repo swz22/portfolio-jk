@@ -50,23 +50,30 @@ export function Hero() {
               </Button>
             </div>
 
-            <div className="mt-12 flex items-center gap-6">
-              <div>
-                <p className="text-3xl font-bold">5+</p>
+            <div className="mt-12 grid grid-cols-2 gap-6 sm:flex sm:items-center">
+              <div className="text-center sm:text-left">
+                <p className="text-3xl font-bold text-primary">5+</p>
                 <p className="text-sm text-muted-foreground">
                   Years Experience
                 </p>
               </div>
-              <div className="h-12 w-px bg-border" />
-              <div>
-                <p className="text-3xl font-bold">30+</p>
+              <div className="hidden h-12 w-px bg-border sm:block" />
+              <div className="text-center sm:text-left">
+                <p className="text-3xl font-bold text-primary">30+</p>
                 <p className="text-sm text-muted-foreground">
                   Projects Completed
                 </p>
               </div>
-              <div className="h-12 w-px bg-border" />
-              <div>
-                <p className="text-3xl font-bold">100%</p>
+              <div className="hidden h-12 w-px bg-border sm:block" />
+              <div className="text-center sm:text-left">
+                <p className="text-3xl font-bold text-primary">Samsung</p>
+                <p className="text-sm text-muted-foreground">
+                  Current Company
+                </p>
+              </div>
+              <div className="hidden h-12 w-px bg-border sm:block" />
+              <div className="text-center sm:text-left">
+                <p className="text-3xl font-bold text-primary">100%</p>
                 <p className="text-sm text-muted-foreground">
                   Client Satisfaction
                 </p>
