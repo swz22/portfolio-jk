@@ -30,7 +30,7 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group h-full min-h-[350px]"
+      className="group h-full min-h-[320px]"
     >
       <Card className="relative flex h-full transform-gpu flex-col overflow-hidden border-border/50 bg-card/50 backdrop-blur transition-all duration-300 hover:scale-[1.02]">
         <CardHeader className="flex-none p-0">
@@ -40,18 +40,18 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
             rel="noopener noreferrer"
             className="block"
           >
-            <div className="group relative h-80 overflow-hidden">
+            <div className="group relative aspect-video overflow-hidden">
               <img
                 src={project.images.thumbnail}
                 alt={project.title}
-                className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-              <div className="absolute right-4 top-4 flex gap-2">
+              <div className="absolute right-3 top-3 flex gap-2">
                 <Badge variant="default">Featured App</Badge>
               </div>
-              <div className="absolute bottom-4 left-4 right-4">
-                <h3 className="text-xl font-bold text-white drop-shadow-lg">
+              <div className="absolute bottom-3 left-3 right-3">
+                <h3 className="text-lg font-bold text-white drop-shadow-lg">
                   {project.title}
                 </h3>
               </div>
@@ -66,7 +66,7 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
 
         <CardContent className="flex flex-1 flex-col justify-between p-4">
           <div>
-            <p className="mb-4 text-sm text-muted-foreground">
+            <p className="mb-3 text-sm text-muted-foreground">
               {project.description}
             </p>
 
