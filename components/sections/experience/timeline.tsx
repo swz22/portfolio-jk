@@ -48,9 +48,10 @@ export const Timeline = memo(function Timeline({
               viewport={{ once: true }}
               onClick={() => handleSelect(exp.id)}
               className={cn(
-                'relative cursor-pointer rounded-lg p-4 transition-all',
-                'hover:bg-secondary/50',
-                isSelected && 'bg-secondary'
+                'relative cursor-pointer rounded-lg p-4 transition-all duration-200',
+                'hover:bg-secondary/50 hover:shadow-md hover:scale-[1.02]',
+                'focus:outline-none focus:ring-2 focus:ring-primary/20',
+                isSelected && 'bg-secondary shadow-md'
               )}
               style={{ transform: 'translateZ(0)' }}
             >
