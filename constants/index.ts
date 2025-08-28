@@ -104,8 +104,7 @@ export const TERMINAL_COMMANDS = {
   'effects on/off': 'Toggle visual effects',
   socials: 'View social links',
   easter: 'Try to find easter eggs',
-  analytics: 'View data analytics experience',
-  stack: 'Show full tech stack',
+  analytics: 'View data analytics experience at Samsung',
 } as const;
 
 export const PROJECT_CATEGORIES = [

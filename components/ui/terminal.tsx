@@ -59,12 +59,32 @@ Electronics America while maintaining strong full-stack
 development expertise.`;
         break;
       case 'skills':
-        output = `Technical Skills:
-• Frontend: React, Angular, TypeScript, Redux
-• Backend: Node.js, Express.js, Python
-• Database: PostgreSQL, MongoDB, MySQL
-• Tools: Git, Docker, GraphQL, SAP
-• Cloud: Firebase, Heroku, AWS`;
+        output = `🛠️ Technical Skills:
+
+💻 Languages:
+• JavaScript (92%)  • TypeScript (88%)  • Python (82%)
+• SQL (90%)         • HTML/CSS (95%)
+
+⚛️ Frontend:
+• React (90%)       • Angular (85%)     • Redux (82%)
+• Next.js (88%)     • Tailwind CSS (90%)
+
+🖥️ Backend:
+• Node.js (88%)     • Express.js (85%)  • Django (80%)
+• GraphQL (78%)     • REST APIs (90%)
+
+🗄️ Database:
+• PostgreSQL (82%)  • MongoDB (85%)     • MySQL (88%)
+• Firebase (80%)    • Supabase (85%)
+
+⚙️ DevOps:
+• Git (92%)         • Docker (78%)      • AWS (75%)
+• Vercel (85%)      • Heroku (75%)
+
+📊 Other:
+• Power BI (82%)    • Tableau (78%)
+
+Type 'analytics' for data analysis experience at Samsung.`;
         break;
       case 'projects':
         output = `Recent Projects:
@@ -140,18 +160,6 @@ Effects: ${isEffectsEnabled ? 'enabled' : 'disabled'}`;
 Currently leveraging these skills at Samsung Electronics 
 to drive data-driven insights while maintaining active 
 development on modern web applications.`;
-        break;
-      case 'stack':
-        output = `Full Technology Stack:
-Frontend: React, Angular, TypeScript, Redux, HTML/CSS
-Backend: Node.js, Express.js, Python, GraphQL, REST APIs
-Database: PostgreSQL, MongoDB, MySQL, SQL
-Analytics: Power BI, Tableau, Superset, SAP
-DevOps: Docker, Git, Firebase, Heroku
-Tools: Agile/Scrum, Bootstrap
-
-Primary Focus: Full Stack Web Development
-Additional Expertise: Data Analytics`;
         break;
       case 'easter':
         output = '🥚 Try: matrix, hack, or game';
