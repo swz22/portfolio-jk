@@ -30,9 +30,9 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group h-full min-h-[320px]"
+      className="group h-full"
     >
-      <Card className="relative flex h-full transform-gpu flex-col overflow-hidden border-border/50 bg-card/50 backdrop-blur transition-all duration-300 hover:scale-[1.02]">
+      <Card className="relative flex h-full min-h-[400px] transform-gpu flex-col overflow-hidden border-border/50 bg-card/50 backdrop-blur transition-all duration-300 hover:scale-[1.02]">
         <CardHeader className="flex-none p-0">
           <Link
             href={project.links.live!}
@@ -71,7 +71,7 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
             </p>
 
             <div className="flex flex-wrap gap-1">
-              {project.techStack.map((tech) => (
+              {project.techStack.slice(0, 5).map((tech) => (
                 <Badge
                   key={tech.name}
                   variant="secondary"
@@ -80,6 +80,11 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
                   {tech.icon} {tech.name}
                 </Badge>
               ))}
+              {project.techStack.length > 5 && (
+                <Badge variant="secondary" className="px-2 py-0.5 text-xs">
+                  +{project.techStack.length - 5}
+                </Badge>
+              )}
             </div>
           </div>
         </CardContent>
