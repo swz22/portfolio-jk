@@ -118,6 +118,50 @@ export const projects: Project[] = [
     year: 2024,
   },
   {
+    id: 'chat-buddy',
+    title: 'Chat Buddy AI',
+    description:
+      'Intelligent conversational AI assistant powered by GPT-3, featuring conversation history, smart suggestions, and a clean chat interface.',
+    longDescription:
+      "Chat Buddy AI is an intelligent conversational interface powered by OpenAI's GPT-3 model. This web application provides users with an intuitive chat experience where they can ask questions, seek assistance, and engage in natural language conversations with an AI assistant. The modern interface features conversation history organized by day, smart conversation starters, and a familiar messaging design that makes AI interaction accessible to all users.",
+    highlights: [
+      "Real-time AI Responses - Seamless integration with OpenAI's GPT-3 API for intelligent, context-aware conversations",
+      'Conversation History - Browse recent chats organized by day with visual cards',
+      'Smart Suggestions - Quick conversation starters for easy engagement',
+      'Typing Animation - Smooth typewriter effect that simulates natural conversation flow',
+      'Loading Indicators - Visual feedback with animated dots during response generation',
+      'Clean Chat Interface - User-friendly design with distinct styling for user and AI messages',
+      'Persistent Sessions - Continue conversations where you left off',
+      'Responsive Design - Mobile-first approach ensuring optimal experience across all devices',
+      'Auto-scroll - Automatically scrolls to the latest message for better UX',
+      'Message Counter - Track conversation length with message count badges',
+      'Time-based Organization - Conversations grouped by Today, Yesterday, and This Week',
+    ],
+    images: {
+      thumbnail: '/projects/chat-buddy/thumbnail.jpg',
+      screenshots: [],
+    },
+    techStack: [
+      { name: 'JavaScript', icon: 'JS', color: '#F7DF1E', proficiency: 92 },
+      { name: 'Node.js', icon: '🟢', color: '#339933', proficiency: 88 },
+      { name: 'Express.js', icon: '⚡', color: '#000000', proficiency: 85 },
+      { name: 'OpenAI API', icon: '🤖', color: '#412991', proficiency: 85 },
+      { name: 'CSS3', icon: '🎨', color: '#1572B6', proficiency: 90 },
+    ],
+    metrics: {
+      performance: 95,
+      users: 250,
+      rating: 4.6,
+    },
+    links: {
+      live: 'https://chat-buddy-ai-production.up.railway.app/',
+      github: 'https://github.com/swz22/chat-buddy-ai',
+    },
+    featured: true,
+    category: 'production',
+    year: 2024,
+  },
+  {
     id: 'bearbnb',
     title: 'Bearbnb',
     description:
@@ -155,46 +199,6 @@ export const projects: Project[] = [
     featured: false,
     category: 'prototype',
     year: 2023,
-  },
-  {
-    id: 'chat-buddy',
-    title: 'Chat Buddy AI',
-    description:
-      'Conversational AI chatbot featuring real-time responses, typing animations, and a familiar messaging experience powered by GPT-3.',
-    longDescription:
-      "Chat Buddy AI is an intelligent conversational interface powered by OpenAI's GPT-3 model. This web application provides users with an intuitive chat experience where they can ask questions, seek assistance, and engage in natural language conversations with an AI assistant. The clean, modern interface mimics popular messaging platforms, making AI interaction accessible and familiar to all users.",
-    highlights: [
-      "Real-time AI Responses - Seamless integration with OpenAI's GPT-3 API for intelligent, context-aware conversations",
-      'Typing Animation - Smooth typewriter effect that simulates natural conversation flow',
-      'Loading Indicators - Visual feedback with animated dots during response generation',
-      'Clean Chat Interface - User-friendly design with distinct styling for user and AI messages',
-      'Responsive Design - Mobile-first approach ensuring optimal experience across all devices',
-      'Persistent Chat History - Maintains conversation context throughout the session',
-      'Auto-scroll - Automatically scrolls to the latest message for better UX',
-    ],
-    images: {
-      thumbnail: '',
-      screenshots: [],
-    },
-    techStack: [
-      { name: 'JavaScript', icon: 'JS', color: '#F7DF1E', proficiency: 92 },
-      { name: 'Node.js', icon: '🟢', color: '#339933', proficiency: 88 },
-      { name: 'Express.js', icon: '⚡', color: '#000000', proficiency: 85 },
-      { name: 'OpenAI API', icon: '🤖', color: '#412991', proficiency: 85 },
-      { name: 'CSS3', icon: '🎨', color: '#1572B6', proficiency: 90 },
-    ],
-    metrics: {
-      performance: 95,
-      users: 250,
-      rating: 4.6,
-    },
-    links: {
-      live: 'https://chatbuddy-sand.vercel.app/',
-      github: 'https://github.com/swz22/chat-buddy-ai',
-    },
-    featured: false,
-    category: 'prototype',
-    year: 2024,
   },
   {
     id: 'discord-clone',
