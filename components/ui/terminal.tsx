@@ -235,8 +235,8 @@ Fun fact: This terminal was inspired by retro computing!`;
     }
   };
 
-  return (
-    <div className="terminal-container glass glass-hover flex h-[450px] w-full flex-col rounded-xl bg-black/40 p-6 font-mono text-sm shadow-2xl backdrop-blur-lg">
+ return (
+    <div className="terminal-container flex h-[450px] w-full flex-col rounded-xl border-2 border-white/20 bg-black/80 p-6 font-mono text-sm shadow-2xl">
       <div className="terminal-header mb-4 flex select-none items-center gap-2">
         <div className="flex gap-1.5">
           <div className="h-3 w-3 rounded-full bg-red-500" />
