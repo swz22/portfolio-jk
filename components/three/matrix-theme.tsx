@@ -35,40 +35,14 @@ export function MatrixTheme() {
     let canvasWidth = 0;
     let canvasHeight = 0;
 
-    const resizeCanvas = () => {
-      const rect = canvas.getBoundingClientRect();
-      canvasWidth = rect.width;
-      canvasHeight = rect.height;
-      canvas.width = canvasWidth;
-      canvas.height = canvasHeight;
-      initializeMatrix();
-    };
-
-    const handleResize = () => {
-      resizeCanvas();
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      };
-    };
-
-    resizeCanvas();
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('mousemove', handleMouseMove);
-
     const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const charArray = chars.split('');
-
     const fontSize = quality === 'low' ? 16 : quality === 'medium' ? 14 : 12;
     const columnWidth = fontSize;
-    const maxCharsPerColumn = Math.ceil(canvasHeight / fontSize) + 1;
 
     function initializeMatrix() {
       const numColumns = Math.ceil(canvasWidth / columnWidth);
+      const maxCharsPerColumn = Math.ceil(canvasHeight / fontSize) + 1;
       columnsRef.current = [];
 
       for (let i = 0; i < numColumns; i++) {
@@ -89,7 +63,33 @@ export function MatrixTheme() {
       }
     }
 
-    initializeMatrix();
+    const resizeCanvas = () => {
+      const rect = canvas.getBoundingClientRect();
+      canvasWidth = rect.width;
+      canvasHeight = rect.height;
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+      
+      if (canvasWidth > 0 && canvasHeight > 0) {
+        initializeMatrix();
+      }
+    };
+
+    const handleResize = () => {
+      resizeCanvas();
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      };
+    };
+
+    resizeCanvas();
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('mousemove', handleMouseMove);
 
     const animate = (currentTime: number) => {
       const deltaTime = currentTime - lastFrameTime.current;
@@ -162,7 +162,9 @@ export function MatrixTheme() {
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    animationRef.current = requestAnimationFrame(animate);
+    if (canvasWidth > 0 && canvasHeight > 0) {
+      animationRef.current = requestAnimationFrame(animate);
+    }
 
     return () => {
       if (animationRef.current) {
