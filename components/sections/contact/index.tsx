@@ -19,7 +19,7 @@ export default function Contact() {
           <h2 className="mb-3 text-3xl font-bold md:text-4xl">Get in Touch</h2>
           <p className="mx-auto max-w-2xl text-base text-muted-foreground">
             Have a project in mind? Let's work together to bring your ideas to
-            life. I'm always open to discussing new opportunities.
+            life!
           </p>
         </motion.div>
 

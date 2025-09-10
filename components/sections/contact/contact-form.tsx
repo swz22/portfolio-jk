@@ -210,7 +210,7 @@ export function ContactForm() {
                 'w-full rounded-lg border bg-background px-4 py-2 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 resize-y',
                 errors.message && 'border-destructive focus:border-destructive focus:ring-destructive/20'
               )}
-              placeholder="Tell me about your project, ask a question, or just say hello! I love hearing from fellow developers and potential collaborators."
+              placeholder="Tell me about your project, ask a question, or just say hello!"
               disabled={isSubmitting}
             />
             <AnimatePresence>
