@@ -48,7 +48,12 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
               <div className="absolute right-3 top-3 flex gap-2">
-                <Badge variant="default">Featured App</Badge>
+                <Badge 
+                  variant="default" 
+                  className="border border-white/20 bg-black/80 text-white backdrop-blur-sm hover:bg-black/90"
+                >
+                  Featured
+                </Badge>
               </div>
               <div className="absolute bottom-3 left-3 right-3">
                 <h3 className="text-lg font-bold text-white drop-shadow-lg">
