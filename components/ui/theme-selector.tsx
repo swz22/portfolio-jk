@@ -18,7 +18,7 @@ export function ThemeSelector() {
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all',
+          'flex items-center gap-1.5 rounded-lg px-2 py-1 text-xs font-medium transition-all',
           'bg-secondary/50 backdrop-blur-sm hover:bg-secondary/80',
           'border border-border/50 hover:border-border'
         )}
@@ -26,7 +26,7 @@ export function ThemeSelector() {
         whileTap={{ scale: 0.95 }}
       >
         <svg
-          className="h-4 w-4"
+          className="h-3 w-3"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -40,7 +40,7 @@ export function ThemeSelector() {
         </svg>
         Theme
         <svg
-          className={cn('h-4 w-4 transition-transform', isOpen && 'rotate-180')}
+          className={cn('h-3 w-3 transition-transform', isOpen && 'rotate-180')}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -68,9 +68,9 @@ export function ThemeSelector() {
               initial={{ opacity: 0, scale: 0.95, y: -10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -10 }}
-              className="absolute right-0 z-40 mt-2 w-56 overflow-hidden rounded-lg border border-border bg-background/95 shadow-lg backdrop-blur-lg"
+              className="absolute right-0 z-40 mt-1 w-44 overflow-hidden rounded-lg border border-border bg-background/95 shadow-lg backdrop-blur-lg"
             >
-              <div className="p-2">
+              <div className="p-1">
                 {availableThemes.map((theme) => (
                   <button
                     key={theme.id}
@@ -79,20 +79,20 @@ export function ThemeSelector() {
                       setIsOpen(false);
                     }}
                     className={cn(
-                      'flex w-full items-center justify-between rounded-md px-3 py-2 transition-all',
+                      'flex w-full items-center justify-between rounded-md px-2 py-1 transition-all text-xs',
                       'hover:bg-secondary/50',
                       currentTheme === theme.id && 'bg-secondary'
                     )}
                   >
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5">
                       <span className="font-medium">{theme.name}</span>
-                      <span className="rounded-full bg-secondary px-1.5 py-0.5 text-[10px] text-secondary-foreground">
+                      <span className="rounded-full bg-secondary px-1 py-0.5 text-[9px] text-secondary-foreground">
                         {theme.technology === '3D WebGL' ? '3D' : '2D'}
                       </span>
                     </div>
                     <span
                       className={cn(
-                        'text-xs',
+                        'text-[10px]',
                         theme.performance === 'light' && 'text-green-500',
                         theme.performance === 'medium' && 'text-yellow-500',
                         theme.performance === 'heavy' && 'text-red-500'
