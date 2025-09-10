@@ -13,7 +13,11 @@ const themeComponents = {
   neural: lazy(() =>
     import('./neural-theme').then((mod) => ({ default: mod.NeuralTheme }))
   ),
-  matrix: null,
+  matrix: lazy(() =>
+    import('./matrix-theme').then((mod) => ({ default: mod.MatrixTheme }))
+  ),
+  ocean: null, // Will be added in next commit
+  constellation: null, // Will be added in next commit
   cyberpunk: null,
   underwater: null,
 };

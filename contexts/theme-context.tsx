@@ -11,8 +11,10 @@ import React, {
 export type ThemeId =
   | 'starfall'
   | 'matrix'
-  | 'cyberpunk'
   | 'neural'
+  | 'ocean'
+  | 'constellation'
+  | 'cyberpunk'
   | 'underwater';
 
 interface ThemeConfig {
@@ -37,7 +39,7 @@ const themes: ThemeConfig[] = [
   {
     id: 'starfall',
     name: 'Starfall',
-    description: '',
+    description: 'Animated starfield with falling petals',
     technology: '2D Canvas',
     performance: 'light',
     available: true,
@@ -45,31 +47,47 @@ const themes: ThemeConfig[] = [
   {
     id: 'neural',
     name: 'Neural Network',
-    description: '',
+    description: 'Interactive 3D neural connections',
     technology: '3D WebGL',
     performance: 'medium',
     available: true,
   },
   {
-    id: 'underwater',
-    name: 'Underwater Abyss',
-    description: '',
+    id: 'matrix',
+    name: 'Matrix Rain',
+    description: 'Falling code characters with glow effects',
+    technology: '2D Canvas',
+    performance: 'medium',
+    available: true,
+  },
+  {
+    id: 'ocean',
+    name: 'Ocean Depths',
+    description: 'Underwater world with marine life',
+    technology: '3D WebGL',
+    performance: 'heavy',
+    available: true,
+  },
+  {
+    id: 'constellation',
+    name: 'Constellation',
+    description: 'Connected stars forming patterns',
+    technology: '2D Canvas',
+    performance: 'light',
+    available: true,
+  },
+  {
+    id: 'cyberpunk',
+    name: 'Cyberpunk',
+    description: 'Neon city grid (coming soon)',
     technology: '3D WebGL',
     performance: 'heavy',
     available: false,
   },
   {
-    id: 'matrix',
-    name: 'Matrix',
-    description: '',
-    technology: '2D Canvas',
-    performance: 'medium',
-    available: false,
-  },
-  {
-    id: 'cyberpunk',
-    name: 'Cyberpunk',
-    description: '',
+    id: 'underwater',
+    name: 'Underwater Abyss',
+    description: 'Deep sea exploration (coming soon)',
     technology: '3D WebGL',
     performance: 'heavy',
     available: false,
