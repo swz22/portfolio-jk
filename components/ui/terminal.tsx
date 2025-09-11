@@ -9,6 +9,13 @@ interface Command {
   output: string;
 }
 
+interface GameState {
+  wins: number;
+  losses: number;
+  draws: number;
+  isPlaying: boolean;
+}
+
 export function Terminal() {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<Command[]>([
@@ -18,6 +25,12 @@ export function Terminal() {
 Type 'help' for available commands.`,
     },
   ]);
+  const [gameState, setGameState] = useState<GameState>({
+    wins: 0,
+    losses: 0,
+    draws: 0,
+    isPlaying: false,
+  });
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const { currentTheme, setTheme, themes, isEffectsEnabled, toggleEffects } =
@@ -29,9 +42,103 @@ Type 'help' for available commands.`,
     }
   }, [history]);
 
+  const getRPSAsciiArt = (choice: string) => {
+    const art: { [key: string]: string } = {
+      rock: `
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)`,
+      paper: `
+     _______
+---'    ____)____
+           ______)
+          _______)
+         _______)
+---.__________)`,
+      scissors: `
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)`,
+    };
+    return art[choice] || '';
+  };
+
+  const playRPS = (playerChoice: string) => {
+    const choices = ['rock', 'paper', 'scissors'];
+    const computerChoice = choices[Math.floor(Math.random() * 3)];
+    
+    let result = '';
+    let resultEmoji = '';
+    
+    if (playerChoice === computerChoice) {
+      result = "It's a DRAW!";
+      resultEmoji = '🤝';
+      setGameState(prev => ({ ...prev, draws: prev.draws + 1 }));
+    } else if (
+      (playerChoice === 'rock' && computerChoice === 'scissors') ||
+      (playerChoice === 'paper' && computerChoice === 'rock') ||
+      (playerChoice === 'scissors' && computerChoice === 'paper')
+    ) {
+      result = 'You WIN!';
+      resultEmoji = '🎉';
+      setGameState(prev => ({ ...prev, wins: prev.wins + 1 }));
+    } else {
+      result = 'You LOSE!';
+      resultEmoji = '😢';
+      setGameState(prev => ({ ...prev, losses: prev.losses + 1 }));
+    }
+
+    const output = `
+🎮 ROCK PAPER SCISSORS SHOWDOWN! 🎮
+=====================================
+
+Your choice: ${playerChoice.toUpperCase()}
+${getRPSAsciiArt(playerChoice)}
+
+Computer's choice: ${computerChoice.toUpperCase()}
+${getRPSAsciiArt(computerChoice)}
+
+${resultEmoji} ${result} ${resultEmoji}
+
+📊 Score: Wins: ${gameState.wins + (result === 'You WIN!' ? 1 : 0)} | Losses: ${gameState.losses + (result === 'You LOSE!' ? 1 : 0)} | Draws: ${gameState.draws + (result === "It's a DRAW!" ? 1 : 0)}
+
+Play again? Type 'rock', 'paper', or 'scissors'
+Type 'quit' to exit the game`;
+
+    return output;
+  };
+
   const handleCommand = (cmd: string) => {
     const trimmedCmd = cmd.trim().toLowerCase();
     let output = '';
+
+    // Handle game commands
+    if (gameState.isPlaying) {
+      if (trimmedCmd === 'quit' || trimmedCmd === 'exit') {
+        setGameState(prev => ({ ...prev, isPlaying: false }));
+        output = `Thanks for playing! 
+Final Score: ${gameState.wins} wins, ${gameState.losses} losses, ${gameState.draws} draws
+        
+Type 'game' to play again!`;
+      } else if (['rock', 'paper', 'scissors'].includes(trimmedCmd)) {
+        output = playRPS(trimmedCmd);
+      } else if (['r', 'p', 's'].includes(trimmedCmd)) {
+        const fullChoice = trimmedCmd === 'r' ? 'rock' : trimmedCmd === 'p' ? 'paper' : 'scissors';
+        output = playRPS(fullChoice);
+      } else {
+        output = `Invalid move! Choose 'rock' (r), 'paper' (p), or 'scissors' (s)
+Or type 'quit' to exit the game.`;
+      }
+      setHistory([...history, { input: cmd, output }]);
+      setInput('');
+      return;
+    }
 
     switch (trimmedCmd) {
       case 'help':
@@ -164,7 +271,38 @@ development on modern web applications.`;
       case 'easter':
         output = '🥚 Try: matrix, hack, or game';
         break;
+      case 'game':
+      case 'rps':
+        setGameState({ wins: 0, losses: 0, draws: 0, isPlaying: true });
+        output = `
+🎮 ROCK PAPER SCISSORS 🎮
+========================
+
+Welcome to the ultimate RPS showdown!
+
+    _______          _______          _______
+---'   ____)    ---'    ____)____  ---'   ____)____
+      (_____)             ______)           ______)
+      (_____)            _______)        __________)
+      (____)            _______)        (____)
+---.__(___)     ---.__________)    ---.__(___)
+    ROCK             PAPER           SCISSORS
+
+How to play:
+• Type 'rock' (or 'r') to play Rock
+• Type 'paper' (or 'p') to play Paper  
+• Type 'scissors' (or 's') to play Scissors
+• Type 'quit' to exit
+
+Ready? Make your move!`;
+        break;
       case 'matrix':
+        // Enable effects if disabled
+        if (!isEffectsEnabled) {
+          toggleEffects();
+        }
+        // Switch to Matrix theme
+        setTheme('matrix');
         output = `🔢 ENTERING THE MATRIX...
         
 Wake up, Neo...
@@ -174,9 +312,8 @@ Follow the white rabbit...
 01001000 01100101 01101100 01101100 01101111
 01010111 01101111 01110010 01101100 01100100
 
-🕶️ Unfortunately, the Matrix theme is still in development.
-But you can experience the Neural Network theme instead!
-Type 'theme set Neural Network' to enter the digital realm.`;
+🕶️ Matrix Rain theme activated.
+The digital rain falls around you...`;
         break;
       case 'hack':
         output = `🚨 HACKING INITIATED...
@@ -189,22 +326,6 @@ Welcome, elite hacker! 😎
 Just kidding - I'm a web developer, not a security expert.
 But I can build you some pretty cool web applications!
 Check out my projects with 'projects' command.`;
-        break;
-      case 'konami':
-      case 'up up down down left right left right b a':
-        output = `🎮 KONAMI CODE ACTIVATED!
-
-    ↑ ↑ ↓ ↓ ← → ← → B A
-
-🎉 Achievement Unlocked: "Old School Gamer"
-🚀 You found a secret! Here's a bonus fact:
-
-I actually started programming by modifying game files
-and creating scripts for online games. Gaming taught me
-problem-solving and logical thinking - skills I use
-every day as a developer!
-
-Fun fact: This terminal was inspired by retro computing!`;
         break;
       case '':
         return;
@@ -273,7 +394,7 @@ Fun fact: This terminal was inspired by retro computing!`;
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           className="flex-1 bg-transparent placeholder-muted-foreground outline-none"
-          placeholder="Type a command..."
+          placeholder={gameState.isPlaying ? "rock, paper, scissors, or quit..." : "Type a command..."}
           autoFocus
         />
       </div>
