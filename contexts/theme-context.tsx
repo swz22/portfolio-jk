@@ -64,7 +64,7 @@ const themes: ThemeConfig[] = [
     id: 'ocean',
     name: 'Ocean Depths',
     description: 'Underwater world with marine life',
-    technology: '3D WebGL',
+    technology: '2D Canvas',
     performance: 'heavy',
     available: true,
   },
@@ -74,7 +74,7 @@ const themes: ThemeConfig[] = [
     description: 'Connected stars forming patterns',
     technology: '2D Canvas',
     performance: 'light',
-    available: true,
+    available: false,
   },
   {
     id: 'cyberpunk',

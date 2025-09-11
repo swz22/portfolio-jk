@@ -16,8 +16,10 @@ const themeComponents = {
   matrix: lazy(() =>
     import('./matrix-theme').then((mod) => ({ default: mod.MatrixTheme }))
   ),
-  ocean: null, // Will be added in next commit
-  constellation: null, // Will be added in next commit
+  ocean: lazy(() =>
+    import('./ocean-theme').then((mod) => ({ default: mod.OceanTheme }))
+  ),
+  constellation: null, // Will be added later
   cyberpunk: null,
   underwater: null,
 };
