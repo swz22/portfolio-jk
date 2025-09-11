@@ -51,7 +51,7 @@ export function OceanTheme() {
 
     // Adjust counts based on quality
     const counts = {
-      fish: quality === 'low' ? 20 : quality === 'medium' ? 35 : 50,
+      fish: quality === 'low' ? 8 : quality === 'medium' ? 15 : 25,
       particles: quality === 'low' ? 50 : quality === 'medium' ? 125 : 200,
       bubbles: quality === 'low' ? 10 : quality === 'medium' ? 20 : 30,
       corals: quality === 'low' ? 4 : quality === 'medium' ? 6 : 8,
