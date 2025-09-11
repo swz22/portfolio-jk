@@ -35,7 +35,7 @@ export const ProjectCard = memo(function ProjectCard({
       transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
     >
       <TiltCard>
-        <Card className="h-full overflow-hidden border-border/50 bg-card/50 backdrop-blur">
+        <Card className="h-full overflow-hidden">
           <CardHeader className="pb-3">
             <h3 className="text-lg font-semibold">{project.title}</h3>
           </CardHeader>

@@ -32,7 +32,7 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group h-full"
     >
-      <Card className="relative flex h-full min-h-[400px] transform-gpu flex-col overflow-hidden border-border/50 bg-card/50 backdrop-blur transition-all duration-300 hover:scale-[1.02]">
+      <Card className="relative flex h-full min-h-[400px] transform-gpu flex-col overflow-hidden transition-all duration-300 hover:scale-[1.02]">
         <CardHeader className="flex-none p-0">
           <Link
             href={project.links.live!}
@@ -94,7 +94,7 @@ export const FeaturedProjectCard = memo(function FeaturedProjectCard({
           </div>
         </CardContent>
 
-        <CardFooter className="flex flex-none gap-2 border-t border-border/20 p-3">
+        <CardFooter className="flex flex-none gap-2 border-t border-zinc-700/50 p-3">
           <Button
             variant="default"
             size="sm"
